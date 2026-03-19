@@ -15,6 +15,7 @@
     --hero-overlay: rgba(0, 0, 0, 0.4);
     --hero-vignette: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.6) 100%);
     --hero-bg: url('Imags/hero_bg.png');
+    --hero-text: #ffffff;
 }
 
 [data-theme="light"] {
@@ -26,6 +27,7 @@
     --hero-overlay: rgba(255, 255, 255, 0.2);
     --hero-vignette: radial-gradient(circle at center, transparent 0%, rgba(255,255,255,0.4) 100%);
     --hero-bg: url('Imags/hero_bg_light.png');
+    --hero-text: #0f172a;
 }
 
 * {
@@ -101,7 +103,7 @@ h1, h2, h3, h4 {
 .signature-name {
     font-family: var(--font-signature);
     font-size: 6rem;
-    color: #fff;
+    color: var(--hero-text);
     margin-bottom: -10px;
     font-weight: 400;
     white-space: nowrap;
@@ -134,7 +136,7 @@ h1, h2, h3, h4 {
     display: flex;
     align-items: center;
     gap: 12px;
-    color: #fff;
+    color: var(--hero-text);
     font-size: 1rem;
     text-decoration: none;
     transition: var(--transition-smooth);
