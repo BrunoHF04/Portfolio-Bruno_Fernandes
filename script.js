@@ -62,4 +62,27 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Smooth scroll for nav links (already handled by CSS, but good for custom logic if needed)
+
+    // Copy Email to Clipboard Logic
+    const copyEmailBtn = document.getElementById('copy-email-hero');
+    const copyToast = document.getElementById('copy-toast');
+
+    if (copyEmailBtn) {
+        copyEmailBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const email = "fernandesb428@gmail.com";
+            
+            navigator.clipboard.writeText(email).then(() => {
+                // Show Toast
+                copyToast.classList.add('show');
+                
+                // Hide Toast after 3 seconds
+                setTimeout(() => {
+                    copyToast.classList.remove('show');
+                }, 3000);
+            }).catch(err => {
+                console.error('Erro ao copiar e-mail: ', err);
+            });
+        });
+    }
 });
