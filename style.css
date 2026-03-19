@@ -9,12 +9,13 @@
     --accent-secondary: #a855f7; /* Purple */
     --text-primary: #f8fafc;
     --text-secondary: #94a3b8;
-    --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    --glass-blur: blur(12px);
+    --transition-smooth: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-theme: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
     --font-signature: 'Mrs Saint Delafield', cursive;
     --hero-overlay: rgba(0, 0, 0, 0.4);
     --hero-vignette: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.6) 100%);
     --hero-bg: url('Imags/hero_bg.png');
+    --hero-bg-light: url('Imags/hero_bg_light.png');
     --hero-text: #ffffff;
 }
 
@@ -24,9 +25,8 @@
     --border-card: rgba(0, 0, 0, 0.1);
     --text-primary: #0f172a;
     --text-secondary: #475569;
-    --hero-overlay: rgba(255, 255, 255, 0.2);
-    --hero-vignette: radial-gradient(circle at center, transparent 0%, rgba(255,255,255,0.4) 100%);
-    --hero-bg: url('Imags/hero_bg_light.png');
+    --hero-overlay: rgba(255, 255, 255, 0.1);
+    --hero-vignette: radial-gradient(circle at center, transparent 0%, rgba(255,255,255,0.3) 100%);
     --hero-text: #0f172a;
 }
 
@@ -46,7 +46,7 @@ body {
     color: var(--text-primary);
     line-height: 1.6;
     overflow-x: hidden;
-    transition: background-color 0.5s ease, color 0.5s ease;
+    transition: var(--transition-theme);
 }
 
 h1, h2, h3, h4 {
@@ -56,7 +56,7 @@ h1, h2, h3, h4 {
 
 /* Hero Section Enhancement */
 #hero {
-    background: linear-gradient(var(--hero-overlay), var(--hero-overlay)), var(--hero-bg);
+    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), var(--hero-bg);
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -72,6 +72,26 @@ h1, h2, h3, h4 {
     overflow: hidden;
 }
 
+#hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(var(--hero-overlay), var(--hero-overlay)), var(--hero-bg-light);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    opacity: 0;
+    transition: var(--transition-theme);
+    z-index: 1;
+}
+
+[data-theme="light"] #hero::before {
+    opacity: 1;
+}
+
 .hero-content-wrapper {
     width: 100%;
     min-height: 100vh;
@@ -80,6 +100,9 @@ h1, h2, h3, h4 {
     align-items: center;
     padding: 40px;
     background: var(--hero-vignette);
+    position: relative;
+    z-index: 2;
+    transition: var(--transition-theme);
 }
 
 .hero-main-container .profile-img {
@@ -109,7 +132,7 @@ h1, h2, h3, h4 {
     font-weight: 400;
     white-space: nowrap;
     text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
-    transition: color 0.5s ease;
+    transition: var(--transition-theme);
 }
 
 .title-sub {
@@ -141,7 +164,7 @@ h1, h2, h3, h4 {
     color: var(--hero-text);
     font-size: 1rem;
     text-decoration: none;
-    transition: var(--transition-smooth), color 0.5s ease;
+    transition: var(--transition-smooth), var(--transition-theme);
 }
 
 .hero-contact-item:hover {
