@@ -1,7 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;600;700;800&family=Mrs+Saint+Delafield&display=swap');
 
 :root {
-    --bg-dark: #0a0a0c;
+    /* Default Dark Theme */
+    --bg-body: #0a0a0c;
     --bg-card: rgba(255, 255, 255, 0.03);
     --border-card: rgba(255, 255, 255, 0.08);
     --accent-primary: #6366f1; /* Indigo */
@@ -11,6 +12,18 @@
     --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     --glass-blur: blur(12px);
     --font-signature: 'Mrs Saint Delafield', cursive;
+    --hero-overlay: rgba(0, 0, 0, 0.4);
+    --hero-vignette: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.6) 100%);
+}
+
+[data-theme="light"] {
+    --bg-body: #f8fafc;
+    --bg-card: rgba(255, 255, 255, 0.8);
+    --border-card: rgba(0, 0, 0, 0.1);
+    --text-primary: #0f172a;
+    --text-secondary: #475569;
+    --hero-overlay: rgba(255, 255, 255, 0.2);
+    --hero-vignette: radial-gradient(circle at center, transparent 0%, rgba(255,255,255,0.4) 100%);
 }
 
 * {
@@ -25,7 +38,7 @@ html {
 }
 
 body {
-    background-color: var(--bg-dark);
+    background-color: var(--bg-body);
     color: var(--text-primary);
     line-height: 1.6;
     overflow-x: hidden;
@@ -38,7 +51,7 @@ h1, h2, h3, h4 {
 
 /* Hero Section Enhancement */
 #hero {
-    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('Imags/hero_bg.png');
+    background: linear-gradient(var(--hero-overlay), var(--hero-overlay)), url('Imags/hero_bg.png');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -61,7 +74,7 @@ h1, h2, h3, h4 {
     justify-content: center;
     align-items: center;
     padding: 40px;
-    background: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.6) 100%);
+    background: var(--hero-vignette);
 }
 
 .hero-main-container .profile-img {
@@ -169,6 +182,36 @@ h1, h2, h3, h4 {
         text-align: center;
         align-items: center;
     }
+}
+
+/* Theme Toggle styles */
+.theme-toggle-btn {
+    background: var(--bg-card);
+    border: 1px solid var(--border-card);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--text-primary);
+    font-size: 1.1rem;
+    transition: var(--transition-smooth);
+    margin-left: 15px;
+}
+
+.theme-toggle-btn:hover {
+    border-color: var(--accent-primary);
+    color: var(--accent-primary);
+    transform: scale(1.1) rotate(15deg);
+}
+
+[data-theme="light"] .theme-toggle-btn .fa-sun {
+    display: none;
+}
+html:not([data-theme="light"]) .theme-toggle-btn .fa-moon {
+    display: none;
 }
 
 section {
