@@ -1,21 +1,26 @@
 # Portfólio de Bruno Fernandes
 
-Este é um projeto de portfólio moderno e responsivo, desenvolvido com base no perfil do LinkedIn de Bruno Fernandes.
+Este é um projeto de portfólio moderno e responsivo, focado em **Gestão de Projetos de TI & Especialista em IA**. O design utiliza uma estética premium baseada em *Glassmorphism* e micro-animações.
 
-## Tecnologias Utilizadas
+## 🚀 Tecnologias Utilizadas
 
-- **HTML5**: Estrutura semântica.
-- **CSS3 (Vanilla)**: Estilização premium com Glassmorphism, Gradientes e Variáveis CSS.
-- **JavaScript**: Interatividade e animações suaves.
-- **Google Fonts**: Fontes `Outfit` e `Inter`.
+- **HTML5**: Estrutura semântica e SEO.
+- **CSS3 (Vanilla)**: Design premium com Glassmorphism, Gradientes, Variáveis CSS e Animações.
+- **JavaScript (ES6+)**: Lógica de interatividade, tema e manipulação do DOM.
+- **FontAwesome**: Iconografia completa para redes sociais e competências.
+- **Google Fonts**: Fontes `Outfit`, `Inter` e `Mrs Saint Delafield` (assinatura).
+- **Git & GitHub**: Controle de versão e publicação.
 
-## Características
+## ✨ Características & Funcionalidades
 
-- Design Premium Dark Mode.
-- Layout Responsivo (Mobile/Desktop).
-- Animações de Scroll.
-- Efeitos de Vidro (Glassmorphism).
+- **Design Premium**: Efeitos de vidro (Glassmorphism) e fundo dinâmico com blobs animados.
+- **Modo Claro/Escuro**: Alternância suave de tema com persistência no navegador.
+- **Seção Hero Refinada**: Subtítulo profissional e integração de currículo.
+- **Copy Email**: Funcionalidade de copiar e-mail para a área de transferência com toque de um botão.
+- **Projetos com Tags**: Visualização rápida das tecnologias usadas em cada projeto.
+- **Certificações & Depoimentos**: Seções dedicadas para cursos e feedbacks profissionais.
+- **Totalmente Responsivo**: Otimizado para dispositivos móveis, tablets e desktops.
 
-## Como Visualizar
+## 🛠️ Como Visualizar
 
-Basta abrir o arquivo `index.html` em qualquer navegador moderno.
+Basta abrir o arquivo `index.html` em qualquer navegador moderno ou acessar via GitHub Pages (se configurado).
