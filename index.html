@@ -31,6 +31,10 @@
                 style="color: var(--text-secondary); text-decoration: none; font-size: 0.8rem; font-weight: 500;">Projetos</a>
             <a href="#formacao"
                 style="color: var(--text-secondary); text-decoration: none; font-size: 0.8rem; font-weight: 500;">Formação</a>
+            <a href="#certificacoes"
+                style="color: var(--text-secondary); text-decoration: none; font-size: 0.8rem; font-weight: 500;">Cursos</a>
+            <a href="#depoimentos"
+                style="color: var(--text-secondary); text-decoration: none; font-size: 0.8rem; font-weight: 500;">Feedback</a>
             <span style="height: 15px; width: 1px; background: var(--border-card); margin: 0 5px;"></span>
             <div class="social-shortcuts" style="display: flex; gap: 12px;">
                 <a href="https://github.com/BrunoHF04" target="_blank" class="social-icon-nav" title="GitHub"><i
@@ -57,6 +61,7 @@
                 </div>
                 <div class="hero-name-title">
                     <div class="signature-name">Bruno Fernandes</div>
+                    <div class="title-sub">Gestor de Projetos de TI & Especialista em IA</div>
                 </div>
 
                 <div class="hero-separator"></div>
@@ -66,9 +71,10 @@
                         <i class="fab fa-whatsapp"></i>
                         <span>(16) 9 9113-3339</span>
                     </a>
-                    <a href="mailto:fernandesb428@gmail.com" class="hero-contact-item">
+                    <a href="mailto:fernandesb428@gmail.com" class="hero-contact-item" id="copy-email-hero">
                     <i class="fas fa-envelope"></i>
                     <span>fernandesb428@gmail.com</span>
+                    <i class="fas fa-copy" style="font-size: 0.7rem; opacity: 0.5;"></i>
                 </a>
                 <a href="files/Bruno Fernandes - Currículo.pdf" target="_blank" class="btn-primary cv-button">
                     <i class="fas fa-file-download"></i>
@@ -130,30 +136,33 @@
         <h2 class="heading-gradient" style="font-size: 2.5rem; margin-bottom: 40px;">Competências Técnicas</h2>
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
             <div class="glass-card">
+                <i class="fas fa-robot skill-icon-top"></i>
                 <h3 style="color: var(--accent-primary); margin-bottom: 15px;">Soluções de IA</h3>
                 <ul style="list-style: none; color: var(--text-secondary); font-size: 0.95rem;">
-                    <li>• IA Generativa (Otimização)</li>
-                    <li>• Codificação Assistida (Cursor IA)</li>
-                    <li>• Google Vertex AI</li>
-                    <li>• Análise de Dados com IA</li>
+                    <li><i class="fas fa-check-circle" style="font-size: 0.7rem; margin-right: 8px; color: var(--accent-primary);"></i> IA Generativa (Otimização)</li>
+                    <li><i class="fas fa-check-circle" style="font-size: 0.7rem; margin-right: 8px; color: var(--accent-primary);"></i> Codificação Assistida (Cursor IA)</li>
+                    <li><i class="fas fa-check-circle" style="font-size: 0.7rem; margin-right: 8px; color: var(--accent-primary);"></i> Google Vertex AI</li>
+                    <li><i class="fas fa-check-circle" style="font-size: 0.7rem; margin-right: 8px; color: var(--accent-primary);"></i> Análise de Dados com IA</li>
                 </ul>
             </div>
             <div class="glass-card">
+                <i class="fas fa-server skill-icon-top"></i>
                 <h3 style="color: var(--accent-primary); margin-bottom: 15px;">Infra & DevOps</h3>
                 <ul style="list-style: none; color: var(--text-secondary); font-size: 0.95rem;">
-                    <li>• Docker (Containers)</li>
-                    <li>• Nginx & Linux (Ubuntu Server)</li>
-                    <li>• Redes & Firewall</li>
-                    <li>• PowerShell & CMD</li>
+                    <li><i class="fas fa-check-circle" style="font-size: 0.7rem; margin-right: 8px; color: var(--accent-primary);"></i> Docker (Containers)</li>
+                    <li><i class="fas fa-check-circle" style="font-size: 0.7rem; margin-right: 8px; color: var(--accent-primary);"></i> Nginx & Linux (Ubuntu Server)</li>
+                    <li><i class="fas fa-check-circle" style="font-size: 0.7rem; margin-right: 8px; color: var(--accent-primary);"></i> Redes & Firewall</li>
+                    <li><i class="fas fa-check-circle" style="font-size: 0.7rem; margin-right: 8px; color: var(--accent-primary);"></i> PowerShell & CMD</li>
                 </ul>
             </div>
             <div class="glass-card">
+                <i class="fas fa-database skill-icon-top"></i>
                 <h3 style="color: var(--accent-primary); margin-bottom: 15px;">Bancos de Dados</h3>
                 <ul style="list-style: none; color: var(--text-secondary); font-size: 0.95rem;">
-                    <li>• SQL Server & PostgreSQL</li>
-                    <li>• Firebird</li>
-                    <li>• Migração & Recuperação</li>
-                    <li>• Tuning de Queries</li>
+                    <li><i class="fas fa-check-circle" style="font-size: 0.7rem; margin-right: 8px; color: var(--accent-primary);"></i> SQL Server & PostgreSQL</li>
+                    <li><i class="fas fa-check-circle" style="font-size: 0.7rem; margin-right: 8px; color: var(--accent-primary);"></i> Firebird</li>
+                    <li><i class="fas fa-check-circle" style="font-size: 0.7rem; margin-right: 8px; color: var(--accent-primary);"></i> Migração & Recuperação</li>
+                    <li><i class="fas fa-check-circle" style="font-size: 0.7rem; margin-right: 8px; color: var(--accent-primary);"></i> Tuning de Queries</li>
                 </ul>
             </div>
         </div>
@@ -164,26 +173,51 @@
         <h2 class="heading-gradient" style="font-size: 2.5rem; margin-bottom: 40px;">Projetos & Realizações</h2>
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px;">
             <div class="glass-card">
+                <div class="project-tags">
+                    <span class="tag">Python</span>
+                    <span class="tag">Web</span>
+                    <span class="tag">Otimização</span>
+                </div>
                 <h3 style="margin-bottom: 15px;">UnespPass</h3>
                 <p style="color: var(--text-secondary); font-size: 0.9rem;">Sistema de verificação e controle de acesso
                     veicular para o campus da Unesp FCAV, integrando módulos de consulta em tempo real.</p>
             </div>
             <div class="glass-card">
+                <div class="project-tags">
+                    <span class="tag">Gestão</span>
+                    <span class="tag">Workflow</span>
+                    <span class="tag">Eficiência</span>
+                </div>
                 <h3 style="margin-bottom: 15px;">Solicitações Administrativas</h3>
                 <p style="color: var(--text-secondary); font-size: 0.9rem;">Plataforma de gestão de demandas internas,
                     otimizando o fluxo entre equipes de CS e CX.</p>
             </div>
             <div class="glass-card">
+                <div class="project-tags">
+                    <span class="tag">IA (NLP)</span>
+                    <span class="tag">Automação</span>
+                    <span class="tag">Python</span>
+                </div>
                 <h3 style="margin-bottom: 15px;">Editor de Flexões Automatizado</h3>
                 <p style="color: var(--text-secondary); font-size: 0.9rem;">Solução inteligente de NLP para realizar
                     flexões de gênero, número e grau em textos complexos automaticamente.</p>
             </div>
             <div class="glass-card">
+                <div class="project-tags">
+                    <span class="tag">PHP/SQL</span>
+                    <span class="tag">Dashboard</span>
+                    <span class="tag">Controle</span>
+                </div>
                 <h3 style="margin-bottom: 15px;">Gestão de Banco de Horas</h3>
                 <p style="color: var(--text-secondary); font-size: 0.9rem;">Sistema para controle preciso de horas
                     excedentes e monitoramento de jornada de trabalho.</p>
             </div>
             <div class="glass-card" style="border-color: var(--accent-secondary);">
+                <div class="project-tags">
+                    <span class="tag" style="background: var(--accent-secondary);">Hardware</span>
+                    <span class="tag" style="background: var(--accent-secondary);">Sustentabilidade</span>
+                    <span class="tag" style="background: var(--accent-secondary);">Arduino</span>
+                </div>
                 <span
                     style="color: var(--accent-secondary); font-size: 0.7rem; font-weight: 800; text-transform: uppercase;">Premiado</span>
                 <h3 style="margin-bottom: 15px;">Arduino: Racionamento de Água</h3>
@@ -213,6 +247,74 @@
             <div class="glass-card">
                 <h3 style="font-size: 1rem; margin-bottom: 10px;">Técnico em Informática</h3>
                 <p style="color: var(--text-secondary); font-size: 0.85rem;">ETEC (2013)</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certificações Section -->
+    <section id="certificacoes" class="reveal">
+        <h2 class="heading-gradient" style="font-size: 2.5rem; margin-bottom: 40px;">Certificações & Cursos</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+            <div class="glass-card cert-card">
+                <i class="fas fa-certificate cert-icon"></i>
+                <div>
+                    <h3 style="font-size: 1rem; margin-bottom: 5px;">IA Generativa</h3>
+                    <p style="color: var(--text-secondary); font-size: 0.85rem;">Google Cloud / Coursera</p>
+                </div>
+            </div>
+            <div class="glass-card cert-card">
+                <i class="fas fa-shield-alt cert-icon"></i>
+                <div>
+                    <h3 style="font-size: 1rem; margin-bottom: 5px;">Segurança da Informação</h3>
+                    <p style="color: var(--text-secondary); font-size: 0.85rem;">Cisco Networking Academy</p>
+                </div>
+            </div>
+            <div class="glass-card cert-card">
+                <i class="fas fa-cloud cert-icon"></i>
+                <div>
+                    <h3 style="font-size: 1rem; margin-bottom: 5px;">Fundamentos de Cloud</h3>
+                    <p style="color: var(--text-secondary); font-size: 0.85rem;">Microsoft Azure (AZ-900)</p>
+                </div>
+            </div>
+            <div class="glass-card cert-card">
+                <i class="fas fa-project-diagram cert-icon"></i>
+                <div>
+                    <h3 style="font-size: 1rem; margin-bottom: 5px;">Metodologias Ágeis (Scrum)</h3>
+                    <p style="color: var(--text-secondary); font-size: 0.85rem;">Project Management Institute</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Depoimentos Section -->
+    <section id="depoimentos" class="reveal">
+        <h2 class="heading-gradient" style="font-size: 2.5rem; margin-bottom: 40px;">Depoimentos</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+            <div class="glass-card" style="position: relative; padding-top: 50px;">
+                <i class="fas fa-quote-left" style="position: absolute; top: 20px; left: 20px; font-size: 1.5rem; color: var(--accent-primary); opacity: 0.3;"></i>
+                <p style="font-style: italic; color: var(--text-secondary); margin-bottom: 20px;">
+                    "O Bruno é um profissional extremamente dedicado e com uma visão técnica invejável. A forma como ele aplica IA nos processos é impressionante."
+                </p>
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <div style="width: 40px; height: 40px; background: var(--border-card); border-radius: 50%; display: flex; align-items: center; justify-content: center;"><i class="fas fa-user"></i></div>
+                    <div>
+                        <h4 style="font-size: 0.9rem;">Nome do Colega</h4>
+                        <p style="font-size: 0.75rem; color: var(--accent-primary);">Cargo / Empresa</p>
+                    </div>
+                </div>
+            </div>
+            <div class="glass-card" style="position: relative; padding-top: 50px;">
+                <i class="fas fa-quote-left" style="position: absolute; top: 20px; left: 20px; font-size: 1.5rem; color: var(--accent-primary); opacity: 0.3;"></i>
+                <p style="font-style: italic; color: var(--text-secondary); margin-bottom: 20px;">
+                    "Excelente liderança técnica. Conseguimos otimizar nossas implantações em 40% após as automações sugeridas pelo Bruno."
+                </p>
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <div style="width: 40px; height: 40px; background: var(--border-card); border-radius: 50%; display: flex; align-items: center; justify-content: center;"><i class="fas fa-user"></i></div>
+                    <div>
+                        <h4 style="font-size: 0.9rem;">Nome do Gestor</h4>
+                        <p style="font-size: 0.75rem; color: var(--accent-primary);">Líder de TI / Notarial</p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -260,6 +362,9 @@
     <button id="back-to-top" class="back-to-top" title="Voltar ao Topo">
         <i class="fas fa-arrow-up"></i>
     </button>
+
+    <!-- Copy Feedback Toast -->
+    <div id="copy-toast" class="copy-feedback">E-mail copiado com sucesso!</div>
 </body>
 
 </html>
