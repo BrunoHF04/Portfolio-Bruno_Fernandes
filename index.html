@@ -5,26 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bruno Fernandes | Gestor de Projetos de TI & IA</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
 <body>
 
     <!-- Header / Nav -->
-    <nav class="glass-card" style="position: fixed; top: 20px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 800px; z-index: 1000; padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; border-radius: 100px;">
+    <nav class="glass-card" style="position: fixed; top: 20px; left: 50%; transform: translateX(-50%); width: 95%; max-width: 1000px; z-index: 1000; padding: 10px 30px; display: flex; justify-content: space-between; align-items: center; border-radius: 100px;">
         <div style="font-weight: 800; font-family: 'Outfit'; font-size: 1.2rem;">BF.</div>
-        <div style="display: flex; gap: 20px;">
-            <a href="#sobre" style="color: var(--text-secondary); text-decoration: none; font-size: 0.85rem; font-weight: 500;">Sobre</a>
-            <a href="#experiencia" style="color: var(--text-secondary); text-decoration: none; font-size: 0.85rem; font-weight: 500;">Carreira</a>
-            <a href="#competencias" style="color: var(--text-secondary); text-decoration: none; font-size: 0.85rem; font-weight: 500;">Skills</a>
-            <a href="#projetos" style="color: var(--text-secondary); text-decoration: none; font-size: 0.85rem; font-weight: 500;">Projetos</a>
-            <a href="#formacao" style="color: var(--text-secondary); text-decoration: none; font-size: 0.85rem; font-weight: 500;">Formação</a>
-            <a href="#contato" style="color: var(--text-secondary); text-decoration: none; font-size: 0.85rem; font-weight: 500;">Contato</a>
+        <div class="nav-links" style="display: flex; gap: 15px; align-items: center;">
+            <a href="#sobre" style="color: var(--text-secondary); text-decoration: none; font-size: 0.8rem; font-weight: 500;">Sobre</a>
+            <a href="#experiencia" style="color: var(--text-secondary); text-decoration: none; font-size: 0.8rem; font-weight: 500;">Carreira</a>
+            <a href="#competencias" style="color: var(--text-secondary); text-decoration: none; font-size: 0.8rem; font-weight: 500;">Skills</a>
+            <a href="#projetos" style="color: var(--text-secondary); text-decoration: none; font-size: 0.8rem; font-weight: 500;">Projetos</a>
+            <a href="#formacao" style="color: var(--text-secondary); text-decoration: none; font-size: 0.8rem; font-weight: 500;">Formação</a>
+            <span style="height: 15px; width: 1px; background: var(--border-card); margin: 0 5px;"></span>
+            <div class="social-shortcuts" style="display: flex; gap: 12px;">
+                <a href="https://github.com/BrunoHF04" target="_blank" class="social-icon-nav" title="GitHub"><i class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/bruno-fernandes-ti/" target="_blank" class="social-icon-nav" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
     <section id="hero" style="min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding-top: 120px;">
         <div class="profile-container reveal" style="margin-bottom: 30px;">
-            <img src="Imagens/Bruno_Fernandes.jpeg" alt="Bruno Henrique Fernandes" class="profile-img">
+            <img src="Imags/Bruno_Fernandes.jpeg" alt="Bruno Henrique Fernandes" class="profile-img">
         </div>
         <h1 class="heading-gradient" style="font-size: 4rem; line-height: 1.1; margin-bottom: 20px;">Bruno Henrique Fernandes</h1>
         <p style="font-size: 1.5rem; color: var(--text-secondary); max-width: 800px; margin-bottom: 40px;">
@@ -32,7 +37,10 @@
         </p>
         <div style="display: flex; gap: 20px;">
             <a href="#sobre" class="btn-primary">Ver Portfólio</a>
-            <a href="https://www.linkedin.com/in/bruno-fernandes-ti/" target="_blank" class="btn-primary" style="background: transparent; border: 1px solid var(--accent-primary);">LinkedIn</a>
+            <div style="display: flex; gap: 10px;">
+                <a href="https://github.com/BrunoHF04" target="_blank" class="btn-secondary" title="GitHub"><i class="fab fa-github"></i> GitHub</a>
+                <a href="https://www.linkedin.com/in/bruno-fernandes-ti/" target="_blank" class="btn-secondary" title="LinkedIn"><i class="fab fa-linkedin"></i> LinkedIn</a>
+            </div>
         </div>
     </section>
 
@@ -168,17 +176,22 @@
         <div class="glass-card" style="max-width: 600px; margin: 0 auto;">
             <p style="font-size: 1.2rem; margin-bottom: 30px; color: var(--text-secondary);">Vamos conversar sobre o seu próximo projeto?</p>
             <div style="display: flex; flex-direction: column; gap: 15px;">
-                <a href="mailto:fernandesb428@gmail.com" style="color: var(--text-primary); text-decoration: none; font-weight: 600;">fernandesb428@gmail.com</a>
-                <p style="color: var(--text-secondary);">(16) 9 9113-3339</p>
-                <div style="margin-top: 20px;">
-                    <a href="https://www.linkedin.com/in/bruno-fernandes-ti/" target="_blank" class="btn-primary">Conectar no LinkedIn</a>
+                <a href="mailto:fernandesb428@gmail.com" style="color: var(--text-primary); text-decoration: none; font-weight: 600; font-size: 1.1rem;"><i class="fas fa-envelope" style="margin-right: 10px; color: var(--accent-primary);"></i>fernandesb428@gmail.com</a>
+                <p style="color: var(--text-secondary); font-size: 1.1rem;"><i class="fas fa-phone" style="margin-right: 10px; color: var(--accent-primary);"></i>(16) 9 9113-3339</p>
+                <div style="margin-top: 25px; display: flex; justify-content: center; gap: 15px;">
+                    <a href="https://github.com/BrunoHF04" target="_blank" class="social-icon-large" title="GitHub"><i class="fab fa-github"></i></a>
+                    <a href="https://www.linkedin.com/in/bruno-fernandes-ti/" target="_blank" class="social-icon-large" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
                 </div>
             </div>
         </div>
     </section>
 
     <footer style="padding: 40px 20px; text-align: center; color: var(--text-secondary); border-top: 1px solid var(--border-card);">
-        <p>© 2026 Bruno Fernandes. Desenvolvido com Antigravity.</p>
+        <div style="display: flex; justify-content: center; gap: 20px; margin-bottom: 20px;">
+            <a href="https://github.com/BrunoHF04" target="_blank" class="social-link-footer" title="GitHub"><i class="fab fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/bruno-fernandes-ti/" target="_blank" class="social-link-footer" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+        </div>
+        <p style="font-size: 0.9rem;">© 2026 Bruno Fernandes. Desenvolvido com Antigravity.</p>
     </footer>
 
     <script src="script.js"></script>
