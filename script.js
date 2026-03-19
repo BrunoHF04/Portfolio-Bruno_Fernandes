@@ -41,5 +41,25 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize on load
     initTheme();
 
+    // Back to Top Logic
+    const backToTopBtn = document.getElementById('back-to-top');
+
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 300) {
+            backToTopBtn.classList.add('show');
+        } else {
+            backToTopBtn.classList.remove('show');
+        }
+    });
+
+    if (backToTopBtn) {
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    }
+
     // Smooth scroll for nav links (already handled by CSS, but good for custom logic if needed)
 });
