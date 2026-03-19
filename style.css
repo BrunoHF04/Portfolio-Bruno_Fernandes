@@ -14,6 +14,7 @@
     --font-signature: 'Mrs Saint Delafield', cursive;
     --hero-overlay: rgba(0, 0, 0, 0.4);
     --hero-vignette: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.6) 100%);
+    --hero-bg: url('Imags/hero_bg.png');
 }
 
 [data-theme="light"] {
@@ -24,6 +25,7 @@
     --text-secondary: #475569;
     --hero-overlay: rgba(255, 255, 255, 0.2);
     --hero-vignette: radial-gradient(circle at center, transparent 0%, rgba(255,255,255,0.4) 100%);
+    --hero-bg: url('Imags/hero_bg_light.png');
 }
 
 * {
@@ -51,7 +53,7 @@ h1, h2, h3, h4 {
 
 /* Hero Section Enhancement */
 #hero {
-    background: linear-gradient(var(--hero-overlay), var(--hero-overlay)), url('Imags/hero_bg.png');
+    background: linear-gradient(var(--hero-overlay), var(--hero-overlay)), var(--hero-bg);
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
