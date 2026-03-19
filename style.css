@@ -217,23 +217,39 @@ h1, h2, h3, h4 {
         text-align: center;
         align-items: center;
     }
+
+    .cv-button {
+        align-self: center !important;
+    }
+}
+
+.cv-button {
+    margin-top: 15px;
+    align-self: flex-start;
+    font-size: 0.85rem;
+    padding: 8px 18px;
+    text-shadow: none;
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.2);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
 }
 
 /* Theme Toggle styles */
 .theme-toggle-btn {
-    background: var(--bg-card);
+    background: rgba(255, 255, 255, 0.05);
     border: 1px solid var(--border-card);
-    width: 40px;
-    height: 40px;
+    width: 34px;
+    height: 34px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     color: var(--text-primary);
-    font-size: 1.1rem;
+    font-size: 0.95rem;
     transition: var(--transition-smooth);
-    margin-left: 15px;
+    margin-left: 10px;
 }
 
 .theme-toggle-btn:hover {
