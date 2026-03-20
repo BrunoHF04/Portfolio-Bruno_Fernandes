@@ -225,6 +225,11 @@ h1, h2, h3, h4 {
     .cv-button {
         align-self: center !important;
     }
+
+    .hero-content-wrapper {
+        padding-top: 120px !important; /* Push content down to avoid overlap with fixed nav */
+        align-items: flex-start; /* Start from top on mobile to ensure visibility */
+    }
 }
 
 .cv-button {
@@ -499,12 +504,30 @@ section {
         width: 95% !important;
     }
 
-    .nav-links a {
-        display: none; /* Hide text links on mobile to save space */
+    .nav-links {
+        display: flex;
+        gap: 12px;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: 5px; /* space for scrollbar if it appears */
+        max-width: 100%;
+        scrollbar-width: none; /* hide scrollbar on Firefox */
     }
 
-    .nav-links a[href="#sobre"] {
-        display: block; /* Keep one or two important ones if needed, or hide all */
+    .nav-links::-webkit-scrollbar {
+        display: none; /* hide scrollbar on Chrome/Safari */
+    }
+
+    .nav-links a {
+        display: block;
+        font-size: 0.75rem !important;
+        white-space: nowrap;
+    }
+
+    .nav-links a[href="#formacao"],
+    .nav-links a[href="#certificacoes"],
+    .nav-links a[href="#depoimentos"] {
+        display: none; /* Hide less critical links to avoid excessive scrolling on mobile */
     }
 
     .nav-links span {
