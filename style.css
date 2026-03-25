@@ -1168,42 +1168,38 @@ strong {
     transform: translateY(0);
 }
 
-/* Custom Dual-Cursor Management */
-@media (hover: hover) and (pointer: fine) {
-    .cursor-dot, .cursor-outline {
-        pointer-events: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        transform: translate(-50%, -50%);
-        border-radius: 50%;
-        z-index: 9999;
-        transition: opacity 0.3s ease-in-out, width 0.3s ease, height 0.3s ease, background 0.3s;
-    }
+/* Custom Elite Cursor (Single Dot Reveal) */
+html, body {
+    cursor: none !important;
+}
 
-    .cursor-dot {
+@media (hover: hover) and (pointer: fine) {
+    .custom-cursor {
         width: 8px;
         height: 8px;
         background-color: var(--accent-primary);
-        box-shadow: 0 0 10px var(--accent-primary);
+        border-radius: 50%;
+        position: fixed;
+        pointer-events: none;
         z-index: 10000;
+        transform: translate(-50%, -50%);
+        box-shadow: 0 0 15px var(--accent-primary);
+        transition: width 0.35s cubic-bezier(0.23, 1, 0.32, 1), 
+                    height 0.35s cubic-bezier(0.23, 1, 0.32, 1), 
+                    background-color 0.35s, 
+                    border 0.35s,
+                    opacity 0.3s;
     }
 
-    .cursor-outline {
-        width: 30px;
-        height: 30px;
+    .custom-cursor.active {
+        width: 45px;
+        height: 45px;
+        background-color: rgba(176, 141, 87, 0.08); /* Sophisticated transparency */
         border: 1px solid var(--accent-primary);
-        opacity: 0.5;
-    }
-    
-    .cursor-outline.active {
-        width: 60px;
-        height: 60px;
-        background-color: rgba(176, 141, 87, 0.1);
-        border: 1px solid var(--accent-primary);
+        box-shadow: 0 0 20px rgba(176, 141, 87, 0.2);
     }
 
-    /* Hide system cursor on interactive elements */
+    /* Keep system cursor hidden for all interaction */
     a, button, .btn, .social-icon-nav, .social-icon-large, .nav-links a, .contact-link {
         cursor: none !important;
     }
