@@ -532,27 +532,43 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- Custom Cursor Logic ---
-    const cursor = document.querySelector('.custom-cursor');
-    const magneticElements = document.querySelectorAll('.btn-primary, .btn-secondary, .cv-button, .social-icon-large, .nav-links a, .contact-link');
+    // --- Masterclass Dual-Cursor Logic ---
+    const cursorDot = document.querySelector('.cursor-dot');
+    const cursorOutline = document.querySelector('.cursor-outline');
+    
+    if (cursorDot && cursorOutline) {
+        let posX = 0, posY = 0;
+        let mouseX = 0, mouseY = 0;
 
-    if (cursor) {
         window.addEventListener('mousemove', (e) => {
-            cursor.style.left = e.clientX + 'px';
-            cursor.style.top = e.clientY + 'px';
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            
+            // Dot follows instantly
+            cursorDot.style.left = `${mouseX}px`;
+            cursorDot.style.top = `${mouseY}px`;
         });
 
-        magneticElements.forEach(el => {
-            el.addEventListener('mouseenter', () => {
-                cursor.classList.add('active');
-                if (el.classList.contains('social-icon-large') || el.classList.contains('cv-button')) {
-                    cursor.classList.add('large');
-                }
-            });
-            el.addEventListener('mouseleave', () => {
-                cursor.classList.remove('active');
-                cursor.classList.remove('large');
-            });
+        // Outline follows with inertia (Lerp)
+        const animateCursor = () => {
+            const lerp = (start, end, factor) => start + (end - start) * factor;
+            
+            posX = lerp(posX, mouseX, 0.15);
+            posY = lerp(posY, mouseY, 0.15);
+
+            cursorOutline.style.left = `${posX}px`;
+            cursorOutline.style.top = `${posY}px`;
+
+            requestAnimationFrame(animateCursor);
+        };
+        animateCursor();
+
+        // Hover Effect
+        const interactiveElements = document.querySelectorAll('a, button, .btn, .glass-card, .skill-item, .project-thumbnail, .social-icon-large, .nav-links a, .contact-link');
+        
+        interactiveElements.forEach(el => {
+            el.addEventListener('mouseenter', () => cursorOutline.classList.add('active'));
+            el.addEventListener('mouseleave', () => cursorOutline.classList.remove('active'));
         });
     }
 

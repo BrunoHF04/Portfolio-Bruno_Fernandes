@@ -1168,41 +1168,43 @@ strong {
     transform: translateY(0);
 }
 
-/* Custom Cursor Management */
+/* Custom Dual-Cursor Management */
 @media (hover: hover) and (pointer: fine) {
-    .custom-cursor {
+    .cursor-dot, .cursor-outline {
+        pointer-events: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        transform: translate(-50%, -50%);
+        border-radius: 50%;
+        z-index: 9999;
+        transition: opacity 0.3s ease-in-out, width 0.3s ease, height 0.3s ease, background 0.3s;
+    }
+
+    .cursor-dot {
         width: 8px;
         height: 8px;
         background-color: var(--accent-primary);
-        border-radius: 50%;
-        position: fixed;
-        pointer-events: none;
+        box-shadow: 0 0 10px var(--accent-primary);
         z-index: 10000;
-        transform: translate(-50%, -50%);
-        transition: width 0.3s cubic-bezier(0.23, 1, 0.32, 1), 
-                    height 0.3s cubic-bezier(0.23, 1, 0.32, 1), 
-                    background-color 0.3s, 
-                    border 0.3s,
-                    opacity 0.3s;
-        box-shadow: 0 0 15px rgba(176, 141, 87, 0.5);
-        mix-blend-mode: difference; /* Pro look */
     }
 
-    .custom-cursor.active {
-        width: 40px;
-        height: 40px;
-        background-color: rgba(176, 141, 87, 0.1);
+    .cursor-outline {
+        width: 30px;
+        height: 30px;
         border: 1px solid var(--accent-primary);
-        box-shadow: 0 0 20px rgba(176, 141, 87, 0.3);
-    }
-
-    .custom-cursor.large {
-        width: 70px;
-        height: 70px;
+        opacity: 0.5;
     }
     
-    /* Hide default cursor only when custom cursor is preferred */
-    a, button, .btn, .social-icon-nav, .social-icon-large, .nav-links a {
+    .cursor-outline.active {
+        width: 60px;
+        height: 60px;
+        background-color: rgba(176, 141, 87, 0.1);
+        border: 1px solid var(--accent-primary);
+    }
+
+    /* Hide system cursor on interactive elements */
+    a, button, .btn, .social-icon-nav, .social-icon-large, .nav-links a, .contact-link {
         cursor: none !important;
     }
 }
