@@ -971,6 +971,25 @@ strong {
     scrollbar-color: var(--border-card) transparent;
 }
 
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-body);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--border-card);
+    border-radius: 10px;
+    border: 3px solid var(--bg-body);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-primary);
+}
+
 /* Modal Close Button */
 .close-modal {
     position: absolute;
@@ -1085,4 +1104,17 @@ strong {
     font-size: 0.8rem;
     color: var(--text-secondary);
     margin: 0;
+}
+
+/* Reveal Animation */
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+    will-change: transform, opacity;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
 }
