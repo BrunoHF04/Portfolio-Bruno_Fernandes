@@ -413,7 +413,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function fillModalContent(projectId, lang) {
         const t = translations[lang];
+        // Identify the correct thumbnail based on the project ID
+        const thumbnails = {
+            "1": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=600&auto=format&fit=crop",
+            "2": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=600&auto=format&fit=crop",
+            "3": "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?q=80&w=600&auto=format&fit=crop",
+            "4": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=600&auto=format&fit=crop",
+            "5": "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=600&auto=format&fit=crop"
+        };
+
         const content = `
+            <div class="modal-header-img">
+                <img src="${thumbnails[projectId]}" alt="${t[`proj${projectId}-modal-title`]}" class="modal-banner">
+            </div>
             <h2 class="heading-gradient">${t[`proj${projectId}-modal-title`]}</h2>
             <h4>${t['modal-context']}</h4>
             <p>${t[`proj${projectId}-modal-context`]}</p>
@@ -454,16 +466,48 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // --- Back to Top Logic ---
+    // --- Scroll Features (Progress Bar & Active Link) ---
+    const progressBar = document.getElementById('scroll-progress');
+    const navLinksList = document.querySelectorAll('.nav-links a');
+    const sections = document.querySelectorAll('section');
     const backToTopBtn = document.getElementById('back-to-top');
 
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 300) {
-            backToTopBtn.classList.add('show');
-        } else {
-            backToTopBtn.classList.remove('show');
+    function updateScrollFeatures() {
+        // Scroll Progress
+        const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const scrolled = (winScroll / height) * 100;
+        if (progressBar) progressBar.style.width = scrolled + "%";
+
+        // Back to Top Button visibility
+        if (backToTopBtn) {
+            if (winScroll > 300) {
+                backToTopBtn.classList.add('show');
+            } else {
+                backToTopBtn.classList.remove('show');
+            }
         }
-    });
+
+        // Active Link (Scroll Spy)
+        let current = "";
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.clientHeight;
+            if (pageYOffset >= (sectionTop - 150)) { // 150 offset for nav bar
+                current = section.getAttribute('id');
+            }
+        });
+
+        navLinksList.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href').includes(current)) {
+                link.classList.add('active');
+            }
+        });
+    }
+
+    window.addEventListener('scroll', updateScrollFeatures);
+    updateScrollFeatures(); // Run once on load
 
     if (backToTopBtn) {
         backToTopBtn.addEventListener('click', () => {

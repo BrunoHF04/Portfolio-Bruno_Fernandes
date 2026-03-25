@@ -7,9 +7,31 @@
     <title>Bruno Fernandes | Gestor de Projetos de TI & IA</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
+    
+    <!-- SEO & Meta Tags -->
+    <meta name="description" content="Portfolio de Bruno Fernandes - Gestor de Projetos de TI e Especialista em IA. Especialista em automação, infraestrutura e inovação.">
+    <meta name="keywords" content="Gestão de Projetos, TI, Inteligência Artificial, Automação, SQL, Python, Docker">
+    <meta name="author" content="Bruno Fernandes">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://github.com/BrunoHF04">
+    <meta property="og:title" content="Bruno Fernandes | Gestor de Projetos de TI & IA">
+    <meta property="og:description" content="Portfolio profissional focado em inovação tecnológica e gestão de projetos de IA.">
+    <meta property="og:image" content="Imags/Bruno_Fernandes.jpeg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" content="Bruno Fernandes | Gestor de Projetos de TI & IA">
+    <meta property="twitter:description" content="Portfolio profissional focado em inovação tecnológica e gestão de projetos de IA.">
+    <meta property="twitter:image" content="Imags/Bruno_Fernandes.jpeg">
 </head>
 
 <body>
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress" id="scroll-progress"></div>
+
     <!-- Animated Background Blobs -->
     <div class="bg-blobs">
         <div class="blob blob-1"></div>
@@ -141,57 +163,39 @@
         <h2 class="heading-gradient" data-i18n="skills-title" style="font-size: 2.5rem; margin-bottom: 40px;">Competências Técnicas</h2>
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
             <div class="glass-card">
-                <i class="fas fa-robot skill-icon-top"></i>
-                <h3 data-i18n="skill1-title" style="color: var(--accent-primary); margin-bottom: 15px;">Soluções de IA</h3>
+                <div class="skill-header">
+                    <i class="fas fa-robot skill-icon-top"></i>
+                    <h3 data-i18n="skill1-title" style="color: var(--accent-primary); margin-bottom: 15px;">Soluções de IA</h3>
+                </div>
                 <ul style="list-style: none; color: var(--text-secondary); font-size: 0.95rem;">
-                    <li><i class="fas fa-check-circle"
-                            style="font-size: 0.7rem; margin-right: 8px; color: var(--accent-primary);"></i> <span data-i18n="skill1-item1">IA
-                        Generativa (Otimização)</span></li>
-                    <li><i class="fas fa-check-circle"
-                            style="font-size: 0.7rem; margin-right: 8px; color: var(--accent-primary);"></i> <span data-i18n="skill1-item2">Codificação
-                        Assistida (Cursor IA)</span></li>
-                    <li><i class="fas fa-check-circle"
-                            style="font-size: 0.7rem; margin-right: 8px; color: var(--accent-primary);"></i> <span data-i18n="skill1-item3">Google
-                        Vertex AI</span></li>
-                    <li><i class="fas fa-check-circle"
-                            style="font-size: 0.7rem; margin-right: 8px; color: var(--accent-primary);"></i> <span data-i18n="skill1-item4">Análise de
-                        Dados com IA</span></li>
+                    <li class="skill-item"><i class="devicon-googlecloud-plain colored"></i> <span data-i18n="skill1-item1">IA Generativa (Otimização)</span></li>
+                    <li class="skill-item"><i class="devicon-python-plain colored"></i> <span data-i18n="skill1-item2">Codificação Assistida (Cursor IA)</span></li>
+                    <li class="skill-item"><i class="devicon-googlecloud-plain"></i> <span data-i18n="skill1-item3">Google Vertex AI</span></li>
+                    <li class="skill-item"><i class="fas fa-brain"></i> <span data-i18n="skill1-item4">Análise de Dados com IA</span></li>
                 </ul>
             </div>
             <div class="glass-card">
-                <i class="fas fa-server skill-icon-top"></i>
-                <h3 data-i18n="skill2-title" style="color: var(--accent-primary); margin-bottom: 15px;">Infra & DevOps</h3>
+                <div class="skill-header">
+                    <i class="fas fa-server skill-icon-top"></i>
+                    <h3 data-i18n="skill2-title" style="color: var(--accent-primary); margin-bottom: 15px;">Infra & DevOps</h3>
+                </div>
                 <ul style="list-style: none; color: var(--text-secondary); font-size: 0.95rem;">
-                    <li><i class="fas fa-check-circle"
-                            style="font-size: 0.7rem; margin-right: 8px; color: var(--accent-primary);"></i> <span data-i18n="skill2-item1">Docker
-                        (Containers)</span></li>
-                    <li><i class="fas fa-check-circle"
-                            style="font-size: 0.7rem; margin-right: 8px; color: var(--accent-primary);"></i> <span data-i18n="skill2-item2">Nginx &
-                        Linux (Ubuntu Server)</span></li>
-                    <li><i class="fas fa-check-circle"
-                            style="font-size: 0.7rem; margin-right: 8px; color: var(--accent-primary);"></i> <span data-i18n="skill2-item3">Redes &
-                        Firewall</span></li>
-                    <li><i class="fas fa-check-circle"
-                            style="font-size: 0.7rem; margin-right: 8px; color: var(--accent-primary);"></i> <span data-i18n="skill2-item4">PowerShell
-                        & CMD</span></li>
+                    <li class="skill-item"><i class="devicon-docker-plain colored"></i> <span data-i18n="skill2-item1">Docker (Containers)</span></li>
+                    <li class="skill-item"><i class="devicon-linux-plain"></i> <span data-i18n="skill2-item2">Nginx & Linux (Ubuntu Server)</span></li>
+                    <li class="skill-item"><i class="fas fa-network-wired"></i> <span data-i18n="skill2-item3">Redes & Firewall</span></li>
+                    <li class="skill-item"><i class="devicon-powershell-plain colored"></i> <span data-i18n="skill2-item4">PowerShell & CMD</span></li>
                 </ul>
             </div>
             <div class="glass-card">
-                <i class="fas fa-database skill-icon-top"></i>
-                <h3 data-i18n="skill3-title" style="color: var(--accent-primary); margin-bottom: 15px;">Bancos de Dados</h3>
+                <div class="skill-header">
+                    <i class="fas fa-database skill-icon-top"></i>
+                    <h3 data-i18n="skill3-title" style="color: var(--accent-primary); margin-bottom: 15px;">Bancos de Dados</h3>
+                </div>
                 <ul style="list-style: none; color: var(--text-secondary); font-size: 0.95rem;">
-                    <li><i class="fas fa-check-circle"
-                            style="font-size: 0.7rem; margin-right: 8px; color: var(--accent-primary);"></i> <span data-i18n="skill3-item1">SQL Server
-                        & PostgreSQL</span></li>
-                    <li><i class="fas fa-check-circle"
-                            style="font-size: 0.7rem; margin-right: 8px; color: var(--accent-primary);"></i> <span data-i18n="skill3-item2">Firebird</span>
-                    </li>
-                    <li><i class="fas fa-check-circle"
-                            style="font-size: 0.7rem; margin-right: 8px; color: var(--accent-primary);"></i> <span data-i18n="skill3-item3">Migração &
-                        Recuperação</span></li>
-                    <li><i class="fas fa-check-circle"
-                            style="font-size: 0.7rem; margin-right: 8px; color: var(--accent-primary);"></i> <span data-i18n="skill3-item4">Tuning de
-                        Queries</span></li>
+                    <li class="skill-item"><i class="devicon-microsoftsqlserver-plain colored"></i> <span data-i18n="skill3-item1">SQL Server & PostgreSQL</span></li>
+                    <li class="skill-item"><i class="fas fa-database"></i> <span data-i18n="skill3-item2">Firebird</span></li>
+                    <li class="skill-item"><i class="fas fa-exchange-alt"></i> <span data-i18n="skill3-item3">Migração & Recuperação</span></li>
+                    <li class="skill-item"><i class="fas fa-chart-line"></i> <span data-i18n="skill3-item4">Tuning de Queries</span></li>
                 </ul>
             </div>
         </div>
@@ -202,6 +206,9 @@
         <h2 class="heading-gradient" data-i18n="proj-title" style="font-size: 2.5rem; margin-bottom: 40px;">Projetos & Realizações</h2>
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px;">
             <div class="glass-card">
+                <div class="project-img-container">
+                    <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=600&auto=format&fit=crop" alt="UnespPass" class="project-thumbnail">
+                </div>
                 <div class="project-tags">
                     <span class="tag" data-i18n="tag-python">Python</span>
                     <span class="tag" data-i18n="tag-web">Web</span>
@@ -213,6 +220,9 @@
                 <button class="btn-detail" data-project="1" data-i18n="btn-details">Ver Detalhes</button>
             </div>
             <div class="glass-card">
+                <div class="project-img-container">
+                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=600&auto=format&fit=crop" alt="Solicitações Administrativas" class="project-thumbnail">
+                </div>
                 <div class="project-tags">
                     <span class="tag" data-i18n="tag-gestao">Gestão</span>
                     <span class="tag" data-i18n="tag-workflow">Workflow</span>
@@ -224,6 +234,9 @@
                 <button class="btn-detail" data-project="2" data-i18n="btn-details">Ver Detalhes</button>
             </div>
             <div class="glass-card">
+                <div class="project-img-container">
+                    <img src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?q=80&w=600&auto=format&fit=crop" alt="Editor de Flexões Automatizado" class="project-thumbnail">
+                </div>
                 <div class="project-tags">
                     <span class="tag" data-i18n="tag-ia-nlp">IA (NLP)</span>
                     <span class="tag" data-i18n="tag-automacao">Automação</span>
@@ -235,6 +248,9 @@
                 <button class="btn-detail" data-project="3" data-i18n="btn-details">Ver Detalhes</button>
             </div>
             <div class="glass-card">
+                <div class="project-img-container">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=600&auto=format&fit=crop" alt="Gestão de Banco de Horas" class="project-thumbnail">
+                </div>
                 <div class="project-tags">
                     <span class="tag" data-i18n="tag-dashboard">PHP/SQL</span>
                     <span class="tag" data-i18n="tag-controle">Dashboard</span>
@@ -246,6 +262,9 @@
                 <button class="btn-detail" data-project="4" data-i18n="btn-details">Ver Detalhes</button>
             </div>
             <div class="glass-card" style="border-color: var(--accent-secondary);">
+                <div class="project-img-container">
+                    <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=600&auto=format&fit=crop" alt="Racionamento Inteligente" class="project-thumbnail">
+                </div>
                 <div class="project-tags">
                     <span class="tag" data-i18n="tag-hardware" style="background: var(--accent-secondary);">Hardware</span>
                     <span class="tag" data-i18n="tag-sustentabilidade" style="background: var(--accent-secondary);">Sustentabilidade</span>
