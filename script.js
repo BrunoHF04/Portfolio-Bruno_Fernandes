@@ -318,26 +318,14 @@ document.addEventListener('DOMContentLoaded', () => {
         threshold: 0.1
     };
 
-    // --- Elaborate Signature Animation ---
+    // --- Signature Animation Hook ---
+    // The animation is now handled purely by CSS for a smoother stroke effect.
+    // This hook just ensures the signature is present and ready.
     const signature = document.querySelector('.signature-name');
     if (signature) {
-        const signatureText = signature.textContent;
-        signature.textContent = '';
-        
-        // Split text into spans for each character
-        [...signatureText].forEach((char) => {
-            const span = document.createElement('span');
-            span.textContent = char === ' ' ? '\u00A0' : char; // Handle spaces
-            signature.appendChild(span);
-        });
-
-        // Animate each span with a staggered delay
-        const spans = signature.querySelectorAll('span');
-        spans.forEach((span, i) => {
-            setTimeout(() => {
-                span.classList.add('reveal-letter');
-            }, 600 + (i * 90)); // 600ms initial delay + 90ms per character for "writing" feel
-        });
+        // Force the text to be correctly set (avoid any residual span fragments)
+        const text = signature.textContent;
+        signature.textContent = text;
     }
 
     const observer = new IntersectionObserver((entries) => {
