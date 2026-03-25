@@ -1129,7 +1129,46 @@ strong {
     transform: translateY(0);
 }
 
+/* Custom Cursor Management */
+@media (hover: hover) and (pointer: fine) {
+    .custom-cursor {
+        width: 8px;
+        height: 8px;
+        background-color: var(--accent-primary);
+        border-radius: 50%;
+        position: fixed;
+        pointer-events: none;
+        z-index: 10000;
+        transform: translate(-50%, -50%);
+        transition: width 0.3s cubic-bezier(0.23, 1, 0.32, 1), 
+                    height 0.3s cubic-bezier(0.23, 1, 0.32, 1), 
+                    background-color 0.3s, 
+                    border 0.3s,
+                    opacity 0.3s;
+        box-shadow: 0 0 15px rgba(176, 141, 87, 0.5);
+        mix-blend-mode: difference; /* Pro look */
+    }
+
+    .custom-cursor.active {
+        width: 40px;
+        height: 40px;
+        background-color: rgba(176, 141, 87, 0.1);
+        border: 1px solid var(--accent-primary);
+        box-shadow: 0 0 20px rgba(176, 141, 87, 0.3);
+    }
+
+    .custom-cursor.large {
+        width: 70px;
+        height: 70px;
+    }
+    
+    /* Hide default cursor only when custom cursor is preferred */
+    a, button, .btn, .social-icon-nav, .social-icon-large, .nav-links a {
+        cursor: none !important;
+    }
+}
+
 /* Magnetic Button Base Transitions */
-.btn-primary, .btn-secondary, .cv-button, .social-icon-large, .nav-links a {
-    transition: transform 0.2s cubic-bezier(0.23, 1, 0.32, 1), background 0.3s, color 0.3s, box-shadow 0.3s;
+.btn-primary, .btn-secondary, .cv-button, .social-icon-large, .nav-links a, .contact-link {
+    transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1), background 0.3s, color 0.3s, box-shadow 0.3s;
 }
