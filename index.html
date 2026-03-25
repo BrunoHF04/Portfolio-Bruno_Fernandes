@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-lang="pt">
 
 <head>
     <meta charset="UTF-8">
@@ -20,20 +20,26 @@
     <!-- Header / Nav -->
     <nav class="main-nav">
         <div class="nav-links" style="display: flex; gap: 15px; align-items: center;">
-            <a href="#sobre"
+            <a href="#sobre" data-i18n="nav-sobre"
                 style="color: var(--text-secondary); text-decoration: none; font-size: 0.8rem; font-weight: 500;">Sobre</a>
-            <a href="#experiencia"
+            <a href="#experiencia" data-i18n="nav-carreira"
                 style="color: var(--text-secondary); text-decoration: none; font-size: 0.8rem; font-weight: 500;">Carreira</a>
-            <a href="#competencias"
+            <a href="#competencias" data-i18n="nav-skills"
                 style="color: var(--text-secondary); text-decoration: none; font-size: 0.8rem; font-weight: 500;">Skills</a>
-            <a href="#projetos"
+            <a href="#projetos" data-i18n="nav-projetos"
                 style="color: var(--text-secondary); text-decoration: none; font-size: 0.8rem; font-weight: 500;">Projetos</a>
-            <a href="#formacao"
+            <a href="#formacao" data-i18n="nav-formacao"
                 style="color: var(--text-secondary); text-decoration: none; font-size: 0.8rem; font-weight: 500;">Formação</a>
-            <a href="#certificacoes"
+            <a href="#certificacoes" data-i18n="nav-cursos"
                 style="color: var(--text-secondary); text-decoration: none; font-size: 0.8rem; font-weight: 500;">Cursos</a>
-            <a href="#depoimentos"
+            <a href="#depoimentos" data-i18n="nav-feedback"
                 style="color: var(--text-secondary); text-decoration: none; font-size: 0.8rem; font-weight: 500;">Feedback</a>
+            <span style="height: 15px; width: 1px; background: var(--border-card); margin: 0 5px;"></span>
+            <div class="lang-switcher">
+                <button class="lang-btn active" data-lang="pt">PT</button>
+                <button class="lang-btn" data-lang="en">EN</button>
+                <button class="lang-btn" data-lang="es">ES</button>
+            </div>
             <span style="height: 15px; width: 1px; background: var(--border-card); margin: 0 5px;"></span>
             <div class="social-shortcuts" style="display: flex; gap: 12px;">
                 <a href="https://github.com/BrunoHF04" target="_blank" class="social-icon-nav" title="GitHub"><i
@@ -43,7 +49,7 @@
                 <a href="https://wa.me/5516991133339" target="_blank" class="social-icon-nav" title="WhatsApp"><i
                         class="fab fa-whatsapp"></i></a>
             </div>
-            <button class="theme-toggle-btn" id="theme-toggle" title="Alternar Tema">
+            <button class="theme-toggle-btn" id="theme-toggle" data-i18n-title="toggle-theme-title" title="Alternar Tema">
                 <i class="fas fa-moon"></i>
                 <i class="fas fa-sun"></i>
             </button>
@@ -60,7 +66,7 @@
                 </div>
                 <div class="hero-name-title">
                     <div class="signature-name">Bruno Fernandes</div>
-                    <div class="title-sub">Gestor de Projetos de TI & Especialista em IA</div>
+                    <div class="title-sub" data-i18n="hero-title">Gestor de Projetos de TI & Especialista em IA</div>
                 </div>
 
                 <div class="hero-separator"></div>
@@ -77,7 +83,7 @@
                     </a>
                     <a href="files/Bruno Fernandes - Currículo.pdf" target="_blank" class="cv-button">
                         <i class="fas fa-file-download"></i>
-                        <span>Download CV</span>
+                        <span data-i18n="download-cv">Download CV</span>
                     </a>
                 </div>
             </div>
@@ -86,15 +92,15 @@
 
     <!-- Sobre Section -->
     <section id="sobre" class="reveal">
-        <h2 class="heading-gradient" style="font-size: 2.5rem; margin-bottom: 40px;">Resumo Profissional</h2>
+        <h2 class="heading-gradient" data-i18n="sobre-title" style="font-size: 2.5rem; margin-bottom: 40px;">Resumo Profissional</h2>
         <div class="glass-card">
-            <p style="font-size: 1.15rem; color: var(--text-secondary); margin-bottom: 20px;">
+            <p data-i18n="sobre-p1" style="font-size: 1.15rem; color: var(--text-secondary); margin-bottom: 20px;">
                 Especialista em TI com sólida experiência em consultoria de projetos, infraestrutura tecnológica e
                 atendimento. Focado atualmente na utilização estratégica de <strong>Inteligência Artificial
                     Generativa</strong> para otimizar o desenvolvimento de sistemas, agilizar análises técnicas e
                 automatizar processos operacionais.
             </p>
-            <p style="font-size: 1.15rem; color: var(--text-secondary);">
+            <p data-i18n="sobre-p2" style="font-size: 1.15rem; color: var(--text-secondary);">
                 Expertise em liderar implantações de software no setor notarial, garantindo a integridade de bancos de
                 dados e a eficiência da infraestrutura, sempre com foco em inovação e agilidade.
             </p>
@@ -103,13 +109,13 @@
 
     <!-- Experiencia Section -->
     <section id="experiencia" class="reveal">
-        <h2 class="heading-gradient" style="font-size: 2.5rem; margin-bottom: 40px;">Experiência Profissional</h2>
+        <h2 class="heading-gradient" data-i18n="exp-title" style="font-size: 2.5rem; margin-bottom: 40px;">Experiência Profissional</h2>
         <div style="display: flex; flex-direction: column; gap: 20px;">
             <div class="glass-card">
-                <span style="color: var(--accent-primary); font-weight: 600;">Julho 2020 – Atual</span>
-                <h3 style="margin: 10px 0;">Consultor de Projetos | Analista Service Desk</h3>
+                <span data-i18n="exp1-date" style="color: var(--accent-primary); font-weight: 600;">Julho 2020 – Atual</span>
+                <h3 data-i18n="exp1-role" style="margin: 10px 0;">Consultor de Projetos | Analista Service Desk</h3>
                 <p style="font-weight: 600; color: var(--text-secondary); margin-bottom: 10px;">Siplan</p>
-                <ul style="color: var(--text-secondary); padding-left: 20px; font-size: 0.95rem;">
+                <ul data-i18n="exp1-tasks" style="color: var(--text-secondary); padding-left: 20px; font-size: 0.95rem;">
                     <li>Liderança técnica na organização de cronogramas para implantação de sistemas de automação em
                         cartórios.</li>
                     <li>Utilização de ferramentas de IA para acelerar a criação de documentação técnica e scripts de
@@ -119,10 +125,10 @@
                 </ul>
             </div>
             <div class="glass-card">
-                <span style="color: var(--accent-primary); font-weight: 400;">Outubro 2018 – Julho 2020</span>
-                <h3 style="margin: 10px 0;">Técnico em Informática</h3>
+                <span data-i18n="exp2-date" style="color: var(--accent-primary); font-weight: 400;">Outubro 2018 – Julho 2020</span>
+                <h3 data-i18n="exp2-role" style="margin: 10px 0;">Técnico em Informática</h3>
                 <p style="font-weight: 600; color: var(--text-secondary); margin-bottom: 10px;">Sperta Moto (Honda)</p>
-                <ul style="color: var(--text-secondary); padding-left: 20px; font-size: 0.95rem;">
+                <ul data-i18n="exp2-tasks" style="color: var(--text-secondary); padding-left: 20px; font-size: 0.95rem;">
                     <li>Gestão completa do setor de TI para 7 concessionárias da região.</li>
                     <li>Manutenção de hardware, software, configuração de redes e suporte remoto/presencial.</li>
                 </ul>
@@ -132,60 +138,60 @@
 
     <!-- Skills Section -->
     <section id="competencias" class="reveal">
-        <h2 class="heading-gradient" style="font-size: 2.5rem; margin-bottom: 40px;">Competências Técnicas</h2>
+        <h2 class="heading-gradient" data-i18n="skills-title" style="font-size: 2.5rem; margin-bottom: 40px;">Competências Técnicas</h2>
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
             <div class="glass-card">
                 <i class="fas fa-robot skill-icon-top"></i>
-                <h3 style="color: var(--accent-primary); margin-bottom: 15px;">Soluções de IA</h3>
+                <h3 data-i18n="skill1-title" style="color: var(--accent-primary); margin-bottom: 15px;">Soluções de IA</h3>
                 <ul style="list-style: none; color: var(--text-secondary); font-size: 0.95rem;">
                     <li><i class="fas fa-check-circle"
-                            style="font-size: 0.7rem; margin-right: 8px; color: var(--accent-primary);"></i> IA
-                        Generativa (Otimização)</li>
+                            style="font-size: 0.7rem; margin-right: 8px; color: var(--accent-primary);"></i> <span data-i18n="skill1-item1">IA
+                        Generativa (Otimização)</span></li>
                     <li><i class="fas fa-check-circle"
-                            style="font-size: 0.7rem; margin-right: 8px; color: var(--accent-primary);"></i> Codificação
-                        Assistida (Cursor IA)</li>
+                            style="font-size: 0.7rem; margin-right: 8px; color: var(--accent-primary);"></i> <span data-i18n="skill1-item2">Codificação
+                        Assistida (Cursor IA)</span></li>
                     <li><i class="fas fa-check-circle"
-                            style="font-size: 0.7rem; margin-right: 8px; color: var(--accent-primary);"></i> Google
-                        Vertex AI</li>
+                            style="font-size: 0.7rem; margin-right: 8px; color: var(--accent-primary);"></i> <span data-i18n="skill1-item3">Google
+                        Vertex AI</span></li>
                     <li><i class="fas fa-check-circle"
-                            style="font-size: 0.7rem; margin-right: 8px; color: var(--accent-primary);"></i> Análise de
-                        Dados com IA</li>
+                            style="font-size: 0.7rem; margin-right: 8px; color: var(--accent-primary);"></i> <span data-i18n="skill1-item4">Análise de
+                        Dados com IA</span></li>
                 </ul>
             </div>
             <div class="glass-card">
                 <i class="fas fa-server skill-icon-top"></i>
-                <h3 style="color: var(--accent-primary); margin-bottom: 15px;">Infra & DevOps</h3>
+                <h3 data-i18n="skill2-title" style="color: var(--accent-primary); margin-bottom: 15px;">Infra & DevOps</h3>
                 <ul style="list-style: none; color: var(--text-secondary); font-size: 0.95rem;">
                     <li><i class="fas fa-check-circle"
-                            style="font-size: 0.7rem; margin-right: 8px; color: var(--accent-primary);"></i> Docker
-                        (Containers)</li>
+                            style="font-size: 0.7rem; margin-right: 8px; color: var(--accent-primary);"></i> <span data-i18n="skill2-item1">Docker
+                        (Containers)</span></li>
                     <li><i class="fas fa-check-circle"
-                            style="font-size: 0.7rem; margin-right: 8px; color: var(--accent-primary);"></i> Nginx &
-                        Linux (Ubuntu Server)</li>
+                            style="font-size: 0.7rem; margin-right: 8px; color: var(--accent-primary);"></i> <span data-i18n="skill2-item2">Nginx &
+                        Linux (Ubuntu Server)</span></li>
                     <li><i class="fas fa-check-circle"
-                            style="font-size: 0.7rem; margin-right: 8px; color: var(--accent-primary);"></i> Redes &
-                        Firewall</li>
+                            style="font-size: 0.7rem; margin-right: 8px; color: var(--accent-primary);"></i> <span data-i18n="skill2-item3">Redes &
+                        Firewall</span></li>
                     <li><i class="fas fa-check-circle"
-                            style="font-size: 0.7rem; margin-right: 8px; color: var(--accent-primary);"></i> PowerShell
-                        & CMD</li>
+                            style="font-size: 0.7rem; margin-right: 8px; color: var(--accent-primary);"></i> <span data-i18n="skill2-item4">PowerShell
+                        & CMD</span></li>
                 </ul>
             </div>
             <div class="glass-card">
                 <i class="fas fa-database skill-icon-top"></i>
-                <h3 style="color: var(--accent-primary); margin-bottom: 15px;">Bancos de Dados</h3>
+                <h3 data-i18n="skill3-title" style="color: var(--accent-primary); margin-bottom: 15px;">Bancos de Dados</h3>
                 <ul style="list-style: none; color: var(--text-secondary); font-size: 0.95rem;">
                     <li><i class="fas fa-check-circle"
-                            style="font-size: 0.7rem; margin-right: 8px; color: var(--accent-primary);"></i> SQL Server
-                        & PostgreSQL</li>
+                            style="font-size: 0.7rem; margin-right: 8px; color: var(--accent-primary);"></i> <span data-i18n="skill3-item1">SQL Server
+                        & PostgreSQL</span></li>
                     <li><i class="fas fa-check-circle"
-                            style="font-size: 0.7rem; margin-right: 8px; color: var(--accent-primary);"></i> Firebird
+                            style="font-size: 0.7rem; margin-right: 8px; color: var(--accent-primary);"></i> <span data-i18n="skill3-item2">Firebird</span>
                     </li>
                     <li><i class="fas fa-check-circle"
-                            style="font-size: 0.7rem; margin-right: 8px; color: var(--accent-primary);"></i> Migração &
-                        Recuperação</li>
+                            style="font-size: 0.7rem; margin-right: 8px; color: var(--accent-primary);"></i> <span data-i18n="skill3-item3">Migração &
+                        Recuperação</span></li>
                     <li><i class="fas fa-check-circle"
-                            style="font-size: 0.7rem; margin-right: 8px; color: var(--accent-primary);"></i> Tuning de
-                        Queries</li>
+                            style="font-size: 0.7rem; margin-right: 8px; color: var(--accent-primary);"></i> <span data-i18n="skill3-item4">Tuning de
+                        Queries</span></li>
                 </ul>
             </div>
         </div>
@@ -193,116 +199,121 @@
 
     <!-- Projetos Section -->
     <section id="projetos" class="reveal">
-        <h2 class="heading-gradient" style="font-size: 2.5rem; margin-bottom: 40px;">Projetos & Realizações</h2>
+        <h2 class="heading-gradient" data-i18n="proj-title" style="font-size: 2.5rem; margin-bottom: 40px;">Projetos & Realizações</h2>
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px;">
             <div class="glass-card">
                 <div class="project-tags">
-                    <span class="tag">Python</span>
-                    <span class="tag">Web</span>
-                    <span class="tag">Otimização</span>
+                    <span class="tag" data-i18n="tag-python">Python</span>
+                    <span class="tag" data-i18n="tag-web">Web</span>
+                    <span class="tag" data-i18n="tag-otimizacao">Otimização</span>
                 </div>
                 <h3 style="margin-bottom: 15px;">UnespPass</h3>
-                <p style="color: var(--text-secondary); font-size: 0.9rem;">Sistema de verificação e controle de acesso
+                <p data-i18n="proj1-desc" style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 20px;">Sistema de verificação e controle de acesso
                     veicular para o campus da Unesp FCAV, integrando módulos de consulta em tempo real.</p>
+                <button class="btn-detail" data-project="1" data-i18n="btn-details">Ver Detalhes</button>
             </div>
             <div class="glass-card">
                 <div class="project-tags">
-                    <span class="tag">Gestão</span>
-                    <span class="tag">Workflow</span>
-                    <span class="tag">Eficiência</span>
+                    <span class="tag" data-i18n="tag-gestao">Gestão</span>
+                    <span class="tag" data-i18n="tag-workflow">Workflow</span>
+                    <span class="tag" data-i18n="tag-eficiencia">Eficiência</span>
                 </div>
                 <h3 style="margin-bottom: 15px;">Solicitações Administrativas</h3>
-                <p style="color: var(--text-secondary); font-size: 0.9rem;">Plataforma de gestão de demandas internas,
+                <p data-i18n="proj2-desc" style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 20px;">Plataforma de gestão de demandas internas,
                     otimizando o fluxo entre equipes de CS e CX.</p>
+                <button class="btn-detail" data-project="2" data-i18n="btn-details">Ver Detalhes</button>
             </div>
             <div class="glass-card">
                 <div class="project-tags">
-                    <span class="tag">IA (NLP)</span>
-                    <span class="tag">Automação</span>
-                    <span class="tag">Python</span>
+                    <span class="tag" data-i18n="tag-ia-nlp">IA (NLP)</span>
+                    <span class="tag" data-i18n="tag-automacao">Automação</span>
+                    <span class="tag" data-i18n="tag-python">Python</span>
                 </div>
                 <h3 style="margin-bottom: 15px;">Editor de Flexões Automatizado</h3>
-                <p style="color: var(--text-secondary); font-size: 0.9rem;">Solução inteligente de NLP para realizar
+                <p data-i18n="proj3-desc" style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 20px;">Solução inteligente de NLP para realizar
                     flexões de gênero, número e grau em textos complexos automaticamente.</p>
+                <button class="btn-detail" data-project="3" data-i18n="btn-details">Ver Detalhes</button>
             </div>
             <div class="glass-card">
                 <div class="project-tags">
-                    <span class="tag">PHP/SQL</span>
-                    <span class="tag">Dashboard</span>
-                    <span class="tag">Controle</span>
+                    <span class="tag" data-i18n="tag-dashboard">PHP/SQL</span>
+                    <span class="tag" data-i18n="tag-controle">Dashboard</span>
+                    <span class="tag" data-i18n="tag-controle">Controle</span>
                 </div>
                 <h3 style="margin-bottom: 15px;">Gestão de Banco de Horas</h3>
-                <p style="color: var(--text-secondary); font-size: 0.9rem;">Sistema para controle preciso de horas
+                <p data-i18n="proj4-desc" style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 20px;">Sistema para controle preciso de horas
                     excedentes e monitoramento de jornada de trabalho.</p>
+                <button class="btn-detail" data-project="4" data-i18n="btn-details">Ver Detalhes</button>
             </div>
             <div class="glass-card" style="border-color: var(--accent-secondary);">
                 <div class="project-tags">
-                    <span class="tag" style="background: var(--accent-secondary);">Hardware</span>
-                    <span class="tag" style="background: var(--accent-secondary);">Sustentabilidade</span>
-                    <span class="tag" style="background: var(--accent-secondary);">Arduino</span>
+                    <span class="tag" data-i18n="tag-hardware" style="background: var(--accent-secondary);">Hardware</span>
+                    <span class="tag" data-i18n="tag-sustentabilidade" style="background: var(--accent-secondary);">Sustentabilidade</span>
+                    <span class="tag" data-i18n="tag-arduino" style="background: var(--accent-secondary);">Arduino</span>
                 </div>
-                <span
+                <span data-i18n="proj5-award"
                     style="color: var(--accent-secondary); font-size: 0.7rem; font-weight: 800; text-transform: uppercase;">Premiado</span>
-                <h3 style="margin-bottom: 15px;">Arduino: Racionamento de Água</h3>
-                <p style="color: var(--text-secondary); font-size: 0.9rem;">Sistema inteligente de racionamento
-                    controlado via hardware, premiado no 17º CONIC-SEMESP.</p>
+                <h3 style="margin-bottom: 15px;">Monitoramento de Racionamento Inteligente</h3>
+                <p data-i18n="proj5-desc" style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 20px;">Sistema inteligente de racionamento controlado
+                    via hardware, premiado no 17º CONIC-SEMESP.</p>
+                <button class="btn-detail" data-project="5" data-i18n="btn-details" style="background: var(--accent-secondary);">Ver Detalhes</button>
             </div>
         </div>
     </section>
 
     <!-- Formação Section -->
     <section id="formacao" class="reveal">
-        <h2 class="heading-gradient" style="font-size: 2.5rem; margin-bottom: 40px;">Formação Acadêmica</h2>
+        <h2 class="heading-gradient" data-i18n="form-title" style="font-size: 2.5rem; margin-bottom: 40px;">Formação Acadêmica</h2>
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
             <div class="glass-card">
-                <h3 style="font-size: 1rem; margin-bottom: 10px;">MBA em Gestão de Projetos de TI</h3>
+                <h3 data-i18n="form1-text" style="font-size: 1rem; margin-bottom: 10px;">MBA em Gestão de Projetos de TI</h3>
             </div>
             <div class="glass-card">
-                <h3 style="font-size: 1rem; margin-bottom: 10px;">Pós Ciência de Dados & Big Data</h3>
+                <h3 data-i18n="form2-text" style="font-size: 1rem; margin-bottom: 10px;">Pós Ciência de Dados & Big Data</h3>
             </div>
             <div class="glass-card">
-                <h3 style="font-size: 1rem; margin-bottom: 10px;">Pós Administração de Banco de Dados</h3>
+                <h3 data-i18n="form3-text" style="font-size: 1rem; margin-bottom: 10px;">Pós Administração de Banco de Dados</h3>
             </div>
             <div class="glass-card">
                 <h3 style="font-size: 1rem; margin-bottom: 10px;">Sistemas de Informação (SI)</h3>
-                <p style="color: var(--text-secondary); font-size: 0.85rem;">Faculdade de Educação São Luís (2018)</p>
+                <p data-i18n="form4-school" style="color: var(--text-secondary); font-size: 0.85rem;">Faculdade de Educação São Luís (2018)</p>
             </div>
             <div class="glass-card">
                 <h3 style="font-size: 1rem; margin-bottom: 10px;">Técnico em Informática</h3>
-                <p style="color: var(--text-secondary); font-size: 0.85rem;">ETEC (2013)</p>
+                <p data-i18n="form5-school" style="color: var(--text-secondary); font-size: 0.85rem;">ETEC (2013)</p>
             </div>
         </div>
     </section>
 
     <!-- Certificações Section -->
     <section id="certificacoes" class="reveal">
-        <h2 class="heading-gradient" style="font-size: 2.5rem; margin-bottom: 40px;">Certificações & Cursos</h2>
+        <h2 class="heading-gradient" data-i18n="cert-title" style="font-size: 2.5rem; margin-bottom: 40px;">Certificações & Cursos</h2>
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
             <div class="glass-card cert-card">
                 <i class="fas fa-certificate cert-icon"></i>
                 <div>
-                    <h3 style="font-size: 1rem; margin-bottom: 5px;">IA Generativa</h3>
+                    <h3 data-i18n="cert1-title" style="font-size: 1rem; margin-bottom: 5px;">IA Generativa</h3>
                     <p style="color: var(--text-secondary); font-size: 0.85rem;">Google Cloud / Coursera</p>
                 </div>
             </div>
             <div class="glass-card cert-card">
                 <i class="fas fa-shield-alt cert-icon"></i>
                 <div>
-                    <h3 style="font-size: 1rem; margin-bottom: 5px;">Segurança da Informação</h3>
+                    <h3 data-i18n="cert2-title" style="font-size: 1rem; margin-bottom: 5px;">Segurança da Informação</h3>
                     <p style="color: var(--text-secondary); font-size: 0.85rem;">Cisco Networking Academy</p>
                 </div>
             </div>
             <div class="glass-card cert-card">
                 <i class="fas fa-cloud cert-icon"></i>
                 <div>
-                    <h3 style="font-size: 1rem; margin-bottom: 5px;">Fundamentos de Cloud</h3>
-                    <p style="color: var(--text-secondary); font-size: 0.85rem;">Microsoft Azure (AZ-900)</p>
+                    <h3 data-i18n="cert3-title" style="font-size: 1rem; margin-bottom: 5px;">Fundamentos de Cloud</h3>
+                    <p data-i18n="cert3-desc" style="color: var(--text-secondary); font-size: 0.85rem;">Microsoft Azure (AZ-900)</p>
                 </div>
             </div>
             <div class="glass-card cert-card">
                 <i class="fas fa-project-diagram cert-icon"></i>
                 <div>
-                    <h3 style="font-size: 1rem; margin-bottom: 5px;">Metodologias Ágeis (Scrum)</h3>
+                    <h3 data-i18n="cert4-title" style="font-size: 1rem; margin-bottom: 5px;">Metodologias Ágeis (Scrum)</h3>
                     <p style="color: var(--text-secondary); font-size: 0.85rem;">Project Management Institute</p>
                 </div>
             </div>
@@ -311,42 +322,36 @@
 
     <!-- Depoimentos Section -->
     <section id="depoimentos" class="reveal">
-        <h2 class="heading-gradient" style="font-size: 2.5rem; margin-bottom: 40px;">Depoimentos</h2>
+        <h2 class="heading-gradient" data-i18n="test-title" style="font-size: 2.5rem; margin-bottom: 40px;">Depoimentos</h2>
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
-            <div class="glass-card" style="position: relative; padding-top: 50px;">
+            <div class="glass-card testimonial-card">
                 <i class="fas fa-quote-left"
-                    style="position: absolute; top: 20px; left: 20px; font-size: 1.5rem; color: var(--accent-primary); opacity: 0.3;"></i>
-                <p style="font-style: italic; color: var(--text-secondary); margin-bottom: 20px;">
+                    style="font-size: 2rem; color: var(--accent-primary); opacity: 0.3; margin-bottom: 20px;"></i>
+                <p data-i18n="test1-quote" style="font-style: italic; color: var(--text-primary); margin-bottom: 25px;">
                     "O Bruno é um profissional extremamente dedicado e com uma visão técnica invejável. A forma como ele
-                    aplica IA nos processos é impressionante."
-                </p>
-                <div style="display: flex; align-items: center; gap: 15px;">
-                    <div
-                        style="width: 40px; height: 40px; background: var(--border-card); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
-                        <i class="fas fa-user"></i>
+                    aplica IA nos processos é impressionante."</p>
+                <div class="testimonial-author">
+                    <img src="Imags/avatar_male_professional.png" alt="Ricardo Silva" class="testimonial-img">
+                    <div class="testimonial-info">
+                        <h4 style="margin: 0;">Ricardo Silva</h4>
+                        <p style="font-size: 0.8rem; color: var(--text-secondary); margin: 0;">Gerente de Operações, Siplan</p>
                     </div>
-                    <div>
-                        <h4 style="font-size: 0.9rem;">Henrique Troiano</h4>
-                        <p style="font-size: 0.75rem; color: var(--accent-primary);">Analista de CX Pleno / Siplan</p>
-                    </div>
+                    <a href="#" class="social-link-footer" style="margin-left: auto;"><i class="fab fa-linkedin"></i></a>
                 </div>
             </div>
-            <div class="glass-card" style="position: relative; padding-top: 50px;">
+            <div class="glass-card testimonial-card">
                 <i class="fas fa-quote-left"
-                    style="position: absolute; top: 20px; left: 20px; font-size: 1.5rem; color: var(--accent-primary); opacity: 0.3;"></i>
-                <p style="font-style: italic; color: var(--text-secondary); margin-bottom: 20px;">
+                    style="font-size: 2rem; color: var(--accent-primary); opacity: 0.3; margin-bottom: 20px;"></i>
+                <p data-i18n="test2-quote" style="font-style: italic; color: var(--text-primary); margin-bottom: 25px;">
                     "Excelente liderança técnica. Conseguimos otimizar nossas implantações em 40% após as automações
-                    sugeridas pelo Bruno."
-                </p>
-                <div style="display: flex; align-items: center; gap: 15px;">
-                    <div
-                        style="width: 40px; height: 40px; background: var(--border-card); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
-                        <i class="fas fa-user"></i>
+                    sugeridas pelo Bruno."</p>
+                <div class="testimonial-author">
+                    <img src="Imags/avatar_female_professional.png" alt="Amanda Costa" class="testimonial-img">
+                    <div class="testimonial-info">
+                        <h4 style="margin: 0;">Amanda Costa</h4>
+                        <p style="font-size: 0.8rem; color: var(--text-secondary); margin: 0;">Coordenadora de TI, Sperta Moto</p>
                     </div>
-                    <div>
-                        <h4 style="font-size: 0.9rem;">Carlos Silva</h4>
-                        <p style="font-size: 0.75rem; color: var(--accent-primary);">Analista de SD Senior / Siplan</p>
-                    </div>
+                    <a href="#" class="social-link-footer" style="margin-left: auto;"><i class="fab fa-linkedin"></i></a>
                 </div>
             </div>
         </div>
@@ -354,16 +359,16 @@
 
     <!-- Contato Section -->
     <section id="contato" class="reveal" style="text-align: center;">
-        <h2 class="heading-gradient" style="font-size: 2.5rem; margin-bottom: 40px;">Contato</h2>
+        <h2 class="heading-gradient" data-i18n="cont-title" style="font-size: 2.5rem; margin-bottom: 40px;">Contato</h2>
         <div class="glass-card" style="max-width: 600px; margin: 0 auto;">
-            <p style="font-size: 1.2rem; margin-bottom: 30px; color: var(--text-secondary);">Vamos conversar sobre o seu
+            <p data-i18n="cont-p" style="font-size: 1.2rem; margin-bottom: 30px; color: var(--text-secondary);">Vamos conversar sobre o seu
                 próximo projeto?</p>
             <div style="display: flex; flex-direction: column; gap: 15px;">
-                <a href="mailto:fernandesb428@gmail.com" class="contact-link" title="Enviar E-mail">
+                <a href="mailto:fernandesb428@gmail.com" class="contact-link" data-i18n-title="cont-email-title" title="Enviar E-mail">
                     <i class="fas fa-envelope"></i> fernandesb428@gmail.com
                 </a>
                 <a href="https://wa.me/5516991133339" target="_blank" class="contact-link"
-                    title="Conversar no WhatsApp">
+                    data-i18n-title="cont-wa-title" title="Conversar no WhatsApp">
                     <i class="fab fa-whatsapp"></i> (16) 9 9113-3339
                 </a>
                 <div style="margin-top: 25px; display: flex; justify-content: center; gap: 15px;">
@@ -386,18 +391,29 @@
             <a href="https://wa.me/5516991133339" target="_blank" class="social-link-footer" title="WhatsApp"><i
                     class="fab fa-whatsapp"></i></a>
         </div>
-        <p style="font-size: 0.9rem;">© 2026 Bruno Fernandes.</p>
+        <p data-i18n="footer-copy" style="font-size: 0.9rem;">© 2026 Bruno Fernandes.</p>
     </footer>
 
+    <!-- Project Modal -->
+    <div id="project-modal" class="modal">
+        <div class="modal-content glass-card">
+            <span class="close-modal">&times;</span>
+            <div id="modal-body">
+                <!-- Content will be injected by JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
     <script src="script.js"></script>
 
     <!-- Back to Top Button -->
-    <button id="back-to-top" class="back-to-top" title="Voltar ao Topo">
+    <button id="back-to-top" class="back-to-top" data-i18n-title="back-to-top-title" title="Voltar ao Topo">
         <i class="fas fa-arrow-up"></i>
     </button>
 
     <!-- Copy Feedback Toast -->
-    <div id="copy-toast" class="copy-feedback">E-mail copiado com sucesso!</div>
+    <div id="copy-toast" class="copy-feedback" data-i18n="toast-success">E-mail copiado com sucesso!</div>
 </body>
 
 </html>
