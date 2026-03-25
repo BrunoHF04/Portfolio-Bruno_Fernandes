@@ -56,6 +56,7 @@ body {
     color: var(--text-primary);
     line-height: 1.6;
     overflow-x: hidden;
+    width: 100%;
     transition: var(--transition-theme);
 }
 
@@ -68,22 +69,7 @@ h4 {
 }
 
 /* Hero Section Enhancement */
-#hero {
-    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), var(--hero-bg);
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    position: relative;
-    padding: 0 !important;
-    width: 100vw !important;
-    max-width: 100vw !important;
-    margin: 0 !important;
-    left: 50% !important;
-    right: 50% !important;
-    margin-left: -50vw !important;
-    margin-right: -50vw !important;
-    overflow: hidden;
-}
+/* Hero Section Enhancement moved down for precedence */
 
 #hero::before {
     content: '';
@@ -157,6 +143,7 @@ h4 {
     text-transform: uppercase;
     margin-top: 5px;
     opacity: 0.9;
+    white-space: nowrap;
 }
 
 .hero-separator {
@@ -212,6 +199,11 @@ h4 {
 
     .hero-name-title {
         text-align: center;
+    }
+
+    .title-sub {
+        white-space: normal;
+        font-size: 0.95rem;
     }
 
     .signature-name {
@@ -350,6 +342,21 @@ section {
     margin: 0 auto;
 }
 
+#hero {
+    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), var(--hero-bg);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    position: relative;
+    padding: 0;
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    overflow: hidden;
+    left: 0;
+    right: 0;
+}
+
 /* Main Navigation */
 .main-nav {
     position: fixed;
@@ -483,7 +490,7 @@ section {
     border-color: var(--accent-primary);
     color: var(--accent-primary);
     transform: translateY(-5px);
-    box-shadow: 0 10px 20px -5px rgba(37, 99, 235, 0.3);
+    box-shadow: 0 10px 20px -5px rgba(78, 78, 78, 0.3);
 }
 
 .social-link-footer {

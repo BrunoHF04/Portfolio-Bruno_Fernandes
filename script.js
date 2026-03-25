@@ -213,7 +213,7 @@ const translations = {
         "nav-formacao": "Formación",
         "nav-cursos": "Cursos",
         "nav-feedback": "Opinión",
-        "hero-title": "Gestor de Proyectos de TI y Especialista en IA",
+        "hero-title": "Gestor de Proyectos de TI & Especialista en IA",
         "download-cv": "Descargar CV",
         "sobre-title": "Resumen Profesional",
         "sobre-p1": "Especialista en TI con sólida experiencia en consultoría de proyectos, infraestructura tecnológica y atención al cliente. Enfocado actualmente en el uso estratégico de la <strong>Inteligencia Artificial Generativa</strong> para optimizar el desarrollo de sistemas, agilizar el análisis técnico y automatizar procesos operativos.",
@@ -443,7 +443,7 @@ document.addEventListener('DOMContentLoaded', () => {
             modal.classList.remove('show');
             setTimeout(() => {
                 modal.style.display = 'none';
-                document.body.style.overflow = 'auto';
+                document.body.style.overflow = '';
             }, 300);
         });
     }
