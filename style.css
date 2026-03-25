@@ -5,21 +5,21 @@
     --bg-body: #0a0a0c;
     --bg-card: rgba(255, 255, 255, 0.03);
     --border-card: rgba(255, 255, 255, 0.08);
-    --accent-primary: #94a3b8; /* Professional Silver/Slate */
-    --accent-secondary: #475569; /* Deep Graphite */
+    --accent-primary: #b08d57; /* Golden Amber from Hero Light */
+    --accent-secondary: #5d4037; /* Rich Walnut Wood */
     --text-primary: #f8fafc;
     --text-secondary: #cbd5e1;
     --transition-smooth: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-theme: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
     --font-signature: 'Mrs Saint Delafield', cursive;
-    --hero-overlay: rgba(0, 0, 0, 0.4);
-    --hero-vignette: radial-gradient(circle at center, transparent 0%, rgba(0, 0, 0, 0.6) 100%);
+    --hero-overlay: rgba(0, 0, 0, 0.3); /* Slightly lighter overlay to let wood tones pop */
+    --hero-vignette: radial-gradient(circle at center, transparent 0%, rgba(0, 0, 0, 0.7) 100%);
     --hero-bg: url('Imags/hero_bg.png');
     --hero-bg-light: url('Imags/hero_bg_light.png');
     --hero-text: #ffffff;
-    --blob-color-1: rgba(51, 65, 85, 0.15); /* Neutral Slate */
-    --blob-color-2: rgba(100, 116, 139, 0.1); /* Mid Slate */
-    --blob-color-3: rgba(31, 41, 55, 0.08); /* Deepest Gray */
+    --blob-color-1: rgba(176, 141, 87, 0.12); /* Subtle Amber Glow */
+    --blob-color-2: rgba(93, 64, 55, 0.1); /* Warm Walnut */
+    --blob-color-3: rgba(75, 75, 75, 0.08); /* Felt Grey from Mousepad */
     --glass-blur: 20px;
 }
 
