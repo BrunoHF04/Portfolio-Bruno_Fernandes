@@ -10,7 +10,7 @@
     --accent-secondary: #64748b;
     /* Professional Slate Blue */
     --text-primary: #f8fafc;
-    --text-secondary: #94a3b8;
+    --text-secondary: #cbd5e1; /* Brighter for better contrast */
     --transition-smooth: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-theme: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
     --font-signature: 'Mrs Saint Delafield', cursive;
@@ -383,6 +383,35 @@ section {
     background: rgba(255, 255, 255, 0.85);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
+}
+
+/* Scroll Progress Bar */
+.scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 3px;
+    background: linear-gradient(to right, var(--accent-primary), var(--accent-secondary));
+    z-index: 2000;
+    transition: width 0.1s ease-out;
+}
+
+/* Active Nav Link */
+.nav-links a.active {
+    color: var(--text-primary) !important;
+    font-weight: 700 !important;
+}
+
+.nav-links a.active::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--accent-primary);
+    border-radius: 2px;
 }
 
 .glass-card {
@@ -772,12 +801,58 @@ strong {
     text-transform: uppercase;
 }
 
+/* Project Thumbnail Styles */
+.project-img-container {
+    width: 100%;
+    height: 180px;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 20px;
+    border: 1px solid var(--border-card);
+}
+
+.project-thumbnail {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.glass-card:hover .project-thumbnail {
+    transform: scale(1.1);
+}
+
 /* Skill Icons */
 .skill-icon-top {
     font-size: 2rem;
     color: var(--accent-primary);
     margin-bottom: 20px;
     display: block;
+}
+
+.skill-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 5px;
+}
+
+.skill-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+    font-weight: 500;
+}
+
+.skill-item i {
+    font-size: 1.2rem;
+    width: 25px;
+    text-align: center;
+}
+
+.skill-item i.colored {
+    filter: drop-shadow(0 0 5px rgba(0,0,0,0.1));
 }
 
 /* Certification Cards */
@@ -953,4 +1028,26 @@ strong {
     color: var(--text-secondary);
     font-size: 0.95rem;
     line-height: 1.6;
-}
+} 
+ / *   M o d a l   B a n n e r   S t y l e s   * /  
+ . m o d a l - h e a d e r - i m g   {  
+         w i d t h :   1 0 0 % ;  
+         h e i g h t :   2 5 0 p x ;  
+         m a r g i n - b o t t o m :   2 5 p x ;  
+         b o r d e r - r a d i u s :   1 2 p x ;  
+         o v e r f l o w :   h i d d e n ;  
+         b o r d e r :   1 p x   s o l i d   v a r ( - - b o r d e r - c a r d ) ;  
+ }  
+  
+ . m o d a l - b a n n e r   {  
+         w i d t h :   1 0 0 % ;  
+         h e i g h t :   1 0 0 % ;  
+         o b j e c t - f i t :   c o v e r ;  
+ }  
+  
+ @ m e d i a   ( m a x - w i d t h :   7 6 8 p x )   {  
+         . m o d a l - h e a d e r - i m g   {  
+                 h e i g h t :   1 8 0 p x ;  
+         }  
+ }  
+ 
