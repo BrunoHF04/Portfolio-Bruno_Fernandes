@@ -64,6 +64,7 @@ const translations = {
         "toggle-theme-title": "Alternar Tema",
         "toast-success": "E-mail copiado com sucesso!",
         "footer-copy": "© 2026 Bruno Fernandes.",
+        "sav-cont": "Salvar Contato",
         "tag-python": "Python",
         "tag-web": "Web",
         "tag-otimizacao": "Otimização",
@@ -167,6 +168,7 @@ const translations = {
         "toggle-theme-title": "Toggle Theme",
         "toast-success": "E-mail copied successfully!",
         "footer-copy": "© 2026 Bruno Fernandes.",
+        "sav-cont": "Save Contact",
         "tag-python": "Python",
         "tag-web": "Web",
         "tag-otimizacao": "Optimization",
@@ -520,24 +522,51 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- Copy Email Logic ---
-    const copyEmailBtn = document.getElementById('copy-email-hero');
-    const copyToast = document.getElementById('copy-toast');
+    // --- Custom Cursor Logic ---
+    const cursor = document.querySelector('.custom-cursor');
+    const magneticElements = document.querySelectorAll('.btn-primary, .btn-secondary, .cv-button, .social-icon-large, .nav-links a, .contact-link');
 
-    if (copyEmailBtn) {
-        copyEmailBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            const email = "fernandesb428@gmail.com";
-            
-            navigator.clipboard.writeText(email).then(() => {
-                copyToast.classList.add('show');
-                setTimeout(() => {
-                    copyToast.classList.remove('show');
-                }, 3000);
-            }).catch(err => {
-                console.error('Erro ao copiar e-mail: ', err);
+    if (cursor) {
+        window.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+
+        magneticElements.forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursor.classList.add('active');
+                if (el.classList.contains('social-icon-large') || el.classList.contains('cv-button')) {
+                    cursor.classList.add('large');
+                }
+            });
+            el.addEventListener('mouseleave', () => {
+                cursor.classList.remove('active');
+                cursor.classList.remove('large');
             });
         });
+    }
+
+    // --- Lenis Smooth Scroll Initializer ---
+    // Note: Assuming Lenis is loaded via CDN in index.html
+    if (typeof Lenis !== 'undefined') {
+        const lenis = new Lenis({
+            duration: 1.2,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            orientation: 'vertical',
+            gestureOrientation: 'vertical',
+            smoothWheel: true,
+            wheelMultiplier: 1,
+            smoothTouch: false,
+            touchMultiplier: 2,
+            infinite: false,
+        });
+
+        function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        }
+
+        requestAnimationFrame(raf);
     }
 
     // --- Reveal on Scroll Logic ---
@@ -572,9 +601,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- Magnetic Buttons Logic ---
-    const magneticElements = document.querySelectorAll('.btn-primary, .btn-secondary, .cv-button, .social-icon-large, .nav-links a');
+    const magneticHoverElements = document.querySelectorAll('.btn-primary, .btn-secondary, .cv-button, .social-icon-large, .nav-links a');
     
-    magneticElements.forEach(el => {
+    magneticHoverElements.forEach(el => {
         el.addEventListener('mousemove', (e) => {
             const rect = el.getBoundingClientRect();
             const x = e.clientX - rect.left - rect.width / 2;
