@@ -426,13 +426,15 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="modal-header-img">
                 <img src="${thumbnails[projectId]}" alt="${t[`proj${projectId}-modal-title`]}" class="modal-banner">
             </div>
-            <h2 class="heading-gradient">${t[`proj${projectId}-modal-title`]}</h2>
-            <h4>${t['modal-context']}</h4>
-            <p>${t[`proj${projectId}-modal-context`]}</p>
-            <h4>${t['modal-challenge']}</h4>
-            <p>${t[`proj${projectId}-modal-challenge`]}</p>
-            <h4>${t['modal-solution']}</h4>
-            <p>${t[`proj${projectId}-modal-solution`]}</p>
+            <div class="modal-body-content">
+                <h2 class="heading-gradient">${t[`proj${projectId}-modal-title`]}</h2>
+                <h4>${t['modal-context']}</h4>
+                <p>${t[`proj${projectId}-modal-context`]}</p>
+                <h4>${t['modal-challenge']}</h4>
+                <p>${t[`proj${projectId}-modal-challenge`]}</p>
+                <h4>${t['modal-solution']}</h4>
+                <p>${t[`proj${projectId}-modal-solution`]}</p>
+            </div>
         `;
         modalBody.innerHTML = content;
     }
