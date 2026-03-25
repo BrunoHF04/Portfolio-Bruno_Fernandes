@@ -6,7 +6,7 @@
     --bg-card: rgba(255, 255, 255, 0.03);
     --border-card: rgba(255, 255, 255, 0.08);
     --accent-primary: #b08d57; /* Golden Amber from Hero Light */
-    --accent-secondary: #5d4037; /* Rich Walnut Wood */
+    --accent-secondary: #3e2723; /* Darker Espresso Walnut */
     --text-primary: #f8fafc;
     --text-secondary: #cbd5e1;
     --transition-smooth: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
@@ -425,12 +425,12 @@ section {
 .glass-card:hover {
     border-color: var(--accent-primary);
     transform: translateY(-5px);
-    box-shadow: 0 10px 40px -10px rgba(37, 99, 235, 0.2);
+    box-shadow: 0 10px 40px -10px rgba(176, 141, 87, 0.2);
 }
 
 .heading-gradient {
-    background: linear-gradient(135deg, #60a5fa, #94a3b8);
-    /* Lighter professional gradient in dark mode */
+    background: linear-gradient(135deg, var(--accent-primary), #8d6e63);
+    /* Amber to Warm Brown gradient */
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
