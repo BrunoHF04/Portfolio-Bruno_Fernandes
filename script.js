@@ -539,4 +539,26 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
+
+    // --- Reveal on Scroll Logic ---
+    const revealOptions = {
+        threshold: 0.15,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+                revealObserver.unobserve(entry.target); // Only animate once
+            }
+        });
+    }, revealOptions);
+
+    // Apply reveal class to major sections and cards
+    const revealElements = document.querySelectorAll('section, .glass-card, .skill-item, .cert-card');
+    revealElements.forEach(el => {
+        el.classList.add('reveal');
+        revealObserver.observe(el);
+    });
 });
