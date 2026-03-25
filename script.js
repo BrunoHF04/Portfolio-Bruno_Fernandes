@@ -532,43 +532,22 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- Masterclass Dual-Cursor Logic ---
-    const cursorDot = document.querySelector('.cursor-dot');
-    const cursorOutline = document.querySelector('.cursor-outline');
+    // --- Masterclass Custom Cursor Logic ---
+    const cursor = document.querySelector('.custom-cursor');
     
-    if (cursorDot && cursorOutline) {
-        let posX = 0, posY = 0;
-        let mouseX = 0, mouseY = 0;
-
+    if (cursor) {
         window.addEventListener('mousemove', (e) => {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-            
-            // Dot follows instantly
-            cursorDot.style.left = `${mouseX}px`;
-            cursorDot.style.top = `${mouseY}px`;
+            // Instant follow for the single dot cursor
+            cursor.style.left = `${e.clientX}px`;
+            cursor.style.top = `${e.clientY}px`;
         });
-
-        // Outline follows with inertia (Lerp)
-        const animateCursor = () => {
-            const lerp = (start, end, factor) => start + (end - start) * factor;
-            
-            posX = lerp(posX, mouseX, 0.15);
-            posY = lerp(posY, mouseY, 0.15);
-
-            cursorOutline.style.left = `${posX}px`;
-            cursorOutline.style.top = `${posY}px`;
-
-            requestAnimationFrame(animateCursor);
-        };
-        animateCursor();
 
         // Hover Effect
         const interactiveElements = document.querySelectorAll('a, button, .btn, .glass-card, .skill-item, .project-thumbnail, .social-icon-large, .nav-links a, .contact-link');
         
         interactiveElements.forEach(el => {
-            el.addEventListener('mouseenter', () => cursorOutline.classList.add('active'));
-            el.addEventListener('mouseleave', () => cursorOutline.classList.remove('active'));
+            el.addEventListener('mouseenter', () => cursor.classList.add('active'));
+            el.addEventListener('mouseleave', () => cursor.classList.remove('active'));
         });
     }
 
