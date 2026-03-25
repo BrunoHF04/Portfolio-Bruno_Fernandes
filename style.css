@@ -130,20 +130,23 @@ h4 {
     white-space: nowrap;
     text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
     transition: var(--transition-theme);
-    /* Writing Animation */
-    clip-path: inset(0 100% 0 0);
-    animation: write-signature 2.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-    animation-delay: 0.5s;
+    display: inline-block;
+}
+
+.signature-name span {
+    display: inline-block;
+    opacity: 0;
+    transform: translateX(-10px) rotate(-5deg);
+    transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.signature-name span.reveal-letter {
+    opacity: 1;
+    transform: translateX(0) rotate(0deg);
 }
 
 [data-theme="light"] .signature-name {
     text-shadow: none;
-}
-
-@keyframes write-signature {
-    to {
-        clip-path: inset(0 0 0 0);
-    }
 }
 
 .title-sub {
