@@ -13,14 +13,13 @@ Este é um projeto de portfólio moderno e responsivo, focado em **Gestão de Pr
 
 ## ✨ Características & Funcionalidades
 
-- **Design Premium**: Efeitos de vidro (Glassmorphism) e fundo dinâmico com blobs animados.
-- **Modo Claro/Escuro**: Alternância suave de tema com persistência no navegador.
-- **Seção Hero Refinada**: Subtítulo profissional, foto de perfil com efeitos de hover e download de currículo.
-- **Navegação Inteligente**: Barra de ferramentas fixa com links essenciais e acesso rápido às redes sociais.
-- **Otimização Mobile**: Menu responsivo com suporte a rolagem horizontal e ajuste inteligente de padding para evitar sobreposição de elementos fixos.
-- **Copy Email**: Funcionalidade de copiar e-mail para a área de transferência com feedback visual imediato (toast).
-- **Projetos com Tags**: Visualização intuitiva das tecnologias usadas em cada projeto.
-- **Certificações & Depoimentos**: Seções dedicadas para cursos e feedbacks profissionais reais.
+- **Design Premium**: Estética *Glassmorphism* refinada com paleta **Navy & Slate** (Azul Marinho e Cinza Ardósia) para um visual corporativo de alta autoridade.
+- **Suporte Multi-idioma (i18n)**: Internacionalização completa para **Português, Inglês e Espanhol**, com detecção e persistência de idioma via `localStorage`.
+- **Modais de Detalhe de Projeto**: Sistema dinâmico de modais que apresenta Contexto, Desafio e Solução para cada projeto, melhorando a narrativa técnica.
+- **Modo Claro/Escuro**: Alternância suave de tema otimizada para legibilidade, com contraste de fontes ajustado para o modo escuro.
+- **Foco em Autoridade**: Depoimentos com avatares profissionais e cargos detalhados, transmitindo credibilidade internacional.
+- **Otimização & Performance**: Código limpo (Vanilla JS/CSS), responsividade total e correções de layout para evitar scroll horizontal indesejado.
+- **Copy Email**: Funcionalidade de copiar e-mail com feedback visual via *toast*.
 
 ## 🛠️ Como Visualizar
 
