@@ -65,6 +65,7 @@ const translations = {
         "toast-success": "E-mail copiado com sucesso!",
         "footer-copy": "© 2026 Bruno Fernandes.",
         "sav-cont": "Salvar Contato",
+        "loading-text": "Carregando Experiência...",
         "tag-python": "Python",
         "tag-web": "Web",
         "tag-otimizacao": "Otimização",
@@ -169,6 +170,7 @@ const translations = {
         "toast-success": "E-mail copied successfully!",
         "footer-copy": "© 2026 Bruno Fernandes.",
         "sav-cont": "Save Contact",
+        "loading-text": "Loading Experience...",
         "tag-python": "Python",
         "tag-web": "Web",
         "tag-otimizacao": "Optimization",
@@ -272,6 +274,7 @@ const translations = {
         "toggle-theme-title": "Alternar tema",
         "toast-success": "¡Correo electrónico copiado con éxito!",
         "footer-copy": "© 2026 Bruno Fernandes.",
+        "loading-text": "Cargando Experiencia...",
         "tag-python": "Python",
         "tag-web": "Web",
         "tag-otimizacao": "Optimización",
@@ -313,6 +316,35 @@ const translations = {
 };
 
 document.addEventListener('DOMContentLoaded', () => {
+    // --- Loader Logic ---
+    const loader = document.getElementById('loader');
+    const loaderBar = document.getElementById('loader-bar');
+    
+    if (loader && loaderBar) {
+        let progress = 0;
+        const interval = setInterval(() => {
+            progress += Math.random() * 25; // Random increments for varied feel
+            if (progress > 100) progress = 100;
+            loaderBar.style.width = `${progress}%`;
+
+            if (progress === 100) {
+                clearInterval(interval);
+                setTimeout(() => {
+                    loader.classList.add('fade-out');
+                    setTimeout(() => {
+                        loader.remove();
+                    }, 1000); // 1s matches CSS transition
+                }, 500); // Small pause at 100%
+            }
+        }, 150);
+
+        // Safety fallback: if interval takes too long, finish it on window load
+        window.addEventListener('load', () => {
+            progress = 100;
+            loaderBar.style.width = `100%`;
+        });
+    }
+
     // --- Reveal Animation Logic ---
     const observerOptions = {
         threshold: 0.1
