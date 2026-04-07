@@ -66,6 +66,10 @@ const translations = {
         "footer-copy": "© 2026 Bruno Fernandes.",
         "sav-cont": "Salvar Contato",
         "loading-text": "Carregando Experiência...",
+        "filter-all": "Todos",
+        "filter-ia": "IA & Automação",
+        "filter-mgmt": "Gestão & Sistemas",
+        "filter-hw": "Hardware & IoT",
         "tag-python": "Python",
         "tag-web": "Web",
         "tag-otimizacao": "Otimização",
@@ -171,6 +175,10 @@ const translations = {
         "footer-copy": "© 2026 Bruno Fernandes.",
         "sav-cont": "Save Contact",
         "loading-text": "Loading Experience...",
+        "filter-all": "All",
+        "filter-ia": "AI & Automation",
+        "filter-mgmt": "Management & Systems",
+        "filter-hw": "Hardware & IoT",
         "tag-python": "Python",
         "tag-web": "Web",
         "tag-otimizacao": "Optimization",
@@ -275,6 +283,10 @@ const translations = {
         "toast-success": "¡Correo electrónico copiado con éxito!",
         "footer-copy": "© 2026 Bruno Fernandes.",
         "loading-text": "Cargando Experiencia...",
+        "filter-all": "Todos",
+        "filter-ia": "IA y Automatización",
+        "filter-mgmt": "Gestión y Sistemas",
+        "filter-hw": "Hardware e IoT",
         "tag-python": "Python",
         "tag-web": "Web",
         "tag-otimizacao": "Optimización",
@@ -569,6 +581,53 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('scroll', updateScrollFeatures);
     updateScrollFeatures(); // Run once on load
 
+    // --- Project Filtering Logic ---
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const projectCards = document.querySelectorAll('.project-card');
+
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const filter = btn.getAttribute('data-filter');
+            
+            // Update active button
+            filterBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            // Filter cards
+            projectCards.forEach(card => {
+                if (filter === 'all' || card.getAttribute('data-category') === filter) {
+                    card.classList.remove('hidden');
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+        });
+    });
+
+    // --- 3D Tilt Effect Logic ---
+    const tiltCards = document.querySelectorAll('.glass-card');
+    
+    tiltCards.forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            
+            // Calculate rotation (max 10 degrees)
+            const rotateX = ((y - centerY) / centerY) * -10;
+            const rotateY = ((x - centerX) / centerX) * 10;
+            
+            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+        });
+        
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+        });
+    });
+
     if (backToTopBtn) {
         backToTopBtn.addEventListener('click', () => {
             window.scrollTo({
@@ -651,8 +710,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- Magnetic Buttons Logic ---
-    const magneticHoverElements = document.querySelectorAll('.btn-primary, .btn-secondary, .cv-button, .social-icon-large, .nav-links a');
+    // --- Magnetic Buttons Logic (Refined 2.0) ---
+    const magneticHoverElements = document.querySelectorAll('.btn-primary, .btn-secondary, .cv-button, .social-icon-large, .nav-links a, .filter-btn, .lang-btn, .theme-toggle-btn');
     
     magneticHoverElements.forEach(el => {
         el.addEventListener('mousemove', (e) => {
@@ -660,11 +719,19 @@ document.addEventListener('DOMContentLoaded', () => {
             const x = e.clientX - rect.left - rect.width / 2;
             const y = e.clientY - rect.top - rect.height / 2;
             
-            el.style.transform = `translate(${x * 0.25}px, ${y * 0.25}px)`;
+            // Smoother organic pull
+            el.style.transform = `translate(${x * 0.35}px, ${y * 0.35}px)`;
+            
+            // Optional: Light tilt on buttons too
+            if (el.classList.contains('social-icon-large')) {
+                 el.style.transform += ` rotateX(${y * -0.1}deg) rotateY(${x * 0.1}deg)`;
+            }
         });
         
         el.addEventListener('mouseleave', () => {
+            el.style.transition = "transform 0.6s cubic-bezier(0.23, 1, 0.32, 1)";
             el.style.transform = `translate(0, 0)`;
+            setTimeout(() => { el.style.transition = ""; }, 600);
         });
     });
 });
