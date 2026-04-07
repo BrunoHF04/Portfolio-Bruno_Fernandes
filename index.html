@@ -251,9 +251,18 @@
 
     <!-- Projetos Section -->
     <section id="projetos" class="reveal">
-        <h2 class="heading-gradient" data-i18n="proj-title" style="font-size: 2.5rem; margin-bottom: 40px;">Projetos & Realizações</h2>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px;">
-            <div class="glass-card">
+        <h2 class="heading-gradient" data-i18n="proj-title" style="font-size: 2.5rem; margin-bottom: 20px;">Projetos & Realizações</h2>
+        
+        <!-- Project Filters -->
+        <div class="filter-container">
+            <button class="filter-btn active" data-filter="all" data-i18n="filter-all">Todos</button>
+            <button class="filter-btn" data-filter="ia" data-i18n="filter-ia">IA & Automação</button>
+            <button class="filter-btn" data-filter="management" data-i18n="filter-mgmt">Gestão & Sistemas</button>
+            <button class="filter-btn" data-filter="hardware" data-i18n="filter-hw">Hardware & IoT</button>
+        </div>
+
+        <div class="projects-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px;">
+            <div class="glass-card project-card" data-category="ia">
                 <div class="project-img-container">
                     <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=600&auto=format&fit=crop" alt="UnespPass" class="project-thumbnail">
                 </div>
@@ -267,7 +276,7 @@
                     veicular para o campus da Unesp FCAV, integrando módulos de consulta em tempo real.</p>
                 <button class="btn-detail" data-project="1" data-i18n="btn-details">Ver Detalhes</button>
             </div>
-            <div class="glass-card">
+            <div class="glass-card project-card" data-category="ia">
                 <div class="project-img-container">
                     <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=600&auto=format&fit=crop" alt="Solicitações Administrativas" class="project-thumbnail">
                 </div>
@@ -281,7 +290,7 @@
                     otimizando o fluxo entre equipes de CS e CX.</p>
                 <button class="btn-detail" data-project="2" data-i18n="btn-details">Ver Detalhes</button>
             </div>
-            <div class="glass-card">
+            <div class="glass-card project-card" data-category="ia">
                 <div class="project-img-container">
                     <img src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?q=80&w=600&auto=format&fit=crop" alt="Editor de Flexões Automatizado" class="project-thumbnail">
                 </div>
@@ -295,7 +304,7 @@
                     flexões de gênero, número e grau em textos complexos automaticamente.</p>
                 <button class="btn-detail" data-project="3" data-i18n="btn-details">Ver Detalhes</button>
             </div>
-            <div class="glass-card">
+            <div class="glass-card project-card" data-category="management">
                 <div class="project-img-container">
                     <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=600&auto=format&fit=crop" alt="Gestão de Banco de Horas" class="project-thumbnail">
                 </div>
@@ -309,7 +318,7 @@
                     excedentes e monitoramento de jornada de trabalho.</p>
                 <button class="btn-detail" data-project="4" data-i18n="btn-details">Ver Detalhes</button>
             </div>
-            <div class="glass-card" style="border-color: var(--accent-secondary);">
+            <div class="glass-card project-card" data-category="hardware" style="border-color: var(--accent-secondary);">
                 <div class="project-img-container">
                     <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=600&auto=format&fit=crop" alt="Racionamento Inteligente" class="project-thumbnail">
                 </div>
