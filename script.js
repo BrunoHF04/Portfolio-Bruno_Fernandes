@@ -319,13 +319,24 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Loader Logic ---
     const loader = document.getElementById('loader');
     const loaderBar = document.getElementById('loader-bar');
+    const logoPath = document.querySelector('.logo-path');
     
     if (loader && loaderBar) {
         let progress = 0;
+        const totalPathLength = 400; // Matches CSS stroke-dasharray
+
         const interval = setInterval(() => {
-            progress += Math.random() * 25; // Random increments for varied feel
+            progress += Math.random() * 8; // Even slower for better appreciation
             if (progress > 100) progress = 100;
+            
+            // Update Bar
             loaderBar.style.width = `${progress}%`;
+            
+            // Update SVG Stroke (Drawing effect synced with progress)
+            if (logoPath) {
+                const offset = totalPathLength - (progress / 100) * totalPathLength;
+                logoPath.style.strokeDashoffset = offset;
+            }
 
             if (progress === 100) {
                 clearInterval(interval);
@@ -333,15 +344,18 @@ document.addEventListener('DOMContentLoaded', () => {
                     loader.classList.add('fade-out');
                     setTimeout(() => {
                         loader.remove();
-                    }, 1000); // 1s matches CSS transition
-                }, 500); // Small pause at 100%
+                    }, 1200); // Wait for the 1.2s CSS transition
+                }, 1200); // Longer pause at 100% for prestige feel
             }
-        }, 150);
+        }, 300); // Increased interval from 200ms to 300ms
 
-        // Safety fallback: if interval takes too long, finish it on window load
+        // Safety fallback
         window.addEventListener('load', () => {
-            progress = 100;
-            loaderBar.style.width = `100%`;
+            if (progress < 100) {
+                progress = 100;
+                loaderBar.style.width = `100%`;
+                if (logoPath) logoPath.style.strokeDashoffset = 0;
+            }
         });
     }
 
