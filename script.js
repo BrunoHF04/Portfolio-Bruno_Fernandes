@@ -1369,6 +1369,4 @@ function speakText(text) {
     window.speechSynthesis.speak(utterance);
 }
 
-
-
-
+});
