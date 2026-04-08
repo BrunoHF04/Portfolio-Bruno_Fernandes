@@ -780,33 +780,91 @@ document.addEventListener('DOMContentLoaded', () => {
     const aiSend = document.getElementById('ai-send');
     const aiMessages = document.getElementById('ai-messages');
 
+    // --- Intelligence Utilities ---
+    function levenshteinDistance(s1, s2) {
+        if (!s1 || !s2) return 99;
+        const m = s1.length, n = s2.length;
+        const d = Array.from({ length: m + 1 }, () => new Uint8Array(n + 1));
+        for (let i = 0; i <= m; i++) d[i][0] = i;
+        for (let j = 0; j <= n; j++) d[0][j] = j;
+        for (let i = 1; i <= m; i++) {
+            for (let j = 1; j <= n; j++) {
+                const cost = s1[i - 1] === s2[j - 1] ? 0 : 1;
+                d[i][j] = Math.min(d[i - 1][j] + 1, d[i][j - 1] + 1, d[i - 1][j - 1] + cost);
+            }
+        }
+        return d[m][n];
+    }
+
     const botKnowledge = {
         pt: {
-            curriculo: ["Com certeza! Estou abrindo o currículo do Bruno para você em uma nova aba agora mesmo.", "Sem problemas! Já estou baixando meu currículo para você..."],
-            tecnologias: ["Vou te mostrar minhas principais competências e tecnologias!", "Com certeza! Rolei a página para você ver as tecnologias com as quais trabalho."],
-            projetos: ["Claro! Dá uma olhada nos meus projetos em destaque. Vamos rolar até lá?", "Com prazer! Estou te levando até a seção de projetos agora."],
-            contato: ["Vou abrir meu LinkedIn para você agora mesmo!", "Claro! Vamos até a seção de contato e já preparei o link do meu WhatsApp para você."],
-            ia: ["Sou especialista em aplicar IA Generativa para automação. Quer ver mais sobre o que faço?", "Uso IA para acelerar o desenvolvimento. Você pode ver alguns exemplos na seção de Projetos!"],
-            formacao: ["Tenho uma formação sólida em TI e Gestão. Vou te mostrar os detalhes na seção acadêmica!", "Com certeza! Estou te levando até as informações sobre minha formação e MBAs."],
-            default: ["Boa pergunta! Mas o Bruno pode te explicar melhor isso pessoalmente. Vamos marcar uma conversa?", "Desculpe, ainda estou aprendendo sobre esse assunto. Tente perguntar sobre 'tecnologias', 'projetos' ou 'currículo'."]
+            curriculo: [
+                "Com certeza! O currículo do Bruno reflete sua trajetória sólida em Gestão de TI e automação. Estou abrindo para você em uma nova aba agora mesmo.",
+                "Excelente escolha! Analisar o currículo é o primeiro passo para entender como o Bruno pode agregar valor. Já estou baixando para você...",
+                "Sem problemas! O currículo detalha toda a experiência dele com IA e bancos de dados. Abrindo agora."
+            ],
+            tecnologias: [
+                "O Bruno é expert em **IA Generativa** e automação com Python. Vou te levar até a seção de skills para você ver o radar de competências completo!",
+                "Com certeza! Ele trabalha com um stack focado em eficiência: de **Docker** a **SQL Server**. Veja só o detalhamento técnico logo abaixo.",
+                "Vou te mostrar minhas principais competências! O foco atual é usar IA para otimizar o desenvolvimento de sistemas complexos."
+            ],
+            projetos: [
+                "Claro! O Bruno tem projetos premiados, como o sistema de racionamento inteligente. Vamos rolar até a galeria de projetos?",
+                "Com prazer! Recomendo dar uma olhada no **NLP Editor** — é um exemplo brilhante de como ele usa IA para resolver problemas reais.",
+                "Dê uma olhada nos meus projetos em destaque. Cada um deles foca em inovação e agilidade técnica. Vamos lá?"
+            ],
+            contato: [
+                "Vou abrir o LinkedIn do Bruno para você! Ele adora trocar ideias sobre inovação tecnológica.",
+                "Claro! Vamos até a seção de contato. Lá você também encontra o link direto para uma conversa por WhatsApp.",
+                "Já preparei o atalho para você falar diretamente com o Bruno. Conectar talentos é o segredo do sucesso!"
+            ],
+            ia: [
+                "Sua dúvida sobre IA é excelente! O Bruno utiliza **IA Generativa** (como o Cursor e Vertex AI) para triplicar a produtividade em projetos.",
+                "IA é o coração da estratégia do Bruno. Ele foca em automações inteligentes que economizam tempo e reduzem erros humanos.",
+                "Se quer saber sobre IA, você está no lugar certo! O Bruno respira inovação e aplica algoritmos avançados no dia a dia."
+            ],
+            formacao: [
+                "O Bruno tem uma base acadêmica muito forte, com **MBA em Gestão de Projetos** e especializações em Big Data. Vamos ver os detalhes?",
+                "Com certeza! Ele nunca para de aprender. No momento, o foco são as certificações de IA e Cloud. Veja a trajetória acadêmica abaixo.",
+                "Formação sólida é essencial. Estou te levando até as informações sobre as graduações e MBAs do Bruno."
+            ],
+            quem: [
+                "O Bruno é um **Gestor de Projetos de TI & Especialista em IA** que une visão estratégica com execução técnica impecável.",
+                "Imagine alguém que entende de código, bancos de dados e, acima de tudo, de como usar a IA para fazer negócios crescerem. Esse é o Bruno!",
+                "Profissional visionário e premiado no **CONIC-SEMESP**, o Bruno foca em transformar tecnologia bruta em soluções de alto valor."
+            ],
+            saudacao: [
+                "Olá! Que bom te ver por aqui. Eu sou o assistente virtual do Bruno. Como posso tornar sua jornada tecnológica hoje mais eficiente?",
+                "Oi! Sou o Bruno-bot. Estou aqui para te ajudar a navegar por este portfólio de inovação. O que gostaria de ver primeiro?",
+                "Seja bem-vindo! Pronto para descobrir como o Bruno pode elevar seus projetos com IA e gestão de alta performance?"
+            ],
+            default: [
+                "Boa pergunta! Mas o Bruno pode te explicar melhor isso pessoalmente. Que tal marcar uma conversa no WhatsApp ou LinkedIn?",
+                "Ainda estou aprendendo sobre esse assunto específico. Tente perguntar sobre 'tecnologias', 'projetos' ou 'currículo'!",
+                "Interessante... vamos focar na trajetória do Bruno? Ele tem resultados incríveis em IA que você vai adorar conhecer."
+            ]
         },
         en: {
-            curriculo: ["Sure! I'm opening Bruno's resume for you in a new tab right now.", "No problem! Downloading the CV for you as we speak..."],
-            tecnologias: ["I'll show you my main skills and technologies!", "Sure! I've scrolled the page so you can see the technologies I work with."],
-            projetos: ["Of course! Take a look at my featured projects. Let's head there?", "My pleasure! Taking you to the projects section now."],
-            contato: ["I'm opening my LinkedIn for you right now!", "Sure! Let's go to the contact section, and I've also prepared my WhatsApp link for you."],
-            ia: ["I am a specialist in applying Generative AI for automation. Want to see more of what I do?", "I use AI to accelerate development. You can see some examples in the Projects section!"],
-            formacao: ["I have a solid background in IT and Management. I'll show you the details in the academic section!", "Sure! Taking you to the information about my studies and MBAs."],
-            default: ["Good question! Bruno can explain this better in person. Let's schedule a talk?", "Sorry, I'm still learning about this. Try asking about 'technologies', 'projects', or 'resume'."]
+            curriculo: ["Sure! I'm opening Bruno's resume for you in a new tab right now. It highlights his solid journey in IT Management and automation.", "No problem! Downloading the CV for you as we speak... Analysing it is the first step to understand his value."],
+            tecnologias: ["Bruno is an expert in **Generative AI** and Python automation. I'll take you to the skills section to see the full competence radar!", "Sure! He works with any stack focused on efficiency: from **Docker** to **SQL Server**."],
+            projetos: ["Of course! Bruno has award-winning projects, like the smart rationing system. Headed to the projects gallery now.", "My pleasure! Take a look at the **NLP Editor** — a brilliant example of how he uses AI to solve real problems."],
+            contato: ["I'm opening Bruno's LinkedIn for you right now!", "Sure! Let's go to the contact section, where you can find his direct WhatsApp link."],
+            ia: ["Generative AI is the core of Bruno's strategy, focusing on intelligent automation to save time and reduce errors.", "He's a specialist in applying AI to triple project productivity. Want to see more?"],
+            formacao: ["Bruno has a very strong academic base, with an **MBA in IT Project Management**. Taking you to the details now.", "He never stops learning. Currently focusing on AI and Cloud certifications."],
+            quem: ["Bruno is an **IT Project Manager & AI Specialist** who bridges strategic vision with technical execution.", "Award-winning professional at **CONIC-SEMESP**, focused on transforming raw technology into high-value solutions."],
+            saudacao: ["Hello! Great to have you here. I am Bruno's virtual assistant. How can I make your journey more efficient today?", "Hi! I'm Bruno-bot. Ready to discover how Bruno can elevate your projects?"],
+            default: ["Good question! Bruno can explain this better in person. How about scheduling a talk?", "Sorry, still learning about that. Try asking about 'skills', 'projects', or 'resume'."]
         },
         es: {
-            curriculo: ["¡Claro! Estoy abriendo el currículum de Bruno en una nueva pestaña ahora mismo.", "¡Sin problema! Ya estoy bajando mi CV para ti..."],
-            tecnologias: ["¡Te mostraré mis principales competencias y tecnologías!", "¡Seguro! He desplazado la página para que veas las tecnologías con las que trabajo."],
-            projetos: ["¡Claro! Echa un vistazo a mis proyectos destacados. ¿Vamos allá?", "¡Con gusto! Te llevo a la sección de proyectos ahora."],
-            contato: ["¡Voy a abrir mi LinkedIn para ti ahora mismo!", "¡Claro! Vamos a la sección de contacto, y ya he preparado el enlace de mi WhatsApp para ti."],
-            ia: ["Soy especialista en aplicar IA Generativa para automatización. ¿Quieres ver más de lo que hago?", "Uso la IA para acelerar el desarrollo. ¡Puedes ver algunos ejemplos en la sección de Proyectos!"],
-            formacao: ["Tengo una formación sólida en TI y Gestión. ¡Te mostraré los detalles en la sección académica!", "¡Seguro! Te llevo a la información sobre mi formación y MBAs."],
-            default: ["¡Buena pregunta! Bruno puede explicarte esto mejor en persona. ¿Hablamos?", "Lo siento, todavía estoy aprendiendo sobre esto. Intenta preguntar sobre 'tecnologías', 'proyectos' o 'currículo'."]
+            curriculo: ["¡Claro! El currículum de Bruno refleja su trayectoria en Gestión de TI. Lo estoy abriendo en una nueva pestaña.", "¡Sin problema! Ya estoy bajando mi CV para ti..."],
+            tecnologias: ["¡Bruno es experto en **IA Generativa**! Te llevaré a la sección de habilidades para ver el radar de competencias completo.", "¡Seguro! Trabaja con un stack enfocado en la eficiencia."],
+            projetos: ["¡Claro! Bruno tiene proyectos premiados. Vamos a ver los detalles ahora.", "¡Con gusto! Echa un vistazo al **NLP Editor**, un ejemplo brillante de soluciones reales."],
+            contato: ["¡Voy a abrir o LinkedIn de Bruno para ti ahora mismo!", "¡Claro! Vamos a la sección de contacto para hablar directamente con él."],
+            ia: ["¡La IA es el corazón de la estrategia de Bruno! Enfocado en automatizaciones inteligentes.", "Usa la IA para acelerar el desarrollo. ¡Es un experto en la materia!"],
+            formacao: ["Bruno tiene una formación sólida con **MBA en Gestión de Proyectos**. ¡Te mostraré los detalles académicos!", "¡Seguro! Te llevo a la información sobre sus estudios."],
+            quem: ["Bruno es un **Gestor de Proyectos de TI e Especialista en IA** que une visión y ejecución técnica.", "Profesional premiado en **CONIC-SEMESP**, enfocado en innovación e alta performance."],
+            saudacao: ["¡Hola! Qué bueno verte. Soy el asistente de Bruno. ¿Cómo posso ayudarte hoy?", "¡Hola! Soy Bruno-bot. ¿Listo para descubrir cómo Bruno puede elevar tus proyectos?"],
+            default: ["¡Buena pregunta! Bruno puede explicarte esto mejor en persona. ¿Hablamos?", "Lo siento, todavía estoy aprendiendo sobre esto. Intenta preguntar sobre 'habilidades', 'proyectos' ou 'currículo'."]
         }
     };
 
@@ -820,28 +878,60 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function processAI(userText) {
-        const text = userText.toLowerCase();
+        const text = userText.toLowerCase().trim();
         const currentLang = document.documentElement.getAttribute('data-lang') || 'pt';
         const langKnowledge = botKnowledge[currentLang] || botKnowledge.pt;
 
         let replyKey = 'default';
 
-        // Smarter Keywords Mapping
-        if (/(curriculo|cv|resume|currículo|baixar|download)/i.test(text)) {
-            replyKey = 'curriculo';
-        } else if (/(tecnolog|skill|linguagem|ferramenta|tech|know)/i.test(text)) {
-            replyKey = 'tecnologias';
-        } else if (/(projeto|realiza|feito|work|project)/i.test(text)) {
-            replyKey = 'projetos';
-        } else if (/(linkedin|github|contato|email|whats|falar|hablar|social|contact)/i.test(text)) {
-            replyKey = 'contato';
-        } else if (/(ia|inteligencia|ai|bot|robot)/i.test(text)) {
-            replyKey = 'ia';
-        } else if (/(estud|form|univ|mba|gradua|education|school)/i.test(text)) {
-            replyKey = 'formacao';
+        // 1. Precise Pattern Matching (Regex)
+        const patterns = {
+            curriculo: /(curriculo|cv|resume|currículo|baixar|download|archivo|arquivo)/i,
+            tecnologias: /(tecnolog|skill|habilidade|competencia|linguagem|ferramenta|tech|know|capacidad|hability)/i,
+            projetos: /(projeto|realiza|feito|work|project|obra|portafolio|portifolio)/i,
+            contato: /(linked|github|contato|email|whats|falar|hablar|social|contact|escrever|escribir)/i,
+            ia: /(ia|inteligencia|ai|bot|robot|gpt|automatiz)/i,
+            formacao: /(estud|form|univ|mba|gradua|education|school|faculdade|pos|posgradua)/i,
+            quem: /(quem|bruno|fernandes|bio|quem e|about|sobre|biografia|persona|quien)/i,
+            saudacao: /^(oi|ola|olá|hello|hi|hey|bom dia|boa tarde|boa noite|hola|buenos dias)/i
+        };
+
+        for (const [key, pattern] of Object.entries(patterns)) {
+            if (pattern.test(text)) {
+                replyKey = key;
+                break;
+            }
         }
 
-        const options = langKnowledge[replyKey];
+        // 2. Fuzzy Matching fallback for typos (if no precise match found)
+        if (replyKey === 'default') {
+            const keywordsMap = {
+                curriculo: ["curriculo", "curiculu", "currículo", "curriculum", "resume"],
+                tecnologias: ["tecnologias", "skills", "habilidades", "tecs", "habilities"],
+                projetos: ["projetos", "projects", "progetos", "portfolio", "portifolio"],
+                contato: ["contato", "contact", "contatos", "whatsapp"],
+                formacao: ["formacao", "formação", "estudos", "faculdade"],
+                quem: ["bruno", "quem", "about", "sobre"]
+            };
+
+            const inputWords = text.split(/\s+/);
+            let bestScore = 99;
+
+            for (const [key, searchWords] of Object.entries(keywordsMap)) {
+                for (const searchWord of searchWords) {
+                    for (const inputWord of inputWords) {
+                        if (inputWord.length < 3) continue;
+                        const dist = levenshteinDistance(inputWord, searchWord);
+                        if (dist < 3 && dist < bestScore) {
+                            bestScore = dist;
+                            replyKey = key;
+                        }
+                    }
+                }
+            }
+        }
+
+        const options = langKnowledge[replyKey] || langKnowledge['default'];
         const reply = options[Math.floor(Math.random() * options.length)];
 
         // Agentic Action Mapping
@@ -849,21 +939,18 @@ document.addEventListener('DOMContentLoaded', () => {
             if (replyKey === 'curriculo') {
                 window.open('files/Bruno Fernandes - Currículo.pdf', '_blank');
             } else if (replyKey === 'contato') {
-                if (text.includes('linkedin')) {
-                    window.open('https://www.linkedin.com/in/bruno-fernandes-ti/', '_blank');
-                } else if (text.includes('github')) {
-                    window.open('https://github.com/BrunoHF04', '_blank');
-                } else if (text.includes('whats')) {
-                    window.open('https://wa.me/5516991133339', '_blank');
-                } else {
-                    document.getElementById('contato')?.scrollIntoView({ behavior: 'smooth' });
-                }
+                if (text.includes('linkedin')) window.open('https://www.linkedin.com/in/bruno-fernandes-ti/', '_blank');
+                else if (text.includes('github')) window.open('https://github.com/BrunoHF04', '_blank');
+                else if (text.includes('whats')) window.open('https://wa.me/5516991133339', '_blank');
+                else document.getElementById('contato')?.scrollIntoView({ behavior: 'smooth' });
             } else if (replyKey === 'projetos') {
                 document.getElementById('projetos')?.scrollIntoView({ behavior: 'smooth' });
             } else if (replyKey === 'tecnologias') {
                 document.getElementById('skills')?.scrollIntoView({ behavior: 'smooth' });
             } else if (replyKey === 'formacao') {
                 document.getElementById('formacao')?.scrollIntoView({ behavior: 'smooth' });
+            } else if (replyKey === 'quem') {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
             }
         };
 
@@ -872,8 +959,8 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => {
             typingMsg.innerText = reply;
             aiMessages.scrollTop = aiMessages.scrollHeight;
-            // Execute action with a slight delay after message appears
-            setTimeout(executeAction, 500);
+            speakText(reply);
+            setTimeout(executeAction, 600);
         }, 800);
     }
 
