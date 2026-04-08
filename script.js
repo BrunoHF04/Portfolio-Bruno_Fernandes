@@ -939,5 +939,128 @@ document.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => { el.style.transition = ""; }, 600);
         });
     });
+    // --- Skills Radar Chart ---
+    let skillsChart = null;
+    function initRadarChart() {
+        const ctx = document.getElementById('skillsRadar');
+        if (!ctx) return;
+
+        const currentLang = document.documentElement.getAttribute('data-lang') || 'pt';
+        const labels = currentLang === 'en' 
+            ? ['AI & Automation', 'Project Management', 'Cloud & Infra', 'SQL & Databases', 'BI & Analytics']
+            : currentLang === 'es'
+            ? ['IA & Automatización', 'Gestión de Proyectos', 'Cloud & Infra', 'SQL & Datos', 'BI & Analítica']
+            : ['IA & Automação', 'Gestão de Projetos', 'Cloud & Infra', 'SQL & Dados', 'BI & Analytics'];
+
+        const data = {
+            labels: labels,
+            datasets: [{
+                label: 'Bruno Fernandes',
+                data: [95, 92, 85, 90, 88],
+                fill: true,
+                backgroundColor: 'rgba(176, 141, 87, 0.2)',
+                borderColor: '#b08d57',
+                pointBackgroundColor: '#b08d57',
+                pointBorderColor: '#fff',
+                pointHoverBackgroundColor: '#fff',
+                pointHoverBorderColor: '#b08d57'
+            }]
+        };
+
+        const config = {
+            type: 'radar',
+            data: data,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    r: {
+                        angleLines: { color: 'rgba(255, 255, 255, 0.1)' },
+                        grid: { color: 'rgba(255, 255, 255, 0.1)' },
+                        pointLabels: {
+                            color: '#cbd5e1',
+                            font: { family: 'Outfit', size: 12 }
+                        },
+                        ticks: { display: false, stepSize: 20 },
+                        suggestedMin: 0,
+                        suggestedMax: 100
+                    }
+                },
+                plugins: {
+                    legend: { display: false }
+                }
+            }
+        };
+
+        if (skillsChart) skillsChart.destroy();
+        skillsChart = new Chart(ctx, config);
+    }
+    initRadarChart();
+
+    // Re-init chart on language change
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            setTimeout(initRadarChart, 100);
+        });
+    });
+
+    // --- 3D Tilt Effect (Custom Smooth GSAP) ---
+    const cards = document.querySelectorAll('.glass-card');
+    cards.forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            
+            const rotateX = (y - centerY) / 10;
+            const rotateY = (centerX - x) / 10;
+            
+            gsap.to(card, {
+                duration: 0.5,
+                rotateX: rotateX,
+                rotateY: rotateY,
+                ease: "power2.out",
+                overwrite: true
+            });
+        });
+        
+        card.addEventListener('mouseleave', () => {
+            gsap.to(card, {
+                duration: 0.8,
+                rotateX: 0,
+                rotateY: 0,
+                ease: "elastic.out(1, 0.3)",
+                overwrite: true
+            });
+        });
+    });
+
+    // --- CV Download Feedback ---
+    const cvBtn = document.querySelector('.cv-button');
+    if (cvBtn) {
+        cvBtn.addEventListener('click', (e) => {
+            const originalText = cvBtn.querySelector('span').innerText;
+            const originalIcon = cvBtn.querySelector('i').className;
+            
+            cvBtn.classList.add('downloading');
+            cvBtn.querySelector('span').innerText = 'Iniciando...';
+            
+            setTimeout(() => {
+                cvBtn.classList.remove('downloading');
+                cvBtn.classList.add('success');
+                cvBtn.querySelector('i').className = 'fas fa-check';
+                cvBtn.querySelector('span').innerText = 'Pronto!';
+                
+                setTimeout(() => {
+                    cvBtn.classList.remove('success');
+                    cvBtn.querySelector('i').className = originalIcon;
+                    cvBtn.querySelector('span').innerText = originalText;
+                }, 3000);
+            }, 1000);
+        });
+    }
 });
 
