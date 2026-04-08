@@ -161,7 +161,7 @@
     </section>
 
     <!-- Sobre Section -->
-    <section id="sobre" class="reveal">
+    <section id="sobre">
         <h2 class="heading-gradient" data-i18n="sobre-title" style="font-size: 2.5rem; margin-bottom: 40px;">Resumo Profissional</h2>
         <div class="glass-card">
             <p data-i18n="sobre-p1" style="font-size: 1.15rem; color: var(--text-secondary); margin-bottom: 20px;">
@@ -178,7 +178,7 @@
     </section>
 
     <!-- Experiencia Section -->
-    <section id="experiencia" class="reveal">
+    <section id="experiencia">
         <h2 class="heading-gradient" data-i18n="exp-title" style="font-size: 2.5rem; margin-bottom: 40px;">Experiência Profissional</h2>
         <div style="display: flex; flex-direction: column; gap: 20px;">
             <div class="glass-card">
@@ -207,7 +207,7 @@
     </section>
 
     <!-- Skills Section -->
-    <section id="competencias" class="reveal">
+    <section id="competencias">
         <h2 class="heading-gradient" data-i18n="skills-title" style="font-size: 2.5rem; margin-bottom: 40px;">Competências Técnicas</h2>
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
             <div class="glass-card">
@@ -250,7 +250,7 @@
     </section>
 
     <!-- Projetos Section -->
-    <section id="projetos" class="reveal">
+    <section id="projetos">
         <h2 class="heading-gradient" data-i18n="proj-title" style="font-size: 2.5rem; margin-bottom: 20px;">Projetos & Realizações</h2>
         
         <!-- Project Filters -->
@@ -261,84 +261,105 @@
             <button class="filter-btn" data-filter="hardware" data-i18n="filter-hw">Hardware & IoT</button>
         </div>
 
-        <div class="projects-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px;">
-            <div class="glass-card project-card" data-category="ia">
+        <div class="projects-grid bento-grid">
+            <!-- Bento Card: UnespPass (Large) -->
+            <div class="glass-card project-card bento-wide" data-category="ia">
                 <div class="project-img-container">
                     <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=600&auto=format&fit=crop" alt="UnespPass" class="project-thumbnail">
                 </div>
-                <div class="project-tags">
-                    <span class="tag" data-i18n="tag-python">Python</span>
-                    <span class="tag" data-i18n="tag-web">Web</span>
-                    <span class="tag" data-i18n="tag-otimizacao">Otimização</span>
+                <div class="project-content-bento">
+                    <div class="project-tags">
+                        <span class="tag" data-i18n="tag-python">Python</span>
+                        <span class="tag" data-i18n="tag-web">Web</span>
+                    </div>
+                    <h3 style="margin-bottom: 10px;">UnespPass</h3>
+                    <p data-i18n="proj1-desc" style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 15px;">Sistema de verificação e controle de acesso veicular para o campus da Unesp FCAV...</p>
+                    <button class="btn-detail" data-project="1" data-i18n="btn-details">Ver Detalhes</button>
                 </div>
-                <h3 style="margin-bottom: 15px;">UnespPass</h3>
-                <p data-i18n="proj1-desc" style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 20px;">Sistema de verificação e controle de acesso
-                    veicular para o campus da Unesp FCAV, integrando módulos de consulta em tempo real.</p>
-                <button class="btn-detail" data-project="1" data-i18n="btn-details">Ver Detalhes</button>
             </div>
+
+            <!-- Bento Card: GitHub Stats (Live) -->
+            <div class="glass-card github-stats-card bento-small" id="github-stats">
+                <div class="stats-header">
+                    <i class="fab fa-github stats-icon"></i>
+                    <span class="stats-label">GitHub Live</span>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <span class="stat-value" id="github-repos">--</span>
+                        <span class="stat-name">Repos</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value" id="github-followers">--</span>
+                        <span class="stat-name">Followers</span>
+                    </div>
+                </div>
+                <div class="stats-activity">
+                    <div class="pulse-dot"></div>
+                    <span data-i18n="live-activity">Atividade Real</span>
+                </div>
+            </div>
+
+            <!-- Bento Card: Solicitações (Normal) -->
             <div class="glass-card project-card" data-category="ia">
                 <div class="project-img-container">
                     <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=600&auto=format&fit=crop" alt="Solicitações Administrativas" class="project-thumbnail">
                 </div>
                 <div class="project-tags">
                     <span class="tag" data-i18n="tag-gestao">Gestão</span>
-                    <span class="tag" data-i18n="tag-workflow">Workflow</span>
-                    <span class="tag" data-i18n="tag-eficiencia">Eficiência</span>
                 </div>
-                <h3 style="margin-bottom: 15px;">Solicitações Administrativas</h3>
-                <p data-i18n="proj2-desc" style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 20px;">Plataforma de gestão de demandas internas,
-                    otimizando o fluxo entre equipes de CS e CX.</p>
+                <h3 style="margin-bottom: 10px;">Solicitações</h3>
                 <button class="btn-detail" data-project="2" data-i18n="btn-details">Ver Detalhes</button>
             </div>
-            <div class="glass-card project-card" data-category="ia">
+
+            <!-- Bento Card: Editor de Flexões (Tall) -->
+            <div class="glass-card project-card bento-tall" data-category="ia">
                 <div class="project-img-container">
                     <img src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?q=80&w=600&auto=format&fit=crop" alt="Editor de Flexões Automatizado" class="project-thumbnail">
                 </div>
-                <div class="project-tags">
-                    <span class="tag" data-i18n="tag-ia-nlp">IA (NLP)</span>
-                    <span class="tag" data-i18n="tag-automacao">Automação</span>
-                    <span class="tag" data-i18n="tag-python">Python</span>
+                <div class="project-content-bento">
+                    <div class="project-tags">
+                        <span class="tag" data-i18n="tag-ia-nlp">IA (NLP)</span>
+                    </div>
+                    <h3 style="margin-bottom: 10px;">NLP Editor</h3>
+                    <p data-i18n="proj3-desc" style="color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 15px;">Solução inteligente de NLP para realizar flexões gramaticais...</p>
+                    <button class="btn-detail" data-project="3" data-i18n="btn-details">Ver Detalhes</button>
                 </div>
-                <h3 style="margin-bottom: 15px;">Editor de Flexões Automatizado</h3>
-                <p data-i18n="proj3-desc" style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 20px;">Solução inteligente de NLP para realizar
-                    flexões de gênero, número e grau em textos complexos automaticamente.</p>
-                <button class="btn-detail" data-project="3" data-i18n="btn-details">Ver Detalhes</button>
             </div>
+
+            <!-- Bento Card: Banco de Horas (Normal) -->
             <div class="glass-card project-card" data-category="management">
                 <div class="project-img-container">
                     <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=600&auto=format&fit=crop" alt="Gestão de Banco de Horas" class="project-thumbnail">
                 </div>
                 <div class="project-tags">
                     <span class="tag" data-i18n="tag-dashboard">PHP/SQL</span>
-                    <span class="tag" data-i18n="tag-controle">Dashboard</span>
-                    <span class="tag" data-i18n="tag-controle">Controle</span>
                 </div>
-                <h3 style="margin-bottom: 15px;">Gestão de Banco de Horas</h3>
-                <p data-i18n="proj4-desc" style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 20px;">Sistema para controle preciso de horas
-                    excedentes e monitoramento de jornada de trabalho.</p>
+                <h3 style="margin-bottom: 10px;">Banco de Horas</h3>
                 <button class="btn-detail" data-project="4" data-i18n="btn-details">Ver Detalhes</button>
             </div>
-            <div class="glass-card project-card" data-category="hardware" style="border-color: var(--accent-secondary);">
+
+            <!-- Bento Card: IoT Racionamento (Wide) -->
+            <div class="glass-card project-card bento-wide" data-category="hardware" style="border-color: var(--accent-secondary);">
                 <div class="project-img-container">
                     <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=600&auto=format&fit=crop" alt="Racionamento Inteligente" class="project-thumbnail">
                 </div>
-                <div class="project-tags">
-                    <span class="tag" data-i18n="tag-hardware" style="background: var(--accent-secondary);">Hardware</span>
-                    <span class="tag" data-i18n="tag-sustentabilidade" style="background: var(--accent-secondary);">Sustentabilidade</span>
-                    <span class="tag" data-i18n="tag-arduino" style="background: var(--accent-secondary);">Arduino</span>
+                <div class="project-content-bento">
+                    <div class="project-tags">
+                        <span class="tag" data-i18n="tag-hardware" style="background: var(--accent-secondary);">Hardware</span>
+                        <span class="tag" data-i18n="tag-arduino" style="background: var(--accent-secondary);">Arduino</span>
+                    </div>
+                    <span data-i18n="proj5-award" style="color: var(--accent-secondary); font-size: 0.7rem; font-weight: 800; text-transform: uppercase;">Premiado</span>
+                    <h3 style="margin-bottom: 10px;">Monitoramento IoT</h3>
+                    <p data-i18n="proj5-desc" style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 15px;">Sistema premiado de racionamento inteligente via hardware...</p>
+                    <button class="btn-detail" data-project="5" data-i18n="btn-details" style="background: var(--accent-secondary);">Ver Detalhes</button>
                 </div>
-                <span data-i18n="proj5-award"
-                    style="color: var(--accent-secondary); font-size: 0.7rem; font-weight: 800; text-transform: uppercase;">Premiado</span>
-                <h3 style="margin-bottom: 15px;">Monitoramento de Racionamento Inteligente</h3>
-                <p data-i18n="proj5-desc" style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 20px;">Sistema inteligente de racionamento controlado
-                    via hardware, premiado no 17º CONIC-SEMESP.</p>
-                <button class="btn-detail" data-project="5" data-i18n="btn-details" style="background: var(--accent-secondary);">Ver Detalhes</button>
             </div>
         </div>
     </section>
 
     <!-- Formação Section -->
-    <section id="formacao" class="reveal">
+    <section id="formacao">
         <h2 class="heading-gradient" data-i18n="form-title" style="font-size: 2.5rem; margin-bottom: 40px;">Formação Acadêmica</h2>
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
             <div class="glass-card">
@@ -362,7 +383,7 @@
     </section>
 
     <!-- Certificações Section -->
-    <section id="certificacoes" class="reveal">
+    <section id="certificacoes">
         <h2 class="heading-gradient" data-i18n="cert-title" style="font-size: 2.5rem; margin-bottom: 40px;">Certificações & Cursos</h2>
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
             <div class="glass-card cert-card">
@@ -397,7 +418,7 @@
     </section>
 
     <!-- Depoimentos Section -->
-    <section id="depoimentos" class="reveal">
+    <section id="depoimentos">
         <h2 class="heading-gradient" data-i18n="test-title" style="font-size: 2.5rem; margin-bottom: 40px;">Depoimentos</h2>
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
             <div class="glass-card testimonial-card">
@@ -434,30 +455,43 @@
     </section>
 
     <!-- Contato Section -->
-    <section id="contato" class="reveal" style="text-align: center;">
-        <h2 class="heading-gradient" data-i18n="cont-title" style="font-size: 2.5rem; margin-bottom: 40px;">Contato</h2>
-        <div class="glass-card" style="max-width: 600px; margin: 0 auto;">
-            <p data-i18n="cont-p" style="font-size: 1.2rem; margin-bottom: 30px; color: var(--text-secondary);">Vamos conversar sobre o seu
-                próximo projeto?</p>
-            <div style="display: flex; flex-direction: column; gap: 15px;">
-                <a href="mailto:fernandesb428@gmail.com" class="contact-link" data-i18n-title="cont-email-title" title="Enviar E-mail">
+    <section id="contato" style="text-align: center;">
+        <h2 class="heading-gradient" data-i18n="cont-title" style="font-size: 2.5rem; margin-bottom: 30px;">Contato</h2>
+        <div class="glass-card" style="max-width: 580px; margin: 0 auto; padding: 20px;">
+            <div style="display: flex; gap: 25px; align-items: center; text-align: left; flex-wrap: wrap; justify-content: center;">
+                <!-- Info Column -->
+                <div style="flex: 1; min-width: 250px;">
+                    <p data-i18n="cont-p" style="font-size: 1rem; margin-bottom: 15px; color: var(--text-secondary);">Vamos conversar sobre o seu próximo projeto?</p>
+                    <div style="display: flex; flex-direction: column; gap: 8px;">
+                        <a href="mailto:fernandesb428@gmail.com" class="contact-link" data-i18n-title="cont-email-title" title="Enviar E-mail" style="padding: 8px 12px; font-size: 0.9rem;">
                     <i class="fas fa-envelope"></i> fernandesb428@gmail.com
                 </a>
-                <a href="https://wa.me/5516991133339" target="_blank" class="contact-link"
-                    data-i18n-title="cont-wa-title" title="Conversar no WhatsApp">
+                        <a href="https://wa.me/5516991133339" target="_blank" class="contact-link"
+                            data-i18n-title="cont-wa-title" title="Conversar no WhatsApp" style="padding: 8px 12px; font-size: 0.9rem;">
                     <i class="fab fa-whatsapp"></i> (16) 9 9113-3339
                 </a>
-                <a href="bruno_fernandes.vcf" download class="btn-secondary" style="margin-top: 10px; justify-content: center;">
-                    <i class="fas fa-address-card"></i> <span data-i18n="sav-cont">Salvar Contato</span>
-                </a>
+                <a href="bruno_fernandes.vcf" download class="btn-secondary" style="margin-top: 5px; justify-content: center; height: 36px; font-size: 0.85rem;">
+                            <i class="fas fa-address-card"></i> <span data-i18n="sav-cont">Salvar Contato</span>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- QR Code Column -->
+                <div id="vcard-qrcode" class="qrcode-container" style="display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 10px; border-left: 1px solid rgba(255,255,255,0.1);">
+                    <div id="qrcode-img" class="glass-card" style="padding:6px; width:100px; height:100px; display:flex; align-items:center; justify-content:center; background: rgba(255,255,255,0.03);">
+                        <img src="" id="actual-qr" style="width:100%; height:100%; display:none;">
+                        <span style="font-size: 0.5rem; color: var(--text-secondary);">QR...</span>
+                    </div>
+                    <span style="font-size: 0.6rem; color: var(--text-secondary); max-width: 90px; text-align: center;">Escaneie para salvar</span>
+                </div>
+            </div>
+        </div>
                 <div style="margin-top: 25px; display: flex; justify-content: center; gap: 15px;">
                     <a href="https://github.com/BrunoHF04" target="_blank" class="social-icon-large" title="GitHub"><i
                             class="fab fa-github"></i></a>
                     <a href="https://www.linkedin.com/in/bruno-fernandes-ti/" target="_blank" class="social-icon-large"
                         title="LinkedIn"><i class="fab fa-linkedin"></i></a>
                 </div>
-            </div>
-        </div>
     </section>
 
     <footer
@@ -485,6 +519,8 @@
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/gh/darkroomengineering/lenis@1.0.42/dist/lenis.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="script.js"></script>
 
     <!-- Back to Top Button -->
@@ -494,6 +530,28 @@
 
     <!-- Copy Feedback Toast -->
     <div id="copy-toast" class="copy-feedback" data-i18n="toast-success">E-mail copiado com sucesso!</div>
+
+    <!-- AI Assistant: Bruno-bot -->
+    <div id="ai-assistant" class="ai-assistant-wrapper">
+        <div class="ai-chat-btn" id="ai-toggle">
+            <i class="fas fa-robot"></i>
+            <span class="ai-badge">IA</span>
+        </div>
+        <div class="ai-chat-window glass-card" id="ai-window">
+            <div class="ai-chat-header">
+                <div class="ai-status-dot"></div>
+                <span>Bruno-bot</span>
+                <button class="ai-close" id="ai-close">&times;</button>
+            </div>
+            <div class="ai-chat-messages" id="ai-messages">
+                <div class="message ai-msg">Olá! Sou o assistente do Bruno. Como posso te ajudar hoje?</div>
+            </div>
+            <div class="ai-chat-input">
+                <input type="text" id="ai-input" placeholder="Pergunte algo..." data-i18n-placeholder="ai-placeholder">
+                <button id="ai-send"><i class="fas fa-paper-plane"></i></button>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>

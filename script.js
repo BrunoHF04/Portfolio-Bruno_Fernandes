@@ -106,7 +106,9 @@ const translations = {
         "proj5-modal-title": "Monitoramento de Racionamento Inteligente",
         "proj5-modal-context": "Projeto focado em sustentabilidade hídrica premiado no 17º CONIC-SEMESP.",
         "proj5-modal-challenge": "Criar um sistema de baixo custo capaz de monitorar e racionar o consumo de água de forma autônoma.",
-        "proj5-modal-solution": "Integração de hardware Arduino com sensores de vazão e uma interface web para monitoramento remoto do consumo em tempo real."
+        "proj5-modal-solution": "Integração de hardware Arduino com sensores de vazão e uma interface web para monitoramento remoto do consumo em tempo real.",
+        "ai-placeholder": "Pergunte algo...",
+        "live-activity": "Atividade Real"
     },
     en: {
         "nav-sobre": "About",
@@ -215,7 +217,9 @@ const translations = {
         "proj5-modal-title": "Intelligent Rationing Monitoring",
         "proj5-modal-context": "Project focused on water sustainability awarded at the 17th CONIC-SEMESP.",
         "proj5-modal-challenge": "Create a low-cost system capable of autonomously monitoring and rationing water consumption.",
-        "proj5-modal-solution": "Integration of Arduino hardware with flow sensors and a web interface for remote real-time monitoring of consumption."
+        "proj5-modal-solution": "Integration of Arduino hardware with flow sensors and a web interface for remote real-time monitoring of consumption.",
+        "ai-placeholder": "Ask something...",
+        "live-activity": "Real Activity"
     },
     es: {
         "nav-sobre": "Sobre",
@@ -371,32 +375,12 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- Reveal Animation Logic ---
-    const observerOptions = {
-        threshold: 0.1
-    };
-
     // --- Signature Animation Hook ---
-    // The animation is now handled purely by CSS for a smoother stroke effect.
-    // This hook just ensures the signature is present and ready.
     const signature = document.querySelector('.signature-name');
     if (signature) {
-        // Force the text to be correctly set (avoid any residual span fragments)
         const text = signature.textContent;
         signature.textContent = text;
     }
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('active');
-            }
-        });
-    }, observerOptions);
-
-    document.querySelectorAll('.reveal').forEach(el => {
-        observer.observe(el);
-    });
 
     // --- Theme Toggle Logic ---
     const themeToggle = document.getElementById('theme-toggle');
@@ -466,6 +450,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize Language
     const savedLang = localStorage.getItem('language') || 'pt';
     setLanguage(savedLang);
+    
+    // Refresh ScrollTrigger after content is loaded and translated
+    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+        ScrollTrigger.refresh();
+    }
 
     // Event Listeners for Language Buttons
     langBtns.forEach(btn => {
@@ -685,22 +674,6 @@ document.addEventListener('DOMContentLoaded', () => {
         rootMargin: '0px 0px -50px 0px'
     };
 
-    const revealObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('active');
-                revealObserver.unobserve(entry.target); // Only animate once
-            }
-        });
-    }, revealOptions);
-
-    // Apply reveal class to major sections and cards
-    const revealElements = document.querySelectorAll('section, .glass-card, .skill-item, .cert-card');
-    revealElements.forEach(el => {
-        el.classList.add('reveal');
-        revealObserver.observe(el);
-    });
-
     // --- PWA Service Worker Registration ---
     if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
@@ -710,8 +683,240 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // --- GitHub Stats Fetcher ---
+    async function fetchGitHubStats() {
+        try {
+            const response = await fetch('https://api.github.com/users/BrunoHF04');
+            if (response.ok) {
+                const data = await response.json();
+                document.getElementById('github-repos').innerText = data.public_repos;
+                document.getElementById('github-followers').innerText = data.followers;
+            }
+        } catch (error) {
+            console.error('Error fetching GitHub stats:', error);
+            document.getElementById('github-repos').innerText = '15+';
+            document.getElementById('github-followers').innerText = '10+';
+        }
+    }
+    fetchGitHubStats();
+
+    // --- GSAP ScrollTrigger Animations ---
+    if (typeof gsap !== 'undefined') {
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Header Background Fade
+        gsap.to('.main-nav', {
+            scrollTrigger: {
+                trigger: 'body',
+                start: 'top -50',
+                toggleActions: 'play none none reverse'
+            },
+            background: 'rgba(10, 10, 12, 0.95)',
+            padding: '8px 30px',
+            duration: 0.4
+        });
+
+        // Section Reveal Sequences
+        gsap.utils.toArray('section').forEach(section => {
+            const heading = section.querySelector('.heading-gradient');
+            const cards = section.querySelectorAll('.glass-card');
+
+            if (heading) {
+                gsap.from(heading, {
+                    scrollTrigger: {
+                        trigger: heading,
+                        start: 'top 95%', 
+                        toggleActions: 'play none none none',
+                        once: true
+                    },
+                    opacity: 0,
+                    y: 20,
+                    duration: 0.8,
+                    ease: 'power3.out'
+                });
+            }
+
+            if (cards.length > 0) {
+                gsap.from(cards, {
+                    scrollTrigger: {
+                        trigger: section,
+                        start: 'top 85%',
+                        toggleActions: 'play none none none',
+                        once: true
+                    },
+                    opacity: 0,
+                    y: 15,
+                    stagger: 0.08,
+                    duration: 0.8,
+                    ease: 'power3.out',
+                    clearProps: "all"
+                });
+            }
+        });
+
+        // Parallax effect for project thumbnails
+        gsap.utils.toArray('.project-thumbnail').forEach(img => {
+            gsap.to(img, {
+                scrollTrigger: {
+                    trigger: img,
+                    scrub: true
+                },
+                y: -15,
+                scale: 1.1
+            });
+        });
+    }
+
+    const aiToggle = document.getElementById('ai-toggle');
+    const aiWindow = document.getElementById('ai-window');
+    const aiClose = document.getElementById('ai-close');
+    const aiInput = document.getElementById('ai-input');
+    const aiSend = document.getElementById('ai-send');
+    const aiMessages = document.getElementById('ai-messages');
+
+    const botKnowledge = {
+        pt: {
+            curriculo: ["Com certeza! Estou abrindo o currículo do Bruno para você em uma nova aba agora mesmo.", "Sem problemas! Já estou baixando meu currículo para você..."],
+            tecnologias: ["Vou te mostrar minhas principais competências e tecnologias!", "Com certeza! Rolei a página para você ver as tecnologias com as quais trabalho."],
+            projetos: ["Claro! Dá uma olhada nos meus projetos em destaque. Vamos rolar até lá?", "Com prazer! Estou te levando até a seção de projetos agora."],
+            contato: ["Vou abrir meu LinkedIn para você agora mesmo!", "Claro! Vamos até a seção de contato e já preparei o link do meu WhatsApp para você."],
+            ia: ["Sou especialista em aplicar IA Generativa para automação. Quer ver mais sobre o que faço?", "Uso IA para acelerar o desenvolvimento. Você pode ver alguns exemplos na seção de Projetos!"],
+            formacao: ["Tenho uma formação sólida em TI e Gestão. Vou te mostrar os detalhes na seção acadêmica!", "Com certeza! Estou te levando até as informações sobre minha formação e MBAs."],
+            default: ["Boa pergunta! Mas o Bruno pode te explicar melhor isso pessoalmente. Vamos marcar uma conversa?", "Desculpe, ainda estou aprendendo sobre esse assunto. Tente perguntar sobre 'tecnologias', 'projetos' ou 'currículo'."]
+        },
+        en: {
+            curriculo: ["Sure! I'm opening Bruno's resume for you in a new tab right now.", "No problem! Downloading the CV for you as we speak..."],
+            tecnologias: ["I'll show you my main skills and technologies!", "Sure! I've scrolled the page so you can see the technologies I work with."],
+            projetos: ["Of course! Take a look at my featured projects. Let's head there?", "My pleasure! Taking you to the projects section now."],
+            contato: ["I'm opening my LinkedIn for you right now!", "Sure! Let's go to the contact section, and I've also prepared my WhatsApp link for you."],
+            ia: ["I am a specialist in applying Generative AI for automation. Want to see more of what I do?", "I use AI to accelerate development. You can see some examples in the Projects section!"],
+            formacao: ["I have a solid background in IT and Management. I'll show you the details in the academic section!", "Sure! Taking you to the information about my studies and MBAs."],
+            default: ["Good question! Bruno can explain this better in person. Let's schedule a talk?", "Sorry, I'm still learning about this. Try asking about 'technologies', 'projects', or 'resume'."]
+        },
+        es: {
+            curriculo: ["¡Claro! Estoy abriendo el currículum de Bruno en una nueva pestaña ahora mismo.", "¡Sin problema! Ya estoy bajando mi CV para ti..."],
+            tecnologias: ["¡Te mostraré mis principales competencias y tecnologías!", "¡Seguro! He desplazado la página para que veas las tecnologías con las que trabajo."],
+            projetos: ["¡Claro! Echa un vistazo a mis proyectos destacados. ¿Vamos allá?", "¡Con gusto! Te llevo a la sección de proyectos ahora."],
+            contato: ["¡Voy a abrir mi LinkedIn para ti ahora mismo!", "¡Claro! Vamos a la sección de contacto, y ya he preparado el enlace de mi WhatsApp para ti."],
+            ia: ["Soy especialista en aplicar IA Generativa para automatización. ¿Quieres ver más de lo que hago?", "Uso la IA para acelerar el desarrollo. ¡Puedes ver algunos ejemplos en la sección de Proyectos!"],
+            formacao: ["Tengo una formación sólida en TI y Gestión. ¡Te mostraré los detalles en la sección académica!", "¡Seguro! Te llevo a la información sobre mi formación y MBAs."],
+            default: ["¡Buena pregunta! Bruno puede explicarte esto mejor en persona. ¿Hablamos?", "Lo siento, todavía estoy aprendiendo sobre esto. Intenta preguntar sobre 'tecnologías', 'proyectos' o 'currículo'."]
+        }
+    };
+
+    function addMessage(text, isUser = false) {
+        const msgDiv = document.createElement('div');
+        msgDiv.className = `message ${isUser ? 'user-msg' : 'ai-msg'}`;
+        msgDiv.innerText = text;
+        aiMessages.appendChild(msgDiv);
+        aiMessages.scrollTop = aiMessages.scrollHeight;
+        return msgDiv;
+    }
+
+    function processAI(userText) {
+        const text = userText.toLowerCase();
+        const currentLang = document.documentElement.getAttribute('data-lang') || 'pt';
+        const langKnowledge = botKnowledge[currentLang] || botKnowledge.pt;
+        
+        let replyKey = 'default';
+
+        // Smarter Keywords Mapping
+        if (/(curriculo|cv|resume|currículo|baixar|download)/i.test(text)) {
+            replyKey = 'curriculo';
+        } else if (/(tecnolog|skill|linguagem|ferramenta|tech|know)/i.test(text)) {
+            replyKey = 'tecnologias';
+        } else if (/(projeto|realiza|feito|work|project)/i.test(text)) {
+            replyKey = 'projetos';
+        } else if (/(linkedin|github|contato|email|whats|falar|hablar|social|contact)/i.test(text)) {
+            replyKey = 'contato';
+        } else if (/(ia|inteligencia|ai|bot|robot)/i.test(text)) {
+            replyKey = 'ia';
+        } else if (/(estud|form|univ|mba|gradua|education|school)/i.test(text)) {
+            replyKey = 'formacao';
+        }
+
+        const options = langKnowledge[replyKey];
+        const reply = options[Math.floor(Math.random() * options.length)];
+
+        // Agentic Action Mapping
+        const executeAction = () => {
+             if (replyKey === 'curriculo') {
+                window.open('files/Bruno Fernandes - Currículo.pdf', '_blank');
+            } else if (replyKey === 'contato') {
+                if (text.includes('linkedin')) {
+                    window.open('https://www.linkedin.com/in/bruno-fernandes-ti/', '_blank');
+                } else if (text.includes('github')) {
+                    window.open('https://github.com/BrunoHF04', '_blank');
+                } else if (text.includes('whats')) {
+                    window.open('https://wa.me/5516991133339', '_blank');
+                } else {
+                    document.getElementById('contato')?.scrollIntoView({ behavior: 'smooth' });
+                }
+            } else if (replyKey === 'projetos') {
+                document.getElementById('projetos')?.scrollIntoView({ behavior: 'smooth' });
+            } else if (replyKey === 'tecnologias') {
+                document.getElementById('skills')?.scrollIntoView({ behavior: 'smooth' });
+            } else if (replyKey === 'formacao') {
+                document.getElementById('formacao')?.scrollIntoView({ behavior: 'smooth' });
+            }
+        };
+
+        const typingMsg = addMessage("...", false);
+
+        setTimeout(() => {
+            typingMsg.innerText = reply;
+            aiMessages.scrollTop = aiMessages.scrollHeight;
+            // Execute action with a slight delay after message appears
+            setTimeout(executeAction, 500);
+        }, 800);
+    }
+
+    if (aiToggle) {
+        aiToggle.addEventListener('click', () => aiWindow.classList.toggle('active'));
+    }
+    if (aiClose) {
+        aiClose.addEventListener('click', () => aiWindow.classList.remove('active'));
+    }
+    if (aiSend) {
+        aiSend.addEventListener('click', () => {
+            const text = aiInput.value.trim();
+            if (text) {
+                addMessage(text, true);
+                aiInput.value = '';
+                processAI(text);
+            }
+        });
+        aiInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') aiSend.click();
+        });
+    }
+
+    // --- Dynamic Tab Title ---
+    const originalTitle = document.title;
+    window.addEventListener('blur', () => {
+        document.title = "👋 Volte aqui! | Bruno Fernandes";
+    });
+    window.addEventListener('focus', () => {
+        document.title = originalTitle;
+    });
+
+    // --- QR Code Generator (vCard) ---
+    function generateQR() {
+        const qrImg = document.getElementById('actual-qr');
+        if (qrImg) {
+            const vCardData = "BEGIN:VCARD\nVERSION:3.0\nFN:Bruno Fernandes\nTEL;TYPE=CELL:+5516991133339\nEMAIL:fernandesb428@gmail.com\nTITLE:IT Project Manager & AI Specialist\nEND:VCARD";
+            const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(vCardData)}`;
+            qrImg.src = qrUrl;
+            qrImg.onload = () => {
+                qrImg.style.display = 'block';
+                qrImg.previousElementSibling.style.display = 'none';
+            };
+        }
+    }
+    generateQR();
+
     // --- Magnetic Buttons Logic (Refined 2.0) ---
-    const magneticHoverElements = document.querySelectorAll('.btn-primary, .btn-secondary, .cv-button, .social-icon-large, .nav-links a, .filter-btn, .lang-btn, .theme-toggle-btn');
+    const magneticHoverElements = document.querySelectorAll('.btn-primary, .btn-secondary, .cv-button, .social-icon-large, .nav-links a, .filter-btn, .lang-btn, .theme-toggle-btn, .ai-chat-btn');
     
     magneticHoverElements.forEach(el => {
         el.addEventListener('mousemove', (e) => {
@@ -723,7 +928,7 @@ document.addEventListener('DOMContentLoaded', () => {
             el.style.transform = `translate(${x * 0.35}px, ${y * 0.35}px)`;
             
             // Optional: Light tilt on buttons too
-            if (el.classList.contains('social-icon-large')) {
+            if (el.classList.contains('social-icon-large') || el.classList.contains('ai-chat-btn')) {
                  el.style.transform += ` rotateX(${y * -0.1}deg) rotateY(${x * 0.1}deg)`;
             }
         });
@@ -735,3 +940,4 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+
