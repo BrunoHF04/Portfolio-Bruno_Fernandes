@@ -1034,7 +1034,7 @@ document.addEventListener('DOMContentLoaded', () => {
     generateQR();
 
     // --- Magnetic Buttons Logic (Refined 2.0) ---
-    const magneticHoverElements = document.querySelectorAll('.btn-primary, .btn-secondary, .cv-button, .social-icon-large, .nav-links a, .filter-btn, .lang-btn, .theme-toggle-btn, .ai-chat-btn');
+    const magneticHoverElements = document.querySelectorAll('.btn-primary, .btn-secondary, .cv-button, .social-icon-large, .nav-links a, .filter-btn, .lang-btn, .theme-toggle-btn');
 
     magneticHoverElements.forEach(el => {
         el.addEventListener('mousemove', (e) => {
@@ -1046,7 +1046,7 @@ document.addEventListener('DOMContentLoaded', () => {
             el.style.transform = `translate(${x * 0.35}px, ${y * 0.35}px)`;
 
             // Optional: Light tilt on buttons too
-            if (el.classList.contains('social-icon-large') || el.classList.contains('ai-chat-btn')) {
+            if (el.classList.contains('social-icon-large')) {
                 el.style.transform += ` rotateX(${y * -0.1}deg) rotateY(${x * 0.1}deg)`;
             }
         });
