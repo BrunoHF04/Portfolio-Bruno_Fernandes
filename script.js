@@ -1027,7 +1027,8 @@ document.addEventListener('DOMContentLoaded', () => {
             qrImg.src = qrUrl;
             qrImg.onload = () => {
                 qrImg.style.display = 'block';
-                qrImg.previousElementSibling.style.display = 'none';
+                // Remove the skeleton or placeholder if it exists
+                if (qrImg.previousElementSibling) qrImg.previousElementSibling.style.display = 'none';
             };
         }
     }
@@ -1279,7 +1280,6 @@ function executeCommand(cmd) {
             setTimeout(() => terminalInput.placeholder = "Digite um comando...", 2000);
     }
 }
-
 // --- Voice Integration (STT/TTS) ---
 const btnSTT = document.getElementById('voice-stt');
 const btnTTS = document.getElementById('voice-tts');
@@ -1353,7 +1353,6 @@ if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
     btnSTT.style.display = 'none';
 }
 
-// Speech Synthesis (TTS)
 btnTTS.addEventListener('click', () => {
     isReading = !isReading;
     btnTTS.classList.toggle('active', isReading);
@@ -1369,6 +1368,7 @@ function speakText(text) {
     else utterance.lang = 'pt-BR';
     window.speechSynthesis.speak(utterance);
 }
+
 
 
 
