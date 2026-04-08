@@ -5,6 +5,8 @@
     --bg-body: #0a0a0c;
     --bg-card: rgba(255, 255, 255, 0.03);
     --border-card: rgba(255, 255, 255, 0.08);
+    --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    --glass-inset: inset 0 0 0 1px rgba(255, 255, 255, 0.05);
     --accent-primary: #b08d57; /* Golden Amber from Hero Light */
     --accent-secondary: #3e2723; /* Darker Espresso Walnut */
     --text-primary: #f8fafc;
@@ -26,7 +28,9 @@
 [data-theme="light"] {
     --bg-body: #f8fafc;
     --bg-card: rgba(255, 255, 255, 0.8);
-    --border-card: rgba(0, 0, 0, 0.1);
+    --border-card: rgba(0, 0, 0, 0.05);
+    --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+    --glass-inset: inset 0 0 0 1px rgba(255, 255, 255, 0.4);
     --text-primary: #0f172a;
     --text-secondary: #5a6574;
     --hero-overlay: rgba(255, 255, 255, 0.1);
@@ -590,18 +594,43 @@ section {
 
 .glass-card {
     background: var(--bg-card);
-    backdrop-filter: var(--glass-blur);
-    -webkit-backdrop-filter: var(--glass-blur);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
     border: 1px solid var(--border-card);
     border-radius: 20px;
     padding: 30px;
-    transition: var(--transition-smooth), background-color 0.5s ease, border-color 0.5s ease;
+    box-shadow: var(--glass-shadow), var(--glass-inset);
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease, border-color 0.3s ease;
+    overflow: hidden;
+    position: relative;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
 }
 
 .glass-card:hover {
     border-color: var(--accent-primary);
-    transform: translateY(-5px);
-    box-shadow: 0 10px 40px -10px rgba(176, 141, 87, 0.2);
+    box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.45), var(--glass-inset);
+}
+
+/* Radar Chart Container */
+.radar-container {
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px;
+    transition: all 0.4s ease;
+}
+
+/* CV Button Feedback */
+.cv-button.downloading {
+    background: var(--accent-secondary) !important;
+    pointer-events: none;
+    transform: scale(0.95);
+}
+
+.cv-button.success {
+    background: #22c55e !important;
+    border-color: #22c55e !important;
 }
 
 .heading-gradient {
