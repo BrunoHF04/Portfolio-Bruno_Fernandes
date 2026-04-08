@@ -336,7 +336,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const loader = document.getElementById('loader');
     const loaderBar = document.getElementById('loader-bar');
     const logoPath = document.querySelector('.logo-path');
-    
+
     if (loader && loaderBar) {
         let progress = 0;
         const totalPathLength = 400; // Matches CSS stroke-dasharray
@@ -344,10 +344,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const interval = setInterval(() => {
             progress += Math.random() * 8; // Even slower for better appreciation
             if (progress > 100) progress = 100;
-            
+
             // Update Bar
             loaderBar.style.width = `${progress}%`;
-            
+
             // Update SVG Stroke (Drawing effect synced with progress)
             if (logoPath) {
                 const offset = totalPathLength - (progress / 100) * totalPathLength;
@@ -394,9 +394,14 @@ document.addEventListener('DOMContentLoaded', () => {
     function toggleTheme() {
         const currentTheme = htmlElement.getAttribute('data-theme');
         const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-        
+
         htmlElement.setAttribute('data-theme', newTheme);
         localStorage.setItem('theme', newTheme);
+
+        // Re-init chart to update colors
+        if (typeof initRadarChart === 'function') {
+            initRadarChart();
+        }
     }
 
     if (themeToggle) {
@@ -407,12 +412,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Language Switching Logic ---
     const langBtns = document.querySelectorAll('.lang-btn');
-    
+
     function setLanguage(lang) {
         // Update HTML lang and data-lang attributes
         htmlElement.setAttribute('lang', lang === 'pt' ? 'pt-BR' : (lang === 'en' ? 'en-US' : 'es-ES'));
         htmlElement.setAttribute('data-lang', lang);
-        
+
         // Update all translatable elements
         document.querySelectorAll('[data-i18n]').forEach(el => {
             const key = el.getAttribute('data-i18n');
@@ -450,7 +455,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize Language
     const savedLang = localStorage.getItem('language') || 'pt';
     setLanguage(savedLang);
-    
+
     // Refresh ScrollTrigger after content is loaded and translated
     if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
         ScrollTrigger.refresh();
@@ -502,7 +507,7 @@ document.addEventListener('DOMContentLoaded', () => {
         btn.addEventListener('click', () => {
             const projectId = btn.getAttribute('data-project');
             const currentLang = localStorage.getItem('language') || 'pt';
-            
+
             fillModalContent(projectId, currentLang);
             modal.setAttribute('data-active-project', projectId);
             modal.style.display = 'flex';
@@ -577,7 +582,7 @@ document.addEventListener('DOMContentLoaded', () => {
     filterBtns.forEach(btn => {
         btn.addEventListener('click', () => {
             const filter = btn.getAttribute('data-filter');
-            
+
             // Update active button
             filterBtns.forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
@@ -595,23 +600,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- 3D Tilt Effect Logic ---
     const tiltCards = document.querySelectorAll('.glass-card');
-    
+
     tiltCards.forEach(card => {
         card.addEventListener('mousemove', (e) => {
             const rect = card.getBoundingClientRect();
             const x = e.clientX - rect.left;
             const y = e.clientY - rect.top;
-            
+
             const centerX = rect.width / 2;
             const centerY = rect.height / 2;
-            
+
             // Calculate rotation (max 10 degrees)
             const rotateX = ((y - centerY) / centerY) * -10;
             const rotateY = ((x - centerX) / centerX) * 10;
-            
+
             card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
         });
-        
+
         card.addEventListener('mouseleave', () => {
             card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
         });
@@ -628,7 +633,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Masterclass Custom Cursor Logic ---
     const cursor = document.querySelector('.custom-cursor');
-    
+
     if (cursor) {
         window.addEventListener('mousemove', (e) => {
             // Instant follow for the single dot cursor
@@ -638,7 +643,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Hover Effect
         const interactiveElements = document.querySelectorAll('a, button, .btn, .glass-card, .skill-item, .project-thumbnail, .social-icon-large, .nav-links a, .contact-link');
-        
+
         interactiveElements.forEach(el => {
             el.addEventListener('mouseenter', () => cursor.classList.add('active'));
             el.addEventListener('mouseleave', () => cursor.classList.remove('active'));
@@ -704,14 +709,13 @@ document.addEventListener('DOMContentLoaded', () => {
     if (typeof gsap !== 'undefined') {
         gsap.registerPlugin(ScrollTrigger);
 
-        // Header Background Fade
+        // Header Scroll Animation (Scale & Padding)
         gsap.to('.main-nav', {
             scrollTrigger: {
                 trigger: 'body',
                 start: 'top -50',
                 toggleActions: 'play none none reverse'
             },
-            background: 'rgba(10, 10, 12, 0.95)',
             padding: '8px 30px',
             duration: 0.4
         });
@@ -725,7 +729,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 gsap.from(heading, {
                     scrollTrigger: {
                         trigger: heading,
-                        start: 'top 95%', 
+                        start: 'top 95%',
                         toggleActions: 'play none none none',
                         once: true
                     },
@@ -817,7 +821,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const text = userText.toLowerCase();
         const currentLang = document.documentElement.getAttribute('data-lang') || 'pt';
         const langKnowledge = botKnowledge[currentLang] || botKnowledge.pt;
-        
+
         let replyKey = 'default';
 
         // Smarter Keywords Mapping
@@ -840,7 +844,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Agentic Action Mapping
         const executeAction = () => {
-             if (replyKey === 'curriculo') {
+            if (replyKey === 'curriculo') {
                 window.open('files/Bruno Fernandes - Currículo.pdf', '_blank');
             } else if (replyKey === 'contato') {
                 if (text.includes('linkedin')) {
@@ -874,6 +878,23 @@ document.addEventListener('DOMContentLoaded', () => {
     if (aiToggle) {
         aiToggle.addEventListener('click', () => aiWindow.classList.toggle('active'));
     }
+
+    // Navbar Mood/Voice Toggle
+    const moodToggle = document.getElementById('mood-toggle');
+    if (moodToggle && aiWindow) {
+        moodToggle.addEventListener('click', () => {
+            const isActive = aiWindow.classList.toggle('active');
+            if (isActive) {
+                // Focus input and enable TTS automatically if triggered from navbar
+                if (aiInput) aiInput.focus();
+                if (typeof isReading !== 'undefined' && !isReading) {
+                    const btnTTS = document.getElementById('voice-tts');
+                    isReading = true;
+                    if (btnTTS) btnTTS.classList.add('active');
+                }
+            }
+        });
+    }
     if (aiClose) {
         aiClose.addEventListener('click', () => aiWindow.classList.remove('active'));
     }
@@ -894,7 +915,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Dynamic Tab Title ---
     const originalTitle = document.title;
     window.addEventListener('blur', () => {
-        document.title = "👋 Volte aqui! | Bruno Fernandes";
+        document.title = "Bruno Fernandes";
     });
     window.addEventListener('focus', () => {
         document.title = originalTitle;
@@ -917,22 +938,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Magnetic Buttons Logic (Refined 2.0) ---
     const magneticHoverElements = document.querySelectorAll('.btn-primary, .btn-secondary, .cv-button, .social-icon-large, .nav-links a, .filter-btn, .lang-btn, .theme-toggle-btn, .ai-chat-btn');
-    
+
     magneticHoverElements.forEach(el => {
         el.addEventListener('mousemove', (e) => {
             const rect = el.getBoundingClientRect();
             const x = e.clientX - rect.left - rect.width / 2;
             const y = e.clientY - rect.top - rect.height / 2;
-            
+
             // Smoother organic pull
             el.style.transform = `translate(${x * 0.35}px, ${y * 0.35}px)`;
-            
+
             // Optional: Light tilt on buttons too
             if (el.classList.contains('social-icon-large') || el.classList.contains('ai-chat-btn')) {
-                 el.style.transform += ` rotateX(${y * -0.1}deg) rotateY(${x * 0.1}deg)`;
+                el.style.transform += ` rotateX(${y * -0.1}deg) rotateY(${x * 0.1}deg)`;
             }
         });
-        
+
         el.addEventListener('mouseleave', () => {
             el.style.transition = "transform 0.6s cubic-bezier(0.23, 1, 0.32, 1)";
             el.style.transform = `translate(0, 0)`;
@@ -946,11 +967,11 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!ctx) return;
 
         const currentLang = document.documentElement.getAttribute('data-lang') || 'pt';
-        const labels = currentLang === 'en' 
+        const labels = currentLang === 'en'
             ? ['AI & Automation', 'Project Management', 'Cloud & Infra', 'SQL & Databases', 'BI & Analytics']
             : currentLang === 'es'
-            ? ['IA & Automatización', 'Gestión de Proyectos', 'Cloud & Infra', 'SQL & Datos', 'BI & Analítica']
-            : ['IA & Automação', 'Gestão de Projetos', 'Cloud & Infra', 'SQL & Dados', 'BI & Analytics'];
+                ? ['IA & Automatización', 'Gestión de Proyectos', 'Cloud & Infra', 'SQL & Datos', 'BI & Analítica']
+                : ['IA & Automação', 'Gestão de Projetos', 'Cloud & Infra', 'SQL & Dados', 'BI & Analytics'];
 
         const data = {
             labels: labels,
@@ -967,6 +988,10 @@ document.addEventListener('DOMContentLoaded', () => {
             }]
         };
 
+        const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+        const gridColor = isLight ? 'rgba(0, 0, 0, 0.1)' : 'rgba(255, 255, 255, 0.1)';
+        const labelColor = isLight ? '#475569' : '#cbd5e1';
+
         const config = {
             type: 'radar',
             data: data,
@@ -975,10 +1000,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 maintainAspectRatio: false,
                 scales: {
                     r: {
-                        angleLines: { color: 'rgba(255, 255, 255, 0.1)' },
-                        grid: { color: 'rgba(255, 255, 255, 0.1)' },
+                        angleLines: { color: gridColor },
+                        grid: { color: gridColor },
                         pointLabels: {
-                            color: '#cbd5e1',
+                            color: labelColor,
                             font: { family: 'Outfit', size: 12 }
                         },
                         ticks: { display: false, stepSize: 20 },
@@ -1011,13 +1036,13 @@ document.addEventListener('DOMContentLoaded', () => {
             const rect = card.getBoundingClientRect();
             const x = e.clientX - rect.left;
             const y = e.clientY - rect.top;
-            
+
             const centerX = rect.width / 2;
             const centerY = rect.height / 2;
-            
+
             const rotateX = (y - centerY) / 10;
             const rotateY = (centerX - x) / 10;
-            
+
             gsap.to(card, {
                 duration: 0.5,
                 rotateX: rotateX,
@@ -1026,7 +1051,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 overwrite: true
             });
         });
-        
+
         card.addEventListener('mouseleave', () => {
             gsap.to(card, {
                 duration: 0.8,
@@ -1044,16 +1069,16 @@ document.addEventListener('DOMContentLoaded', () => {
         cvBtn.addEventListener('click', (e) => {
             const originalText = cvBtn.querySelector('span').innerText;
             const originalIcon = cvBtn.querySelector('i').className;
-            
+
             cvBtn.classList.add('downloading');
             cvBtn.querySelector('span').innerText = 'Iniciando...';
-            
+
             setTimeout(() => {
                 cvBtn.classList.remove('downloading');
                 cvBtn.classList.add('success');
                 cvBtn.querySelector('i').className = 'fas fa-check';
                 cvBtn.querySelector('span').innerText = 'Pronto!';
-                
+
                 setTimeout(() => {
                     cvBtn.classList.remove('success');
                     cvBtn.querySelector('i').className = originalIcon;
@@ -1064,3 +1089,197 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
+// --- Terminal / Command Palette Logic ---
+const commandPalette = document.getElementById('command-palette');
+const terminalInput = document.getElementById('terminal-input');
+const hintTags = document.querySelectorAll('.hint-tag');
+
+function toggleCommandPalette() {
+    if (commandPalette.classList.contains('active')) {
+        commandPalette.classList.remove('active');
+        setTimeout(() => commandPalette.style.display = 'none', 300);
+        terminalInput.value = '';
+    } else {
+        commandPalette.style.display = 'flex';
+        setTimeout(() => {
+            commandPalette.classList.add('active');
+            terminalInput.focus();
+        }, 10);
+    }
+}
+
+window.addEventListener('keydown', (e) => {
+    if ((e.ctrlKey && e.key === 'k') || e.key === '/') {
+        e.preventDefault();
+        toggleCommandPalette();
+    }
+    if (e.key === 'Escape' && commandPalette.classList.contains('active')) {
+        toggleCommandPalette();
+    }
+});
+
+terminalInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+        const cmd = terminalInput.value.toLowerCase().trim();
+        executeCommand(cmd);
+        terminalInput.value = '';
+    }
+});
+
+hintTags.forEach(tag => {
+    tag.addEventListener('click', () => {
+        const cmd = tag.getAttribute('data-cmd');
+        executeCommand(cmd);
+    });
+});
+
+function executeCommand(cmd) {
+    if (!cmd) return;
+
+    switch (cmd) {
+        case 'home':
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            toggleCommandPalette();
+            break;
+        case 'projetos':
+            document.getElementById('projetos')?.scrollIntoView({ behavior: 'smooth' });
+            toggleCommandPalette();
+            break;
+        case 'curriculo':
+        case 'cv':
+            window.open('files/Bruno Fernandes - Currículo.pdf', '_blank');
+            toggleCommandPalette();
+            break;
+        case 'skills':
+        case 'tecnologias':
+            document.getElementById('skills')?.scrollIntoView({ behavior: 'smooth' });
+            toggleCommandPalette();
+            break;
+        case 'contato':
+            document.getElementById('contato')?.scrollIntoView({ behavior: 'smooth' });
+            toggleCommandPalette();
+            break;
+        case 'github':
+            window.open('https://github.com/BrunoHF04', '_blank');
+            toggleCommandPalette();
+            break;
+        case 'linkedin':
+            window.open('https://www.linkedin.com/in/bruno-fernandes-ti/', '_blank');
+            toggleCommandPalette();
+            break;
+        case 'help':
+            alert('Comandos disponíveis: home, projetos, curriculo, skills, contato, github, linkedin, clear, exit');
+            break;
+        case 'exit':
+        case 'quit':
+            toggleCommandPalette();
+            break;
+        case 'clear':
+            terminalInput.value = '';
+            break;
+        default:
+            terminalInput.placeholder = "Comando não reconhecido...";
+            setTimeout(() => terminalInput.placeholder = "Digite um comando...", 2000);
+    }
+}
+
+// --- Voice Integration (STT/TTS) ---
+const btnSTT = document.getElementById('voice-stt');
+const btnTTS = document.getElementById('voice-tts');
+const voiceStatus = document.getElementById('voice-status');
+let isReading = false;
+
+// Speech Recognition (STT)
+if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    const recognition = new SpeechRecognition();
+    recognition.lang = document.documentElement.getAttribute('data-lang') === 'en' ? 'en-US' : 'pt-BR';
+    recognition.interimResults = false;
+
+    btnSTT.addEventListener('click', () => {
+        if (btnSTT.classList.contains('active')) {
+            recognition.stop();
+        } else {
+            recognition.start();
+            btnSTT.classList.add('active');
+            voiceStatus.innerText = "Ouvindo...";
+        }
+    });
+
+    recognition.onresult = (event) => {
+        const result = event.results[0][0].transcript;
+        aiInput.value = result;
+        addMessage(result, true);
+        processAI(result);
+    };
+
+    recognition.onend = () => {
+        btnSTT.classList.remove('active');
+        voiceStatus.innerText = "";
+    };
+
+    recognition.onerror = () => {
+        btnSTT.classList.remove('active');
+        voiceStatus.innerText = "Erro de voz";
+    };
+} else {
+    btnSTT.style.display = 'none';
+}
+
+// Speech Synthesis (TTS)
+btnTTS.addEventListener('click', () => {
+    isReading = !isReading;
+    btnTTS.classList.toggle('active', isReading);
+    if (!isReading) window.speechSynthesis.cancel();
+});
+
+// Helper to speak AI responses
+function speakText(text) {
+    if (!isReading) return;
+    const utterance = new SpeechSynthesisUtterance(text);
+    const currentLang = document.documentElement.getAttribute('data-lang') || 'pt';
+    utterance.lang = currentLang === 'en' ? 'en-US' : (currentLang === 'es' ? 'es-ES' : 'pt-BR');
+    window.speechSynthesis.speak(utterance);
+}
+
+// Wrap the existing processAI to include TTS
+const originalProcessAI = processAI;
+processAI = function (userText) {
+    // We reuse logic but add TTS hook
+    const text = userText.toLowerCase();
+    const currentLang = document.documentElement.getAttribute('data-lang') || 'pt';
+    const langKnowledge = botKnowledge[currentLang] || botKnowledge.pt;
+    let replyKey = 'default';
+
+    if (/(curriculo|cv|resume|currículo|baixar|download)/i.test(text)) replyKey = 'curriculo';
+    else if (/(tecnolog|skill|linguagem|ferramenta|tech|know)/i.test(text)) replyKey = 'tecnologias';
+    else if (/(projeto|realiza|feito|work|project)/i.test(text)) replyKey = 'projetos';
+    else if (/(linkedin|github|contato|email|whats|falar|hablar|social|contact)/i.test(text)) replyKey = 'contato';
+    else if (/(ia|inteligencia|ai|bot|robot)/i.test(text)) replyKey = 'ia';
+    else if (/(estud|form|univ|mba|gradua|education|school)/i.test(text)) replyKey = 'formacao';
+
+    const options = langKnowledge[replyKey];
+    const reply = options[Math.floor(Math.random() * options.length)];
+
+    // Custom modified logic from original processAI
+    const typingMsg = addMessage("...", false);
+    setTimeout(() => {
+        typingMsg.innerText = reply;
+        aiMessages.scrollTop = aiMessages.scrollHeight;
+        speakText(reply); // TTS Integration
+
+        // Re-map actions
+        const executeAction = () => {
+            if (replyKey === 'curriculo') window.open('files/Bruno Fernandes - Currículo.pdf', '_blank');
+            else if (replyKey === 'contato') {
+                if (text.includes('linkedin')) window.open('https://www.linkedin.com/in/bruno-fernandes-ti/', '_blank');
+                else if (text.includes('github')) window.open('https://github.com/BrunoHF04', '_blank');
+                else if (text.includes('whats')) window.open('https://wa.me/5516991133339', '_blank');
+                else document.getElementById('contato')?.scrollIntoView({ behavior: 'smooth' });
+            } else if (replyKey === 'projetos') document.getElementById('projetos')?.scrollIntoView({ behavior: 'smooth' });
+            else if (replyKey === 'tecnologias') document.getElementById('skills')?.scrollIntoView({ behavior: 'smooth' });
+            else if (replyKey === 'formacao') document.getElementById('formacao')?.scrollIntoView({ behavior: 'smooth' });
+        };
+        setTimeout(executeAction, 500);
+    }, 800);
+};
