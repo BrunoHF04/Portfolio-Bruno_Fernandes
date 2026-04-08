@@ -1294,30 +1294,60 @@ if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
     recognition.interimResults = false;
 
     btnSTT.addEventListener('click', () => {
-        if (btnSTT.classList.contains('active')) {
-            recognition.stop();
-        } else {
-            recognition.start();
-            btnSTT.classList.add('active');
-            voiceStatus.innerText = "Ouvindo...";
+        try {
+            if (btnSTT.classList.contains('active')) {
+                recognition.stop();
+            } else {
+                const currentLang = document.documentElement.getAttribute('data-lang') || 'pt';
+                recognition.lang = currentLang === 'en' ? 'en-US' : (currentLang === 'es' ? 'es-ES' : 'pt-BR');
+                
+                recognition.start();
+                btnSTT.classList.add('active');
+                voiceStatus.innerText = currentLang === 'en' ? "Listening..." : (currentLang === 'es' ? "Escuchando..." : "Ouvindo...");
+            }
+        } catch (err) {
+            console.error("STT Start Error:", err);
+            btnSTT.classList.remove('active');
         }
     });
 
     recognition.onresult = (event) => {
         const result = event.results[0][0].transcript;
         aiInput.value = result;
-        addMessage(result, true);
-        processAI(result);
+        // Optional: show interim result in the status
+        // voiceStatus.innerText = result;
     };
 
     recognition.onend = () => {
+        if (btnSTT.classList.contains('active') && aiInput.value.trim() !== "") {
+            const finalResult = aiInput.value;
+            addMessage(finalResult, true);
+            processAI(finalResult);
+            aiInput.value = "";
+        }
         btnSTT.classList.remove('active');
         voiceStatus.innerText = "";
     };
 
-    recognition.onerror = () => {
+    recognition.onerror = (event) => {
         btnSTT.classList.remove('active');
-        voiceStatus.innerText = "Erro de voz";
+        const currentLang = document.documentElement.getAttribute('data-lang') || 'pt';
+        console.warn("STT Error:", event.error);
+        
+        switch (event.error) {
+            case 'not-allowed':
+                voiceStatus.innerText = currentLang === 'en' ? "Mic blocked" : (currentLang === 'es' ? "Mic bloqueado" : "Mic bloqueado");
+                break;
+            case 'no-speech':
+                voiceStatus.innerText = currentLang === 'en' ? "No speech" : (currentLang === 'es' ? "Sin voz" : "Sem voz");
+                break;
+            case 'network':
+                voiceStatus.innerText = currentLang === 'en' ? "Network error" : (currentLang === 'es' ? "Error red" : "Erro de rede");
+                break;
+            default:
+                voiceStatus.innerText = "Error";
+        }
+        setTimeout(() => { if (voiceStatus.innerText !== "") voiceStatus.innerText = ""; }, 3000);
     };
 } else {
     btnSTT.style.display = 'none';
@@ -1330,53 +1360,15 @@ btnTTS.addEventListener('click', () => {
     if (!isReading) window.speechSynthesis.cancel();
 });
 
-// Helper to speak AI responses
 function speakText(text) {
     if (!isReading) return;
     const utterance = new SpeechSynthesisUtterance(text);
     const currentLang = document.documentElement.getAttribute('data-lang') || 'pt';
-    utterance.lang = currentLang === 'en' ? 'en-US' : (currentLang === 'es' ? 'es-ES' : 'pt-BR');
+    if (currentLang === 'en') utterance.lang = 'en-US';
+    else if (currentLang === 'es') utterance.lang = 'es-ES';
+    else utterance.lang = 'pt-BR';
     window.speechSynthesis.speak(utterance);
 }
 
-// Wrap the existing processAI to include TTS
-const originalProcessAI = processAI;
-processAI = function (userText) {
-    // We reuse logic but add TTS hook
-    const text = userText.toLowerCase();
-    const currentLang = document.documentElement.getAttribute('data-lang') || 'pt';
-    const langKnowledge = botKnowledge[currentLang] || botKnowledge.pt;
-    let replyKey = 'default';
 
-    if (/(curriculo|cv|resume|currículo|baixar|download)/i.test(text)) replyKey = 'curriculo';
-    else if (/(tecnolog|skill|linguagem|ferramenta|tech|know)/i.test(text)) replyKey = 'tecnologias';
-    else if (/(projeto|realiza|feito|work|project)/i.test(text)) replyKey = 'projetos';
-    else if (/(linkedin|github|contato|email|whats|falar|hablar|social|contact)/i.test(text)) replyKey = 'contato';
-    else if (/(ia|inteligencia|ai|bot|robot)/i.test(text)) replyKey = 'ia';
-    else if (/(estud|form|univ|mba|gradua|education|school)/i.test(text)) replyKey = 'formacao';
 
-    const options = langKnowledge[replyKey];
-    const reply = options[Math.floor(Math.random() * options.length)];
-
-    // Custom modified logic from original processAI
-    const typingMsg = addMessage("...", false);
-    setTimeout(() => {
-        typingMsg.innerText = reply;
-        aiMessages.scrollTop = aiMessages.scrollHeight;
-        speakText(reply); // TTS Integration
-
-        // Re-map actions
-        const executeAction = () => {
-            if (replyKey === 'curriculo') window.open('files/Bruno Fernandes - Currículo.pdf', '_blank');
-            else if (replyKey === 'contato') {
-                if (text.includes('linkedin')) window.open('https://www.linkedin.com/in/bruno-fernandes-ti/', '_blank');
-                else if (text.includes('github')) window.open('https://github.com/BrunoHF04', '_blank');
-                else if (text.includes('whats')) window.open('https://wa.me/5516991133339', '_blank');
-                else document.getElementById('contato')?.scrollIntoView({ behavior: 'smooth' });
-            } else if (replyKey === 'projetos') document.getElementById('projetos')?.scrollIntoView({ behavior: 'smooth' });
-            else if (replyKey === 'tecnologias') document.getElementById('skills')?.scrollIntoView({ behavior: 'smooth' });
-            else if (replyKey === 'formacao') document.getElementById('formacao')?.scrollIntoView({ behavior: 'smooth' });
-        };
-        setTimeout(executeAction, 500);
-    }, 800);
-};
