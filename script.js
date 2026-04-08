@@ -108,6 +108,7 @@ const translations = {
         "proj5-modal-challenge": "Criar um sistema de baixo custo capaz de monitorar e racionar o consumo de água de forma autônoma.",
         "proj5-modal-solution": "Integração de hardware Arduino com sensores de vazão e uma interface web para monitoramento remoto do consumo em tempo real.",
         "ai-placeholder": "Pergunte algo...",
+        "ai-welcome": "Olá! Sou o assistente do Bruno. Como posso te ajudar hoje?",
         "live-activity": "Atividade Real"
     },
     en: {
@@ -219,6 +220,7 @@ const translations = {
         "proj5-modal-challenge": "Create a low-cost system capable of autonomously monitoring and rationing water consumption.",
         "proj5-modal-solution": "Integration of Arduino hardware with flow sensors and a web interface for remote real-time monitoring of consumption.",
         "ai-placeholder": "Ask something...",
+        "ai-welcome": "Hello! I am Bruno's assistant. How can I help you today?",
         "live-activity": "Real Activity"
     },
     es: {
@@ -885,12 +887,20 @@ document.addEventListener('DOMContentLoaded', () => {
         moodToggle.addEventListener('click', () => {
             const isActive = aiWindow.classList.toggle('active');
             if (isActive) {
-                // Focus input and enable TTS automatically if triggered from navbar
                 if (aiInput) aiInput.focus();
-                if (typeof isReading !== 'undefined' && !isReading) {
-                    const btnTTS = document.getElementById('voice-tts');
+                
+                // Enable TTS
+                if (typeof isReading !== 'undefined') {
                     isReading = true;
+                    const btnTTS = document.getElementById('voice-tts');
                     if (btnTTS) btnTTS.classList.add('active');
+                    
+                    // Trigger welcome speech
+                    const lang = document.documentElement.getAttribute('data-lang') || 'pt';
+                    const welcomeMsg = translations[lang]['ai-welcome'] || translations['pt']['ai-welcome'];
+                    
+                    // Small delay to ensure browser allows audio after click
+                    setTimeout(() => speakText(welcomeMsg), 300);
                 }
             }
         });
