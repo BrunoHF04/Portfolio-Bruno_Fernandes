@@ -63,6 +63,7 @@ const translations = {
         "test2-quote": "\"Excelente liderança técnica. Conseguimos otimizar nossas implantações em 40% após as automações sugeridas pelo Bruno.\"",
         "test2-name": "Hugo Januário",
         "test2-role": "Consultor de Implantação, Siplan",
+        "wa-msg": "Oi Bruno, tudo bem? Vi seu portfólio e achei muito interessante. Podemos conversar? Quando você teria um horário disponível?",
         "cont-title": "Contato",
         "cont-p": "Vamos conversar sobre o seu próximo projeto?",
         "cont-email-title": "Enviar E-mail",
@@ -182,6 +183,7 @@ const translations = {
         "test2-quote": "\"Excellent technical leadership. We optimized our deployments by 40% after the automations suggested by Bruno.\"",
         "test2-name": "Hugo Januário",
         "test2-role": "Implementation Consultant, Siplan",
+        "wa-msg": "Hi Bruno, how are you? I saw your portfolio and found it very interesting. Can we talk? When would you have some time available?",
         "cont-title": "Contact",
         "cont-p": "Let's talk about your next project?",
         "cont-email-title": "Send Email",
@@ -301,6 +303,7 @@ const translations = {
         "test2-quote": "\"Excelente liderazgo técnico. Logramos optimizar nuestras implementaciones en un 40% tras las automatizaciones sugeridas por Bruno.\"",
         "test2-name": "Hugo Januário",
         "test2-role": "Consultor de Implantación, Siplan",
+        "wa-msg": "Hola Bruno, ¿cómo estás? He visto tu portafolio y me ha parecido muy interesante. ¿Podemos hablar? ¿Cuándo tendrías un horario disponible?",
         "cont-title": "Contacto",
         "cont-p": "¿Hablamos de tu próximo proyecto?",
         "cont-email-title": "Enviar correo electrónico",
@@ -446,6 +449,14 @@ document.addEventListener('DOMContentLoaded', () => {
             const key = el.getAttribute('data-i18n');
             if (translations[lang] && translations[lang][key]) {
                 el.innerHTML = translations[lang][key];
+            }
+        });
+
+        // Update WhatsApp links with pre-filled message
+        document.querySelectorAll('[data-wa-link]').forEach(el => {
+            const msg = translations[lang]['wa-msg'];
+            if (msg) {
+                el.href = `https://wa.me/5516991133339?text=${encodeURIComponent(msg)}`;
             }
         });
 
