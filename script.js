@@ -1205,7 +1205,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 1000);
         });
     }
-});
 
 // --- Terminal / Command Palette Logic ---
 const commandPalette = document.getElementById('command-palette');
@@ -1382,7 +1381,10 @@ if (btnTTS) {
     });
 }
 
-// Speech Synthesis (TTS) Helper
+    }
+});
+
+// Speech Synthesis (TTS) Helper - Keep global for access
 function speakText(text) {
     if (!isReading) return;
     const utterance = new SpeechSynthesisUtterance(text);
@@ -1392,4 +1394,3 @@ function speakText(text) {
     else utterance.lang = 'pt-BR';
     window.speechSynthesis.speak(utterance);
 }
-});
