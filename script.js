@@ -42,8 +42,11 @@ const translations = {
         "proj5-desc": "Sistema inteligente de racionamento controlado via hardware, premiado no 17º CONIC-SEMESP.",
         "form-title": "Formação Acadêmica",
         "form1-text": "MBA em Gestão de Projetos de TI",
-        "form2-text": "Pós Ciência de Dados & Big Data",
-        "form3-text": "Pós Administração de Banco de Dados",
+        "form1-school": "Minas Faculdade (2025)",
+        "form2-text": "Pós Administração de Banco de Dados",
+        "form2-school": "(2024)",
+        "form3-text": "Pós Ciência de Dados & Big Data",
+        "form3-school": "(2022)",
         "form4-school": "Faculdade de Educação São Luís (2018)",
         "form5-school": "ETEC (2013)",
         "cert-title": "Certificações & Cursos",
@@ -152,8 +155,11 @@ const translations = {
         "proj5-desc": "Intelligent water rationing system controlled via hardware, awarded at the 17th CONIC-SEMESP.",
         "form-title": "Academic Background",
         "form1-text": "MBA in IT Project Management",
-        "form2-text": "Postgrad in Data Science & Big Data",
-        "form3-text": "Postgrad in Database Administration",
+        "form1-school": "Minas Faculty (2025)",
+        "form2-text": "Postgrad in Database Administration",
+        "form2-school": "(2024)",
+        "form3-text": "Postgrad in Data Science & Big Data",
+        "form3-school": "(2022)",
         "form4-school": "São Luís Faculty of Education (2018)",
         "form5-school": "ETEC (2013)",
         "cert-title": "Certifications & Courses",
@@ -262,8 +268,11 @@ const translations = {
         "proj5-desc": "Sistema inteligente de racionamiento de agua controlado por hardware, premiado en el 17º CONIC-SEMESP.",
         "form-title": "Formación Académica",
         "form1-text": "MBA en Gestión de Proyectos de TI",
-        "form2-text": "Posgrado en Ciencia de Datos y Big Data",
-        "form3-text": "Posgrado en Administración de Bases de Datos",
+        "form1-school": "Facultad Minas (2025)",
+        "form2-text": "Posgrado en Administración de Bases de Datos",
+        "form2-school": "(2024)",
+        "form3-text": "Posgrado en Ciencia de Datos y Big Data",
+        "form3-school": "(2022)",
         "form4-school": "Facultad de Educación São Luís (2018)",
         "form5-school": "ETEC (2013)",
         "cert-title": "Certificaciones y Cursos",
@@ -528,6 +537,64 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // --- Certificate Modal Logic (Robust 2.0) ---
+    const certModal = document.getElementById('cert-modal');
+    const closeCertModal = document.querySelector('#cert-modal .close-modal');
+    const certIframe = document.getElementById('cert-iframe');
+    const downloadCert = document.getElementById('download-cert');
+    const openNewTab = document.getElementById('open-new-tab');
+
+    function openCertificate(certPath) {
+        if (!certPath || !certModal || !certIframe) return;
+        
+        // Reset iframe first
+        certIframe.src = "";
+        
+        // Set new content
+        setTimeout(() => {
+            certIframe.src = certPath;
+            if (downloadCert) downloadCert.href = certPath;
+            if (openNewTab) openNewTab.href = certPath;
+
+            certModal.style.display = 'flex';
+            setTimeout(() => certModal.classList.add('active'), 20);
+            document.body.style.overflow = 'hidden';
+        }, 50);
+    }
+
+    // Using delegation for better reliability with dynamic content
+    document.addEventListener('click', (e) => {
+        const card = e.target.closest('.academic-card');
+        if (card) {
+            const certPath = card.getAttribute('data-certificate');
+            if (certPath) openCertificate(certPath);
+        }
+
+        // Close logic
+        if (certModal && certModal.classList.contains('active')) {
+            if (e.target === certModal || e.target === closeCertModal || e.target.closest('.close-modal')) {
+                certModal.classList.remove('active');
+                setTimeout(() => {
+                    certModal.style.display = 'none';
+                    certIframe.src = "";
+                    document.body.style.overflow = '';
+                }, 300);
+            }
+        }
+    });
+
+    // Keyboard support
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && certModal && certModal.classList.contains('active')) {
+            if (closeCertModal) closeCertModal.click();
+        }
+        
+        if ((e.key === 'Enter' || e.key === ' ') && e.target.classList.contains('academic-card')) {
+            e.preventDefault();
+            e.target.click();
+        }
+    });
+
     // --- Scroll Features (Progress Bar & Active Link) ---
     const progressBar = document.getElementById('scroll-progress');
     const navLinksList = document.querySelectorAll('.nav-links a');
@@ -595,7 +662,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // --- 3D Tilt Effect Logic ---
-    const tiltCards = document.querySelectorAll('.glass-card');
+    const tiltCards = document.querySelectorAll('.glass-card:not(.no-tilt)');
 
     tiltCards.forEach(card => {
         card.addEventListener('mousemove', (e) => {
@@ -676,11 +743,11 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // --- PWA Service Worker Registration ---
-    if ('serviceWorker' in navigator) {
+    if ('serviceWorker' in navigator && (window.location.protocol === 'http:' || window.location.protocol === 'https:')) {
         window.addEventListener('load', () => {
             navigator.serviceWorker.register('./sw.js')
                 .then(reg => console.log('SW registrado!', reg))
-                .catch(err => console.log('Falha ao registrar SW', err));
+                .catch(err => console.error('Falha ao registrar SW', err));
         });
     }
 
