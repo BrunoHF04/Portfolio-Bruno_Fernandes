@@ -654,6 +654,46 @@ section {
     margin-bottom: 1px;
 }
 
+.timeline-container {
+    display: flex;
+    height: 100vh;
+    align-items: flex-start;
+    padding: 90px 5vw 0;
+}
+
+.timeline-intro {
+    min-width: 380px;
+    padding-right: 80px;
+    z-index: 1;
+    margin-top: 20px;
+}
+
+.timeline-track {
+    display: flex;
+    gap: 60px;
+    z-index: 2;
+    padding-right: 15vw;
+    margin-top: 20px;
+    align-items: flex-start;
+}
+
+.timeline-card {
+    display: flex;
+    flex-direction: column;
+    max-height: calc(100vh - 160px);
+    overflow-y: auto;
+    padding-right: 15px !important; /* Space for scrollbar */
+}
+
+/* Custom scrollbar for cards */
+.timeline-card::-webkit-scrollbar {
+    width: 4px;
+}
+.timeline-card::-webkit-scrollbar-thumb {
+    background: var(--accent-primary);
+    border-radius: 10px;
+}
+
 [data-theme="light"] .premium-check {
     color: white;
 }
