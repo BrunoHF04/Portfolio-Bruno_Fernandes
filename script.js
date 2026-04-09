@@ -7,7 +7,7 @@ const translations = {
         "nav-formacao": "Formação",
         "nav-cursos": "Cursos",
         "nav-feedback": "Feedback",
-        "hero-title": "Gestor de Projetos de TI & Especialista em IA",
+        "hero-title": "Consultor de Projetos | Especialista em Soluções de IA",
         "download-cv": "Download CV",
         "sobre-title": "Resumo Profissional",
         "sobre-p1": "Especialista em TI com sólida experiência em consultoria de projetos, infraestrutura tecnológica e atendimento. Focado atualmente na utilização estratégica de <strong>Inteligência Artificial Generativa</strong> para otimizar o desenvolvimento de sistemas, agilizar análises técnicas e automatizar processos operacionais.",
@@ -15,10 +15,9 @@ const translations = {
         "exp-title": "Experiência Profissional",
         "exp1-date": "Julho 2020 – Atual",
         "exp1-role": "Consultor de Projetos | Analista Service Desk",
-        "exp1-tasks": "<li>Liderança técnica na organização de cronogramas para implantação de sistemas de automação em cartórios.</li><li>Utilização de ferramentas de IA para acelerar a criação de documentação técnica e scripts de automação.</li><li>Análise avançada e suporte em bancos de dados (Consultas, ajustes e restauração de bases).</li><li>Liderança de equipes de Service Desk mantendo excelência nos SLAs.</li>",
-        "exp2-date": "Outubro 2018 – Julho 2020",
-        "exp2-role": "Técnico em Informática",
-        "exp2-tasks": "<li>Gestão completa do setor de TI para 7 concessionárias da região.</li><li>Manutenção de hardware, software, configuração de redes e suporte remoto/presencial.</li>",
+        "exp1-tasks": '<li><span class="premium-check"><i class="fas fa-check"></i></span> Liderança técnica na organização de cronogramas para implantação de sistemas de automação em cartórios.</li><li><span class="premium-check"><i class="fas fa-check"></i></span> Utilização de ferramentas de IA para acelerar a criação de documentação técnica, manuais de treinamento e scripts de automação.</li><li><span class="premium-check"><i class="fas fa-check"></i></span> Análise avançada e suporte em bancos de dados, realizando consultas, ajustes e restauração de bases corrompidas.</li><li><span class="premium-check"><i class="fas fa-check"></i></span> Desenvolvimento e melhoria contínua de sistemas internos.</li><li><span class="premium-check"><i class="fas fa-check"></i></span> Validação de infraestrutura de TI e suporte back-office para garantir a continuidade operacional das serventias.</li><li><span class="premium-check"><i class="fas fa-check"></i></span> Atendimento via Service Desk com excelência sempre respeitando SLA dos chamados e liderando uma das equipes de atendimento.</li>',
+        "exp2-tasks": '<li><span class="premium-check"><i class="fas fa-check"></i></span> Gestão completa do setor de TI para 7 concessionárias da região (Jaboticabal, Monte Alto, Barrinha, Guariba, Araraquara, Ibitinga e Bauru).</li><li><span class="premium-check"><i class="fas fa-check"></i></span> Responsável pela manutenção de hardware, software, configuração de redes e suporte remoto/presencial para múltiplas unidades.</li>',
+        "exp3-tasks": '<li><span class="premium-check"><i class="fas fa-check"></i></span> Consultoria direta em infraestrutura e segurança da informação para pequenas e médias empresas.</li><li><span class="premium-check"><i class="fas fa-check"></i></span> Gestão técnica e administrativa focada em resultados e uptime de sistemas.</li>',
         "skills-title": "Competências Técnicas",
         "skill1-title": "Soluções de IA",
         "skill1-item1": "IA Generativa (Otimização)",
@@ -119,7 +118,7 @@ const translations = {
         "nav-formacao": "Education",
         "nav-cursos": "Courses",
         "nav-feedback": "Feedback",
-        "hero-title": "IT Project Manager & AI Specialist",
+        "hero-title": "Project Consultant | AI Solutions Specialist",
         "download-cv": "Download CV",
         "sobre-title": "Professional Summary",
         "sobre-p1": "IT Specialist with solid experience in project consulting, technology infrastructure, and service. Currently focused on the strategic use of <strong>Generative Artificial Intelligence</strong> to optimize system development, streamline technical analysis, and automate operational processes.",
@@ -127,10 +126,9 @@ const translations = {
         "exp-title": "Professional Experience",
         "exp1-date": "July 2020 – Present",
         "exp1-role": "Project Consultant | Service Desk Analyst",
-        "exp1-tasks": "<li>Technical leadership in organizing schedules for the deployment of automation systems in notary offices.</li><li>Use of AI tools to accelerate the creation of technical documentation and automation scripts.</li><li>Advanced analysis and support in databases (Queries, adjustments, and base restoration).</li><li>Leadership of Service Desk teams maintaining excellence in SLAs.</li>",
-        "exp2-date": "October 2018 – July 2020",
-        "exp2-role": "IT Technician",
-        "exp2-tasks": "<li>Complete management of the IT sector for 7 dealerships in the region.</li><li>Hardware and software maintenance, network configuration, and remote/in-person support.</li>",
+        "exp1-tasks": '<li><span class="premium-check"><i class="fas fa-check"></i></span> Technical leadership in organizing schedules for the deployment of automation systems in notary offices.</li><li><span class="premium-check"><i class="fas fa-check"></i></span> Use of AI tools to accelerate the creation of technical documentation, training manuals, and automation scripts.</li><li><span class="premium-check"><i class="fas fa-check"></i></span> Advanced analysis and support in databases, performing queries, adjustments, and restoration of corrupted bases.</li><li><span class="premium-check"><i class="fas fa-check"></i></span> Continuous development and improvement of internal systems.</li><li><span class="premium-check"><i class="fas fa-check"></i></span> Validation of IT infrastructure and back-office support to ensure the operational continuity of the services.</li><li><span class="premium-check"><i class="fas fa-check"></i></span> Service Desk attendance with excellence, always respecting SLAs and leading one of the support teams.</li>',
+        "exp2-tasks": '<li><span class="premium-check"><i class="fas fa-check"></i></span> Complete management of the IT sector for 7 dealerships in the region (Jaboticabal, Monte Alto, Barrinha, Guariba, Araraquara, Ibitinga, and Bauru).</li><li><span class="premium-check"><i class="fas fa-check"></i></span> Responsible for hardware and software maintenance, network configuration, and remote/in-person support for multiple units.</li>',
+        "exp3-tasks": '<li><span class="premium-check"><i class="fas fa-check"></i></span> Direct consulting in infrastructure and information security for small and medium-sized companies.</li><li><span class="premium-check"><i class="fas fa-check"></i></span> Technical and administrative management focused on results and system uptime.</li>',
         "skills-title": "Technical Competencies",
         "skill1-title": "AI Solutions",
         "skill1-item1": "Generative AI (Optimization)",
@@ -231,7 +229,7 @@ const translations = {
         "nav-formacao": "Formación",
         "nav-cursos": "Cursos",
         "nav-feedback": "Opinión",
-        "hero-title": "Gestor de Proyectos de TI & Especialista en IA",
+        "hero-title": "Consultor de Proyectos | Especialista en Soluciones de IA",
         "download-cv": "Descargar CV",
         "sobre-title": "Resumen Profesional",
         "sobre-p1": "Especialista en TI con sólida experiencia en consultoría de proyectos, infraestructura tecnológica y atención al cliente. Enfocado actualmente en el uso estratégico de la <strong>Inteligencia Artificial Generativa</strong> para optimizar el desarrollo de sistemas, agilizar el análisis técnico y automatizar procesos operativos.",
@@ -239,10 +237,9 @@ const translations = {
         "exp-title": "Experiencia Profesional",
         "exp1-date": "Julio 2020 – Actual",
         "exp1-role": "Consultor de Proyectos | Analista de Service Desk",
-        "exp1-tasks": "<li>Liderazgo técnico en la organización de cronogramas para la implementación de sistemas de automatización en notarías.</li><li>Uso de herramientas de IA para acelerar la creación de documentación técnica y scripts de automatización.</li><li>Análisis avanzado y soporte en bases de datos (Consultas, ajustes y restauración de bases).</li><li>Liderazgo de equipos de Service Desk manteniendo la excelencia en los SLA.</li>",
-        "exp2-date": "Octubre 2018 – Julio 2020",
-        "exp2-role": "Técnico en Informática",
-        "exp2-tasks": "<li>Gestão completa do setor de TI para 7 concessionárias da região.</li><li>Mantenimiento de hardware, software, configuración de redes y soporte remoto/presencial.</li>",
+        "exp1-tasks": '<li><span class="premium-check"><i class="fas fa-check"></i></span> Liderazgo técnico en la organización de cronogramas para la implementación de sistemas de automatización en notarías.</li><li><span class="premium-check"><i class="fas fa-check"></i></span> Uso de herramientas de IA para acelerar la creación de documentación técnica, manuales de entrenamiento y scripts de automatización.</li><li><span class="premium-check"><i class="fas fa-check"></i></span> Análisis avanzado y soporte en bases de datos, realizando consultas, ajustes y restauración de bases corrompidas.</li><li><span class="premium-check"><i class="fas fa-check"></i></span> Desarrollo y mejora continua de sistemas internos.</li><li><span class="premium-check"><i class="fas fa-check"></i></span> Validación de infraestructura de TI y soporte back-office para garantizar la continuidad operativa de las serventías.</li><li><span class="premium-check"><i class="fas fa-check"></i></span> Atención vía Service Desk con excelencia siempre respetando los SLA de las llamadas y liderando uno de los equipos de soporte.</li>',
+        "exp2-tasks": '<li><span class="premium-check"><i class="fas fa-check"></i></span> Gestión completa del sector de TI para 7 concesionarias de la región (Jaboticabal, Monte Alto, Barrinha, Guariba, Araraquara, Ibitinga y Bauru).</li><li><span class="premium-check"><i class="fas fa-check"></i></span> Responsable del mantenimiento de hardware, software, configuración de redes y soporte remoto/presencial para múltiples unidades.</li>',
+        "exp3-tasks": '<li><span class="premium-check"><i class="fas fa-check"></i></span> Consultoría directa en infraestructura y seguridad de la información para pequeñas y medianas empresas.</li><li><span class="premium-check"><i class="fas fa-check"></i></span> Gestión técnica y administrativa enfocada en resultados y tiempo de actividad del sistema.</li>',
         "skills-title": "Competencias Técnicas",
         "skill1-title": "Soluciones de IA",
         "skill1-item1": "IA Generativa (Optimización)",
@@ -771,6 +768,42 @@ document.addEventListener('DOMContentLoaded', () => {
                 scale: 1.1
             });
         });
+
+        // --- Career Horizontal Scroll Implementation ---
+        const timelineTrack = document.querySelector('.timeline-track');
+        const timelineContainer = document.querySelector('#experiencia');
+        
+        if (timelineTrack && timelineContainer) {
+            ScrollTrigger.matchMedia({
+                // Desktop
+                "(min-width: 993px)": function() {
+                    const getScrollAmount = () => {
+                        const trackWidth = timelineTrack.scrollWidth;
+                        const windowWidth = window.innerWidth;
+                        return -(trackWidth - windowWidth + (windowWidth * 0.1));
+                    };
+
+                    gsap.to(timelineTrack, {
+                        x: getScrollAmount,
+                        ease: "none",
+                        scrollTrigger: {
+                            trigger: "#experiencia",
+                            pin: true,
+                            scrub: 1,
+                            start: "top top",
+                            end: () => `+=${timelineTrack.scrollWidth}`,
+                            invalidateOnRefresh: true,
+                            anticipatePin: 1
+                        }
+                    });
+                },
+                // Mobile
+                "(max-width: 992px)": function() {
+                    // No pinning or horizontal movement needed on mobile
+                    gsap.set(timelineTrack, { x: 0 });
+                }
+            });
+        }
     }
 
     const aiToggle = document.getElementById('ai-toggle');
