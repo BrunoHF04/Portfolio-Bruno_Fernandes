@@ -340,19 +340,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const logoPath = document.querySelector('.logo-path');
 
     if (loader && loaderBar) {
-        // --- Safety Hatch ---
-        // Forces the loader to disappear after 5s regardless of progress
-        setTimeout(() => {
-            const activeLoader = document.getElementById('loader');
-            if (activeLoader) {
-                console.warn("Safety Hatch Triggered: Forcing loader removal.");
-                activeLoader.classList.add('fade-out');
-                setTimeout(() => activeLoader.remove(), 1200);
-            }
-        }, 5000);
-
         let progress = 0;
-        const totalPathLength = 400;
+        const totalPathLength = 400; // Matches CSS stroke-dasharray
 
         const interval = setInterval(() => {
             progress += Math.random() * 8; // Even slower for better appreciation
@@ -367,19 +356,25 @@ document.addEventListener('DOMContentLoaded', () => {
                 logoPath.style.strokeDashoffset = offset;
             }
 
-            if (progress >= 100) {
-                progress = 100;
+            if (progress === 100) {
                 clearInterval(interval);
                 setTimeout(() => {
                     loader.classList.add('fade-out');
                     setTimeout(() => {
                         loader.remove();
-                    }, 1200);
-                }, 800);
+                    }, 1200); // Wait for the 1.2s CSS transition
+                }, 1200); // Longer pause at 100% for prestige feel
             }
-        }, 150);
+        }, 300); // Increased interval from 200ms to 300ms
 
-
+        // Safety fallback
+        window.addEventListener('load', () => {
+            if (progress < 100) {
+                progress = 100;
+                loaderBar.style.width = `100%`;
+                if (logoPath) logoPath.style.strokeDashoffset = 0;
+            }
+        });
     }
 
     // --- Signature Animation Hook ---
@@ -686,21 +681,11 @@ document.addEventListener('DOMContentLoaded', () => {
         rootMargin: '0px 0px -50px 0px'
     };
 
+    // --- PWA Service Worker Registration ---
     if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
             navigator.serviceWorker.register('./sw.js')
-                .then(reg => {
-                    console.log('SW registrado!', reg);
-                    reg.onupdatefound = () => {
-                        const installingWorker = reg.installing;
-                        installingWorker.onstatechange = () => {
-                            if (installingWorker.state === 'installed' && navigator.serviceWorker.controller) {
-                                console.log('Nova versão detectada! Atualizando...');
-                                window.location.reload();
-                            }
-                        };
-                    };
-                })
+                .then(reg => console.log('SW registrado!', reg))
                 .catch(err => console.log('Falha ao registrar SW', err));
         });
     }
@@ -1042,8 +1027,7 @@ document.addEventListener('DOMContentLoaded', () => {
             qrImg.src = qrUrl;
             qrImg.onload = () => {
                 qrImg.style.display = 'block';
-                // Remove the skeleton or placeholder if it exists
-                if (qrImg.previousElementSibling) qrImg.previousElementSibling.style.display = 'none';
+                qrImg.previousElementSibling.style.display = 'none';
             };
         }
     }
@@ -1200,6 +1184,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 1000);
         });
     }
+});
 
 // --- Terminal / Command Palette Logic ---
 const commandPalette = document.getElementById('command-palette');
@@ -1294,6 +1279,7 @@ function executeCommand(cmd) {
             setTimeout(() => terminalInput.placeholder = "Digite um comando...", 2000);
     }
 }
+
 // --- Voice Integration (STT/TTS) ---
 const btnSTT = document.getElementById('voice-stt');
 const btnTTS = document.getElementById('voice-tts');
@@ -1308,77 +1294,46 @@ if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
     recognition.interimResults = false;
 
     btnSTT.addEventListener('click', () => {
-        try {
-            if (btnSTT.classList.contains('active')) {
-                recognition.stop();
-            } else {
-                const currentLang = document.documentElement.getAttribute('data-lang') || 'pt';
-                recognition.lang = currentLang === 'en' ? 'en-US' : (currentLang === 'es' ? 'es-ES' : 'pt-BR');
-                
-                recognition.start();
-                btnSTT.classList.add('active');
-                voiceStatus.innerText = currentLang === 'en' ? "Listening..." : (currentLang === 'es' ? "Escuchando..." : "Ouvindo...");
-            }
-        } catch (err) {
-            console.error("STT Start Error:", err);
-            btnSTT.classList.remove('active');
+        if (btnSTT.classList.contains('active')) {
+            recognition.stop();
+        } else {
+            // Update language dynamically before starting
+            const currentLang = document.documentElement.getAttribute('data-lang') || 'pt';
+            recognition.lang = currentLang === 'en' ? 'en-US' : (currentLang === 'es' ? 'es-ES' : 'pt-BR');
+            
+            recognition.start();
+            btnSTT.classList.add('active');
+            voiceStatus.innerText = currentLang === 'en' ? "Listening..." : (currentLang === 'es' ? "Escuchando..." : "Ouvindo...");
         }
     });
 
     recognition.onresult = (event) => {
         const result = event.results[0][0].transcript;
         aiInput.value = result;
-        // Optional: show interim result in the status
-        // voiceStatus.innerText = result;
+        addMessage(result, true);
+        processAI(result);
     };
 
     recognition.onend = () => {
-        if (btnSTT.classList.contains('active') && aiInput.value.trim() !== "") {
-            const finalResult = aiInput.value;
-            addMessage(finalResult, true);
-            processAI(finalResult);
-            aiInput.value = "";
-        }
         btnSTT.classList.remove('active');
         voiceStatus.innerText = "";
     };
 
-    recognition.onerror = (event) => {
+    recognition.onerror = () => {
         btnSTT.classList.remove('active');
-        const currentLang = document.documentElement.getAttribute('data-lang') || 'pt';
-        console.warn("STT Error:", event.error);
-        
-        switch (event.error) {
-            case 'not-allowed':
-                voiceStatus.innerText = currentLang === 'en' ? "Mic blocked" : (currentLang === 'es' ? "Mic bloqueado" : "Mic bloqueado");
-                break;
-            case 'no-speech':
-                voiceStatus.innerText = currentLang === 'en' ? "No speech" : (currentLang === 'es' ? "Sin voz" : "Sem voz");
-                break;
-            case 'network':
-                voiceStatus.innerText = currentLang === 'en' ? "Network error" : (currentLang === 'es' ? "Error red" : "Erro de rede");
-                break;
-            default:
-                voiceStatus.innerText = "Error";
-        }
-        setTimeout(() => { if (voiceStatus.innerText !== "") voiceStatus.innerText = ""; }, 3000);
+        voiceStatus.innerText = "Erro de voz";
     };
-} else if (btnSTT) {
+} else {
     btnSTT.style.display = 'none';
 }
 
-// Speech Synthesis (TTS) Button Toggle
-if (btnTTS) {
-    btnTTS.addEventListener('click', () => {
-        isReading = !isReading;
-        btnTTS.classList.toggle('active', isReading);
-        if (!isReading) window.speechSynthesis.cancel();
-    });
-}
-
+// Speech Synthesis (TTS)
+btnTTS.addEventListener('click', () => {
+    isReading = !isReading;
+    btnTTS.classList.toggle('active', isReading);
+    if (!isReading) window.speechSynthesis.cancel();
 });
 
-// Speech Synthesis (TTS) Helper - Keep global for access
 function speakText(text) {
     if (!isReading) return;
     const utterance = new SpeechSynthesisUtterance(text);
@@ -1388,3 +1343,6 @@ function speakText(text) {
     else utterance.lang = 'pt-BR';
     window.speechSynthesis.speak(utterance);
 }
+
+
+
