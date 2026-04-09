@@ -1233,6 +1233,20 @@ strong {
     font-weight: 500;
 }
 
+.skill-link {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    align-items: center;
+    gap: inherit;
+    width: 100%;
+    transition: var(--transition-smooth);
+}
+
+.skill-link:hover {
+    color: var(--accent-primary);
+}
+
 .skill-item i {
     font-size: 1.2rem;
     width: 25px;
@@ -1248,6 +1262,110 @@ strong {
 
 .skill-item i.colored {
     filter: drop-shadow(0 0 5px rgba(0,0,0,0.1));
+}
+
+/* Academic Cards Interactive Styling */
+#formacao .academic-card {
+    cursor: pointer !important;
+    position: relative !important;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+    user-select: none;
+    z-index: 1;
+}
+
+#formacao .academic-card:hover {
+    transform: translateY(-8px) scale(1.03) !important;
+    border-color: var(--accent-primary) !important;
+    box-shadow: 0 15px 40px rgba(176, 141, 87, 0.3) !important;
+    z-index: 5;
+}
+
+#formacao .academic-icon-view {
+    position: absolute !important;
+    top: 20px !important;
+    right: 20px !important;
+    width: 32px;
+    height: 32px;
+    background: rgba(176, 141, 87, 0.2);
+    border-radius: 50%;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent-primary);
+    opacity: 0 !important;
+    transform: scale(0) rotate(-45deg);
+    transition: all 0.4s ease !important;
+    z-index: 10 !important;
+    pointer-events: none;
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(176, 141, 87, 0.3);
+}
+
+#formacao .academic-card:hover .academic-icon-view {
+    opacity: 1 !important;
+    transform: scale(1) rotate(0deg) !important;
+}
+
+/* Certificate Modal Styling */
+#cert-modal {
+    display: none;
+    position: fixed;
+    z-index: 10000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: rgba(0,0,0,0.85);
+    backdrop-filter: blur(12px);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+#cert-modal.active {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 1;
+}
+
+#cert-modal .modal-content {
+    width: 90%;
+    max-width: 1100px;
+    position: relative;
+    padding: 40px !important;
+    animation: cert-modal-zoom 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    background: rgba(20, 20, 20, 0.8);
+    border: 1px solid var(--border-card);
+}
+
+@keyframes cert-modal-zoom {
+    from { transform: scale(0.9); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+#cert-modal .close-modal {
+    position: absolute;
+    top: 20px;
+    right: 25px;
+    color: var(--text-secondary);
+    font-size: 2.5rem;
+    font-weight: 300;
+    cursor: pointer;
+    z-index: 10001;
+    transition: var(--transition-smooth);
+    line-height: 1;
+}
+
+#cert-modal .close-modal:hover {
+    color: var(--accent-primary);
+    transform: rotate(90deg);
+}
+
+#cert-viewer-container {
+    box-shadow: 0 0 50px rgba(0,0,0,0.5);
+    border: 1px solid var(--border-card);
+    background: #000;
 }
 
 /* Certification Cards */
@@ -1320,6 +1438,12 @@ strong {
     color: var(--accent-primary);
     border-color: var(--accent-primary);
     box-shadow: 0 5px 15px rgba(37, 99, 235, 0.2);
+}
+
+/* Disable 3D Tilt for specific elements */
+.no-tilt {
+    transform: none !important;
+    perspective: none !important;
 }
 
 /* Modal Styles */
@@ -1612,6 +1736,27 @@ html, body {
     flex-direction: column;
     flex-grow: 1;
     justify-content: space-between;
+}
+
+/* Contact Section Redesign - Forced Square */
+#contato .glass-card {
+    width: 380px !important;
+    min-height: 380px !important;
+    margin: 0 auto !important;
+    padding: 40px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 25px !important;
+    text-align: center !important;
+}
+
+#contato .glass-card #qrcode-img {
+    margin: 0 auto !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
 }
 
 /* GitHub Stats Card Styling */
