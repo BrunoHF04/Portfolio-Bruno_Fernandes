@@ -340,6 +340,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const logoPath = document.querySelector('.logo-path');
 
     if (loader && loaderBar) {
+        // --- Safety Hatch ---
+        // Forces the loader to disappear after 5s if anything fails during progress
+        const safetyTimeout = setTimeout(() => {
+            if (document.getElementById('loader')) {
+                console.warn("Safety Hatch Triggered: Forcing loader removal.");
+                loader.classList.add('fade-out');
+                setTimeout(() => loader.remove(), 1200);
+            }
+        }, 5000);
+
         let progress = 0;
         const totalPathLength = 400; // Matches CSS stroke-dasharray
 
@@ -1349,16 +1359,20 @@ if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
         }
         setTimeout(() => { if (voiceStatus.innerText !== "") voiceStatus.innerText = ""; }, 3000);
     };
-} else {
+} else if (btnSTT) {
     btnSTT.style.display = 'none';
 }
 
-btnTTS.addEventListener('click', () => {
-    isReading = !isReading;
-    btnTTS.classList.toggle('active', isReading);
-    if (!isReading) window.speechSynthesis.cancel();
-});
+// Speech Synthesis (TTS) Button Toggle
+if (btnTTS) {
+    btnTTS.addEventListener('click', () => {
+        isReading = !isReading;
+        btnTTS.classList.toggle('active', isReading);
+        if (!isReading) window.speechSynthesis.cancel();
+    });
+}
 
+// Speech Synthesis (TTS) Helper
 function speakText(text) {
     if (!isReading) return;
     const utterance = new SpeechSynthesisUtterance(text);
@@ -1368,5 +1382,4 @@ function speakText(text) {
     else utterance.lang = 'pt-BR';
     window.speechSynthesis.speak(utterance);
 }
-
 });
