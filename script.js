@@ -64,6 +64,8 @@ const translations = {
         "test2-name": "Hugo Januário",
         "test2-role": "Consultor de Implantação, Siplan",
         "wa-msg": "Oi Bruno, tudo bem? Vi seu portfólio e achei muito interessante. Podemos conversar? Quando você teria um horário disponível?",
+        "github-repos-label": "Repos",
+        "github-commits-label": "Commits",
         "cont-title": "Contato",
         "cont-p": "Vamos conversar sobre o seu próximo projeto?",
         "cont-email-title": "Enviar E-mail",
@@ -184,6 +186,8 @@ const translations = {
         "test2-name": "Hugo Januário",
         "test2-role": "Implementation Consultant, Siplan",
         "wa-msg": "Hi Bruno, how are you? I saw your portfolio and found it very interesting. Can we talk? When would you have some time available?",
+        "github-repos-label": "Repos",
+        "github-commits-label": "Commits",
         "cont-title": "Contact",
         "cont-p": "Let's talk about your next project?",
         "cont-email-title": "Send Email",
@@ -304,6 +308,8 @@ const translations = {
         "test2-name": "Hugo Januário",
         "test2-role": "Consultor de Implantación, Siplan",
         "wa-msg": "Hola Bruno, ¿cómo estás? He visto tu portafolio y me ha parecido muy interesante. ¿Podemos hablar? ¿Cuándo tendrías un horario disponible?",
+        "github-repos-label": "Repos",
+        "github-commits-label": "Commits",
         "cont-title": "Contacto",
         "cont-p": "¿Hablamos de tu próximo proyecto?",
         "cont-email-title": "Enviar correo electrónico",
@@ -783,16 +789,27 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- GitHub Stats Fetcher ---
     async function fetchGitHubStats() {
         try {
-            const response = await fetch('https://api.github.com/users/BrunoHF04');
-            if (response.ok) {
-                const data = await response.json();
-                document.getElementById('github-repos').innerText = data.public_repos;
-                document.getElementById('github-followers').innerText = data.followers;
+            // Fetch User info for repos
+            const userResponse = await fetch('https://api.github.com/users/BrunoHF04');
+            if (userResponse.ok) {
+                const userData = await userResponse.json();
+                const reposEl = document.getElementById('github-repos');
+                if (reposEl) reposEl.innerText = userData.public_repos;
+            }
+
+            // Fetch Commits count via Search API
+            const commitsResponse = await fetch('https://api.github.com/search/commits?q=author:BrunoHF04');
+            if (commitsResponse.ok) {
+                const commitsData = await commitsResponse.json();
+                const commitsEl = document.getElementById('github-commits');
+                if (commitsEl) commitsEl.innerText = commitsData.total_count || '500+';
             }
         } catch (error) {
             console.error('Error fetching GitHub stats:', error);
-            document.getElementById('github-repos').innerText = '15+';
-            document.getElementById('github-followers').innerText = '10+';
+            const reposEl = document.getElementById('github-repos');
+            const commitsEl = document.getElementById('github-commits');
+            if (reposEl) reposEl.innerText = '15+';
+            if (commitsEl) commitsEl.innerText = '500+';
         }
     }
     fetchGitHubStats();
