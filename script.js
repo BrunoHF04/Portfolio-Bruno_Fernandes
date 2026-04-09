@@ -691,11 +691,21 @@ document.addEventListener('DOMContentLoaded', () => {
         rootMargin: '0px 0px -50px 0px'
     };
 
-    // --- PWA Service Worker Registration ---
     if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
             navigator.serviceWorker.register('./sw.js')
-                .then(reg => console.log('SW registrado!', reg))
+                .then(reg => {
+                    console.log('SW registrado!', reg);
+                    reg.onupdatefound = () => {
+                        const installingWorker = reg.installing;
+                        installingWorker.onstatechange = () => {
+                            if (installingWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                                console.log('Nova versão detectada! Atualizando...');
+                                window.location.reload();
+                            }
+                        };
+                    };
+                })
                 .catch(err => console.log('Falha ao registrar SW', err));
         });
     }
