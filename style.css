@@ -626,6 +626,70 @@ section {
     box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.45), var(--glass-inset);
 }
 
+/* Premium Career Styles */
+.premium-check {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    background: var(--accent-primary);
+    color: var(--bg-body);
+    border-radius: 4px;
+    font-size: 0.7rem;
+    margin-right: 10px;
+    flex-shrink: 0;
+    margin-top: 2px;
+    box-shadow: 0 2px 6px rgba(176, 141, 87, 0.2);
+}
+
+.timeline-tasks {
+    font-size: 0.8rem;
+    line-height: 1.35;
+}
+
+.timeline-tasks li {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 1px;
+}
+
+[data-theme="light"] .premium-check {
+    color: white;
+}
+
+/* Timeline Responsiveness */
+@media (max-width: 992px) {
+    #experiencia .timeline-container {
+        height: auto !important;
+        flex-direction: column !important;
+        padding: 60px 20px !important;
+    }
+
+    #experiencia .timeline-track {
+        flex-direction: column !important;
+        width: 100% !important;
+        gap: 30px !important;
+        transform: none !important;
+    }
+
+    #experiencia .timeline-item {
+        min-width: unset !important;
+        width: 100% !important;
+    }
+    
+    #experiencia .timeline-intro {
+        min-width: unset !important;
+        padding-right: 0 !important;
+        margin-bottom: 40px;
+        text-align: center;
+    }
+
+    #experiencia .scroll-hint {
+        display: none !important;
+    }
+}
+
 /* Radar Chart Container */
 .radar-container {
     max-width: 600px;
