@@ -341,17 +341,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (loader && loaderBar) {
         // --- Safety Hatch ---
-        // Forces the loader to disappear after 5s if anything fails during progress
-        const safetyTimeout = setTimeout(() => {
-            if (document.getElementById('loader')) {
+        // Forces the loader to disappear after 5s regardless of progress
+        setTimeout(() => {
+            const activeLoader = document.getElementById('loader');
+            if (activeLoader) {
                 console.warn("Safety Hatch Triggered: Forcing loader removal.");
-                loader.classList.add('fade-out');
-                setTimeout(() => loader.remove(), 1200);
+                activeLoader.classList.add('fade-out');
+                setTimeout(() => activeLoader.remove(), 1200);
             }
         }, 5000);
 
         let progress = 0;
-        const totalPathLength = 400; // Matches CSS stroke-dasharray
+        const totalPathLength = 400;
 
         const interval = setInterval(() => {
             progress += Math.random() * 8; // Even slower for better appreciation
@@ -366,25 +367,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 logoPath.style.strokeDashoffset = offset;
             }
 
-            if (progress === 100) {
+            if (progress >= 100) {
+                progress = 100;
                 clearInterval(interval);
                 setTimeout(() => {
                     loader.classList.add('fade-out');
                     setTimeout(() => {
                         loader.remove();
-                    }, 1200); // Wait for the 1.2s CSS transition
-                }, 1200); // Longer pause at 100% for prestige feel
+                    }, 1200);
+                }, 800);
             }
-        }, 300); // Increased interval from 200ms to 300ms
+        }, 150);
 
-        // Safety fallback
-        window.addEventListener('load', () => {
-            if (progress < 100) {
-                progress = 100;
-                loaderBar.style.width = `100%`;
-                if (logoPath) logoPath.style.strokeDashoffset = 0;
-            }
-        });
+
     }
 
     // --- Signature Animation Hook ---
@@ -1381,7 +1376,6 @@ if (btnTTS) {
     });
 }
 
-    }
 });
 
 // Speech Synthesis (TTS) Helper - Keep global for access
