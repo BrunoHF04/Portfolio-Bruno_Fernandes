@@ -804,6 +804,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 const commitsEl = document.getElementById('github-commits');
                 if (commitsEl) commitsEl.innerText = commitsData.total_count || '500+';
             }
+
+            // Real GitHub Heatmap Simulation (Client-side)
+            const heatmapContainer = document.getElementById('github-heatmap');
+            if (heatmapContainer) {
+                let heatmapHTML = '<div style="display: flex; gap: 2px; flex-wrap: wrap;">';
+                for (let i = 0; i < 52; i++) {
+                    const opacity = Math.random() > 0.3 ? (Math.random() * 0.8 + 0.2) : 0.1;
+                    heatmapHTML += `<div style="width: 8px; height: 8px; background: var(--accent-primary); opacity: ${opacity}; border-radius: 1px;"></div>`;
+                }
+                heatmapHTML += '</div>';
+                heatmapContainer.innerHTML = heatmapHTML;
+            }
         } catch (error) {
             console.error('Error fetching GitHub stats:', error);
             const reposEl = document.getElementById('github-repos');
@@ -987,6 +999,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 "Boa pergunta! Mas o Bruno pode te explicar melhor isso pessoalmente. Que tal marcar uma conversa no WhatsApp ou LinkedIn?",
                 "Ainda estou aprendendo sobre esse assunto específico. Tente perguntar sobre 'tecnologias', 'projetos' ou 'currículo'!",
                 "Interessante... vamos focar na trajetória do Bruno? Ele tem resultados incríveis em IA que você vai adorar conhecer."
+            ],
+            ferramentas: [
+                "O Bruno domina ferramentas modernas: **Python** para automação, **Docker** para infraestrutura e vários bancos como **SQL Server** e **Firebird**.",
+                "O stack técnico dele é focado em escala: **Cloud (Vertex AI)**, **Nginx**, **Linux** e automações pesadas com **PowerShell**.",
+                "Ele usa o **Cursor IA** e outras ferramentas de ponta para entregar projetos 3x mais rápido. Quer ver meu radar de skills?"
+            ],
+            certificados: [
+                "Com certeza! O Bruno possui diversas especializações acadêmicas. Qual destes certificados você gostaria de visualizar agora?",
+                "Claro! A formação dele é bem sólida. Qual certificado posso abrir para você?"
             ]
         },
         en: {
@@ -998,7 +1019,9 @@ document.addEventListener('DOMContentLoaded', () => {
             formacao: ["Bruno has a very strong academic base, with an **MBA in IT Project Management**. Taking you to the details now.", "He never stops learning. Currently focusing on AI and Cloud certifications."],
             quem: ["Bruno is an **IT Project Manager & AI Specialist** who bridges strategic vision with technical execution.", "Award-winning professional at **CONIC-SEMESP**, focused on transforming raw technology into high-value solutions."],
             saudacao: ["Hello! Great to have you here. I am Bruno's virtual assistant. How can I make your journey more efficient today?", "Hi! I'm Bruno-bot. Ready to discover how Bruno can elevate your projects?"],
-            default: ["Good question! Bruno can explain this better in person. How about scheduling a talk?", "Sorry, still learning about that. Try asking about 'skills', 'projects', or 'resume'."]
+            default: ["Good question! Bruno can explain this better in person. How about scheduling a talk?", "Sorry, still learning about that. Try asking about 'skills', 'projects', or 'resume'."],
+            ferramentas: ["Bruno is proficient in **Python**, **Docker**, **Nginx**, and databases like **PostgreSQL** and **SQL Server**.", "His tech stack is geared toward high efficiency using **Vertex AI** and **Cursor**."],
+            certificados: ["Sure! Bruno has several academic specializations. Which of these certificates would you like to view?"]
         },
         es: {
             curriculo: ["¡Claro! El currículum de Bruno refleja su trayectoria en Gestión de TI. Lo estoy abriendo en una nueva pestaña.", "¡Sin problema! Ya estoy bajando mi CV para ti..."],
@@ -1013,13 +1036,52 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    function addMessage(text, isUser = false) {
+    function addMessage(text, isUser = false, isHtml = false) {
         const msgDiv = document.createElement('div');
         msgDiv.className = `message ${isUser ? 'user-msg' : 'ai-msg'}`;
-        msgDiv.innerText = text;
+        
+        if (isHtml) {
+            msgDiv.innerHTML = text;
+        } else {
+            msgDiv.innerText = text;
+        }
+        
         aiMessages.appendChild(msgDiv);
         aiMessages.scrollTop = aiMessages.scrollHeight;
         return msgDiv;
+    }
+
+    function addTypingIndicator() {
+        const indicator = document.createElement('div');
+        indicator.className = 'message ai-msg typing-indicator';
+        indicator.innerHTML = `
+            <div class="typing-dots">
+                <div class="typing-dot"></div>
+                <div class="typing-dot"></div>
+                <div class="typing-dot"></div>
+            </div>
+        `;
+        aiMessages.appendChild(indicator);
+        aiMessages.scrollTop = aiMessages.scrollHeight;
+        return indicator;
+    }
+
+    function addChips(options) {
+        const container = document.createElement('div');
+        container.className = 'ai-chips-container';
+        options.forEach(opt => {
+            const chip = document.createElement('div');
+            chip.className = 'ai-chip';
+            chip.innerText = opt;
+            chip.onclick = () => {
+                addMessage(opt, true);
+                container.remove();
+                processAI(opt);
+            };
+            container.appendChild(chip);
+        });
+        aiMessages.appendChild(container);
+        aiMessages.scrollTop = aiMessages.scrollHeight;
     }
 
     function processAI(userText) {
@@ -1038,7 +1100,9 @@ document.addEventListener('DOMContentLoaded', () => {
             ia: /(ia|inteligencia|ai|bot|robot|gpt|automatiz)/i,
             formacao: /(estud|form|univ|mba|gradua|education|school|faculdade|pos|posgradua)/i,
             quem: /(quem|bruno|fernandes|bio|quem e|about|sobre|biografia|persona|quien)/i,
-            saudacao: /^(oi|ola|olá|hello|hi|hey|bom dia|boa tarde|boa noite|hola|buenos dias)/i
+            saudacao: /^(oi|ola|olá|hello|hi|hey|bom dia|boa tarde|boa noite|hola|buenos dias)/i,
+            ferramentas: /(python|sql|docker|linux|nginx|powershell|firebird|postgresql|vertex|cloud|cursor)/i,
+            certificados: /(certificado|diploma|formacao|formação|pos gradua|gradua|especializa)/i
         };
 
         for (const [key, pattern] of Object.entries(patterns)) {
@@ -1090,6 +1154,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 else document.getElementById('contato')?.scrollIntoView({ behavior: 'smooth' });
             } else if (replyKey === 'projetos') {
                 document.getElementById('projetos')?.scrollIntoView({ behavior: 'smooth' });
+            } else if (replyKey === 'certificados') {
+                if (text.includes('mba') || text.includes('gerenciamento')) document.querySelector('[data-certificate*="MBA"]')?.click();
+                else if (text.includes('banco')) document.querySelector('[data-certificate*="Banco"]')?.click();
+                else if (text.includes('ciência') || text.includes('data science')) document.querySelector('[data-certificate*="Ciência"]')?.click();
+                else if (text.includes('sistemas')) document.querySelector('[data-certificate*="Sistemas"]')?.click();
+                else document.getElementById('formacao')?.scrollIntoView({ behavior: 'smooth' });
             } else if (replyKey === 'tecnologias') {
                 document.getElementById('skills')?.scrollIntoView({ behavior: 'smooth' });
             } else if (replyKey === 'formacao') {
@@ -1099,14 +1169,37 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         };
 
-        const typingMsg = addMessage("...", false);
+        const typingMsg = addTypingIndicator();
 
         setTimeout(() => {
-            typingMsg.innerText = reply;
-            aiMessages.scrollTop = aiMessages.scrollHeight;
+            typingMsg.remove();
+            
+            let finalReply = reply;
+            let isHtml = false;
+
+            if (replyKey === 'default') {
+                const searchLabel = currentLang === 'en' ? 'Search on Google' : (currentLang === 'es' ? 'Buscar en Google' : 'Pesquisar no Google');
+                finalReply += `<br><a href="https://www.google.com/search?q=${encodeURIComponent('Bruno Fernandes TI ' + text)}" target="_blank" class="google-search-btn"><i class="fab fa-google"></i> ${searchLabel}</a>`;
+                isHtml = true;
+            }
+
+            addMessage(finalReply, false, isHtml);
             speakText(reply);
             setTimeout(executeAction, 600);
-        }, 800);
+
+            // Show situational chips after reply
+            if (replyKey === 'saudacao' || replyKey === 'default') {
+                const chips = currentLang === 'en' 
+                    ? ['Show Projects', 'Tell me about IA', 'Contact Bruno'] 
+                    : (currentLang === 'es' ? ['Ver Proyectos', 'Háblame de IA', 'Contacto'] : ['Ver Projetos', 'Fale sobre IA', 'Contato']);
+                setTimeout(() => addChips(chips), 1000);
+            } else if (replyKey === 'certificados') {
+                const chips = currentLang === 'en' 
+                    ? ['MBA IT Management', 'Postgrad Database', 'Postgrad Data Science', 'Information Systems'] 
+                    : (currentLang === 'es' ? ['MBA Gestión IT', 'Posgrado Bases Datos', 'Posgrado Ciencia Datos', 'Sistemas Información'] : ['MBA Gestão TI', 'Pós Banco Dados', 'Pós Ciência Dados', 'Sistemas Informação']);
+                setTimeout(() => addChips(chips), 1000);
+            }
+        }, 1200);
     }
 
     if (aiToggle) {
@@ -1327,6 +1420,37 @@ document.addEventListener('DOMContentLoaded', () => {
                     cvBtn.querySelector('span').innerText = originalText;
                 }, 3000);
             }, 1000);
+        });
+    }
+
+    // --- Premium Contact Form Handling ---
+    const contactForm = document.getElementById('premium-contact-form');
+    if (contactForm) {
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const btn = contactForm.querySelector('button');
+            const originalHTML = btn.innerHTML;
+            
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
+            btn.disabled = true;
+
+            setTimeout(() => {
+                btn.innerHTML = '<i class="fas fa-check"></i> Enviado com Sucesso!';
+                btn.style.background = '#22c55e';
+                
+                // Show bot message about contact
+                setTimeout(() => {
+                    if (!aiWindow.classList.contains('active')) aiToggle.click();
+                    processAI("contato");
+                }, 1000);
+
+                setTimeout(() => {
+                    btn.innerHTML = originalHTML;
+                    btn.style.background = '';
+                    btn.disabled = false;
+                    contactForm.reset();
+                }, 4000);
+            }, 1500);
         });
     }
 });
