@@ -22,8 +22,8 @@
     --blob-color-1: rgba(176, 141, 87, 0.12); /* Subtle Amber Glow */
     --blob-color-2: rgba(93, 64, 55, 0.1); /* Warm Walnut */
     --blob-color-3: rgba(75, 75, 75, 0.08); /* Felt Grey from Mousepad */
-    --glass-blur: 20px;
-    --nav-bg: rgba(10, 10, 12, 0.7);
+    --glass-blur: 12px;
+    --nav-bg: rgba(10, 10, 12, 0.75);
 }
 
 [data-theme="light"] {
@@ -40,8 +40,8 @@
     --blob-color-1: rgba(30, 64, 175, 0.05);
     --blob-color-2: rgba(100, 116, 139, 0.05);
     --blob-color-3: rgba(51, 65, 85, 0.05);
-    --glass-blur: 25px;
-    --nav-bg: rgba(255, 255, 255, 0.45);
+    --glass-blur: 15px;
+    --nav-bg: rgba(255, 255, 255, 0.5);
 }
 
 /* Premium Loader Styles */
@@ -566,8 +566,8 @@ section {
     align-items: center;
     border-radius: 100px;
     background: var(--nav-bg);
-    backdrop-filter: blur(25px);
-    -webkit-backdrop-filter: blur(25px);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     border: 1px solid var(--border-card);
     transition: var(--transition-smooth);
 }
@@ -1010,7 +1010,7 @@ strong {
     width: 100%;
     height: 100%;
     pointer-events: none;
-    opacity: 0.05;
+    opacity: 0.02;
     z-index: 9999;
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
 }
