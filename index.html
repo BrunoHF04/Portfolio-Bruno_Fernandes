@@ -130,6 +130,7 @@
 
     <!-- Hero Section -->
     <section id="hero">
+        <div id="three-canvas-container" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none;"></div>
         <div class="hero-content-wrapper">
             <div class="hero-main-container">
                 <div class="profile-container" style="margin-right: 20px;">
@@ -399,6 +400,8 @@
                     <div class="pulse-dot"></div>
                     <span data-i18n="live-activity">Atividade Real</span>
                 </div>
+                <!-- GitHub Heatmap Container -->
+                <div id="github-heatmap" style="margin-top: 15px; width: 100%; height: 60px; opacity: 0.7;"></div>
             </div>
 
             <!-- Bento Card: Solicitações (Normal) -->
@@ -617,22 +620,42 @@
     <!-- Contato Section -->
     <section id="contato" style="text-align: center;">
         <h2 class="heading-gradient" data-i18n="cont-title" style="font-size: 2.5rem; margin-bottom: 30px;">Contato</h2>
-        <div class="glass-card no-tilt">
-            <!-- Top: Contact Info -->
-            <div style="display: flex; flex-direction: column; gap: 15px; width: 100%;">
-                <a href="mailto:fernandesb428@gmail.com" class="contact-link" title="E-mail" style="width: 100%;">
-                    <i class="fas fa-envelope"></i> fernandesb428@gmail.com
-                </a>
-                <a href="https://wa.me/5516991133339?text=Oi%20Bruno%2C%20tudo%20bem%3F%20Vi%20seu%20portf%C3%B3lio%20e%20achei%20muito%20interessante.%20Podemos%20conversar%3F%20Quando%20voc%C3%AA%20teria%20um%20hor%C3%A1rio%20dispon%C3%ADvel%3F" target="_blank" class="contact-link" title="WhatsApp" style="width: 100%;" data-wa-link>
-                    <i class="fab fa-whatsapp"></i> (16) 9 9113-3339
-                </a>
-            </div>
+        <div class="glass-card no-tilt" style="max-width: 600px; margin: 0 auto; padding: 40px;">
+            <div class="contact-grid" style="display: grid; grid-template-columns: 1fr; gap: 30px;">
+                <!-- Left: Contact Form -->
+                <form id="premium-contact-form" class="premium-form">
+                    <div class="form-group">
+                        <input type="text" id="contact-name" required placeholder=" ">
+                        <label for="contact-name" data-i18n="form-name">Nome Completo</label>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="contact-email" required placeholder=" ">
+                        <label for="contact-email" data-i18n="form-email">E-mail</label>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="contact-message" required placeholder=" " rows="4"></textarea>
+                        <label for="contact-message" data-i18n="form-msg">Sua Mensagem</label>
+                    </div>
+                    <button type="submit" class="btn-primary" style="width: 100%; height: 50px; border-radius: 12px;">
+                        <span data-i18n="form-send">Enviar Mensagem</span> <i class="fas fa-paper-plane"></i>
+                    </button>
+                </form>
 
-            <!-- Middle: QR Code & Placeholder -->
-            <div id="qrcode-img">
-                <!-- Placeholder to fix JS previousElementSibling error -->
-                <i class="fas fa-qrcode" style="font-size: 3rem; opacity: 0.1; position: absolute;"></i>
-                <img src="" id="actual-qr" style="width: 100%; height: 100%; display: none; border-radius: 4px; position: relative; z-index: 1;">
+                <!-- Right: Contact Quick Info -->
+                <div style="display: flex; flex-direction: column; gap: 20px;">
+                    <div style="display: flex; flex-direction: column; gap: 15px; width: 100%;">
+                        <a href="mailto:fernandesb428@gmail.com" class="contact-link" title="E-mail" style="width: 100%;">
+                            <i class="fas fa-envelope"></i> fernandesb428@gmail.com
+                        </a>
+                        <a href="https://wa.me/5516991133339?text=Oi%20Bruno%2C%20tudo%20bem%3F%20Vi%20seu%20portf%C3%B3lio%20e%20achei%20muito%20interessante.%20Podemos%20conversar%3F%20Quando%20voc%C3%AA%20teria%20um%20hor%C3%A1rio%20dispon%C3%ADvel%3F" target="_blank" class="contact-link" title="WhatsApp" style="width: 100%;" data-wa-link>
+                            <i class="fab fa-whatsapp"></i> (16) 9 9113-3339
+                        </a>
+                    </div>
+                    <div id="qrcode-img">
+                        <i class="fas fa-qrcode" style="font-size: 3rem; opacity: 0.1; position: absolute;"></i>
+                        <img src="" id="actual-qr" style="width: 100%; height: 100%; display: none; border-radius: 4px; position: relative; z-index: 1;">
+                    </div>
+                </div>
             </div>
 
             <!-- Bottom: Socials & Save Button -->
@@ -695,6 +718,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="three-scene.js"></script>
     <script src="script.js"></script>
 
     <!-- Back to Top Button -->
