@@ -246,13 +246,13 @@ const translations = {
     es: {
         "nav-sobre": "Sobre",
         "nav-carreira": "Carrera",
-        "nav-skills": "Habilidades",
+        "nav-skills": "Skills",
         "nav-projetos": "Proyectos",
         "nav-formacao": "Formación",
         "nav-cursos": "Cursos",
-        "nav-feedback": "Opinión",
+        "nav-feedback": "Feedback",
         "hero-title": "Consultor de Proyectos | Especialista en Soluciones de IA",
-        "download-cv": "Descargar CV",
+        "download-cv": "Download CV",
         "sobre-title": "Resumen Profesional",
         "sobre-p1": "Especialista en TI con sólida experiencia en consultoría de proyectos, infraestructura tecnológica y atención al cliente. Enfocado actualmente en el uso estratégico de la <strong>Inteligencia Artificial Generativa</strong> para optimizar el desarrollo de sistemas, agilizar el análisis técnico y automatizar procesos operativos.",
         "sobre-p2": "Experiencia liderando implementaciones de software en el sector notarial, garantizando la integridad de las bases de datos y la eficiencia de la infraestructura, siempre con un enfoque en la innovación y la agilidad.",
@@ -320,9 +320,9 @@ const translations = {
         "footer-copy": "© 2026 Bruno Fernandes.",
         "loading-text": "Cargando Experiencia...",
         "filter-all": "Todos",
-        "filter-ia": "IA y Automatización",
-        "filter-mgmt": "Gestión y Sistemas",
-        "filter-hw": "Hardware e IoT",
+        "filter-ia": "IA & Automatización",
+        "filter-mgmt": "Gestión & Sistemas",
+        "filter-hw": "Hardware & IoT",
         "tag-python": "Python",
         "tag-web": "Web",
         "tag-otimizacao": "Optimización",
@@ -1260,7 +1260,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function generateQR() {
         const qrImg = document.getElementById('actual-qr');
         if (qrImg) {
-            const vCardData = "BEGIN:VCARD\nVERSION:3.0\nFN:Bruno Fernandes\nTEL;TYPE=CELL:+5516991133339\nEMAIL:fernandesb428@gmail.com\nTITLE:IT Project Manager & AI Specialist\nEND:VCARD";
+            const vCardData = "BEGIN:VCARD\nVERSION:3.0\nFN:Bruno Fernandes\nTEL;TYPE=CELL:+5516991133339\nEMAIL:bruuno.fernandes.ti@gmail.com\nTITLE:IT Project Manager & AI Specialist\nEND:VCARD";
             const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(vCardData)}`;
             qrImg.src = qrUrl;
             qrImg.onload = () => {
