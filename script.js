@@ -1260,7 +1260,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function generateQR() {
         const qrImg = document.getElementById('actual-qr');
         if (qrImg) {
-            const vCardData = "BEGIN:VCARD\nVERSION:3.0\nFN:Bruno Fernandes\nTEL;TYPE=CELL:+5516991133339\nEMAIL:bruuno.fernandes.ti@gmail.com\nTITLE:IT Project Manager & AI Specialist\nEND:VCARD";
+            const vCardData = "BEGIN:VCARD\nVERSION:3.0\nFN:Bruno Fernandes\nTEL;TYPE=CELL:+5516991133339\nEMAIL:bruno.h.fernandes.ti@gmail.com\nTITLE:IT Project Manager & AI Specialist\nEND:VCARD";
             const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(vCardData)}`;
             qrImg.src = qrUrl;
             qrImg.onload = () => {
