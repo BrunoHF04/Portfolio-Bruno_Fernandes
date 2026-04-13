@@ -617,6 +617,53 @@
         </div>
     </section>
 
+    <!-- AI Lab Section -->
+    <section id="ai-lab" class="ai-lab-section">
+        <div class="section-title-wrapper" data-aos="fade-up">
+            <h2 class="section-title"><span data-i18n="ai-lab-title">Neural AI Lab</span></h2>
+            <div class="section-subtitle" data-i18n="ai-lab-subtitle">Interaja com meus modelos de processamento de linguagem natural em tempo real</div>
+        </div>
+
+        <div class="ai-lab-container glass-card" data-aos="fade-up">
+            <div class="ai-terminal-header">
+                <div class="terminal-dots">
+                    <div class="dot red"></div>
+                    <div class="dot yellow"></div>
+                    <div class="dot green"></div>
+                </div>
+                <div class="terminal-status"><i class="fas fa-brain"></i> <span data-i18n="ai-status">Processamento Local Ativo</span></div>
+            </div>
+            
+            <div class="ai-lab-content">
+                <div class="input-area">
+                    <textarea id="ai-lab-input" placeholder="Cole um texto aqui para análise neural profissional..."></textarea>
+                    <button id="process-ai-lab" class="btn-primary">
+                        <i class="fas fa-microchip"></i> <span data-i18n="ai-process">Processar Texto</span>
+                    </button>
+                </div>
+                
+                <div class="results-area">
+                    <div class="result-card">
+                        <div class="result-label" data-i18n="ai-sentiment">Análise de Sentimento</div>
+                        <div id="sentiment-result" class="result-value">--</div>
+                        <div class="progress-container"><div id="sentiment-bar" class="progress-bar"></div></div>
+                    </div>
+                    <div class="result-card">
+                        <div class="result-label" data-i18n="ai-keywords">Palavras-Chave</div>
+                        <div id="keywords-result" class="result-value">--</div>
+                    </div>
+                    <div class="result-card">
+                        <div class="result-label" data-i18n="ai-complexity">Complexidade Técnica</div>
+                        <div id="complexity-result" class="result-value">--</div>
+                    </div>
+                </div>
+            </div>
+            <div class="ai-terminal-footer">
+                <span data-i18n="ai-engine">Engine: LLM-Edge V1.0 (Sinapses Simuladas)</span>
+            </div>
+        </div>
+    </section>
+
     <!-- Contato Section -->
     <section id="contato" style="text-align: center;">
         <h2 class="heading-gradient" data-i18n="cont-title" style="font-size: 2.5rem; margin-bottom: 30px;">Contato</h2>
@@ -721,11 +768,36 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="three-scene.js"></script>
     <script src="script.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('service-worker.js')
+                    .then(reg => console.log('SW Registered'))
+                    .catch(err => console.log('SW Registration Failed', err));
+            });
+        }
+    </script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('service-worker.js')
+                    .then(reg => console.log('SW Registered'))
+                    .catch(err => console.log('SW Registration Failed', err));
+            });
+        }
+    </script>
 
     <!-- Back to Top Button -->
     <button id="back-to-top" class="back-to-top" data-i18n-title="back-to-top-title" title="Voltar ao Topo">
         <i class="fas fa-arrow-up"></i>
     </button>
+
+    <!-- Jarvis Voice Assistant Floating Button -->
+    <div id="jarvis-trigger" class="jarvis-btn" data-i18n-title="jarvis-title" title="Ativar Assistente Jarvis">
+        <div class="jarvis-ring"></div>
+        <i class="fas fa-microphone"></i>
+        <div class="jarvis-label" data-i18n="jarvis-label">Jarvis Mode</div>
+    </div>
 
     <!-- Copy Feedback Toast -->
     <div id="copy-toast" class="copy-feedback" data-i18n="toast-success">E-mail copiado com sucesso!</div>

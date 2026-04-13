@@ -1613,5 +1613,113 @@ function speakText(text) {
     window.speechSynthesis.speak(utterance);
 }
 
+/* --- AI Lab Logic --- */
+const aiLabInput = document.getElementById('ai-lab-input');
+const processAILabBtn = document.getElementById('process-ai-lab');
+
+const positiveLexicon = ['bom', 'excelente', 'ótimo', 'incrível', 'sucesso', 'parabéns', 'eficiente', 'rápido', 'inovador', 'top', 'melhor'];
+const negativeLexicon = ['ruim', 'erro', 'falha', 'atraso', 'difícil', 'problema', 'pobre', 'fraco', 'lento', 'pior'];
+const techLexicon = ['python', 'javascript', 'docker', 'sql', 'ia', 'ai', 'cloud', 'aws', 'api', 'react', 'git', 'node', 'java'];
+
+if (processAILabBtn) {
+    processAILabBtn.addEventListener('click', () => {
+        const text = aiLabInput.value.toLowerCase().trim();
+        if (!text) return;
+
+        processAILabBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Analisando...';
+        processAILabBtn.disabled = true;
+
+        setTimeout(() => {
+            // Sentiment Analysis
+            let posCount = positiveLexicon.filter(w => text.includes(w)).length;
+            let negCount = negativeLexicon.filter(w => text.includes(w)).length;
+            let score = 50 + (posCount * 10) - (negCount * 12);
+            score = Math.max(0, Math.min(100, score));
+
+            const sentimentResult = document.getElementById('sentiment-result');
+            const sentimentBar = document.getElementById('sentiment-bar');
+            
+            if (score > 65) sentimentResult.innerText = "Positivo (Alta Confiança)";
+            else if (score < 35) sentimentResult.innerText = "Crítico (Atenção)";
+            else sentimentResult.innerText = "Neutro / Técnico";
+            
+            sentimentBar.style.width = score + '%';
+            sentimentBar.style.background = score > 65 ? '#10b981' : (score < 35 ? '#ef4444' : '#b08d57');
+
+            // Keyword Extraction
+            const foundTech = techLexicon.filter(w => text.includes(w));
+            document.getElementById('keywords-result').innerText = foundTech.length > 0 ? foundTech.join(', ') : 'Nenhuma detectada';
+
+            // Complexity Estimation
+            const complexityText = text.length > 250 || foundTech.length > 4 ? 'Alta (Docs Técnicas)' : (text.length > 80 ? 'Média (Processo Padrão)' : 'Baixa (Mensagem Simples)');
+            document.getElementById('complexity-result').innerText = complexityText;
+
+            processAILabBtn.innerHTML = '<i class="fas fa-microchip"></i> Processar Texto';
+            processAILabBtn.disabled = false;
+        }, 1200);
+    });
+}
+
+/* --- Jarvis Assistant Logic --- */
+const jarvisTrigger = document.getElementById('jarvis-trigger');
+if (jarvisTrigger && ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window)) {
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    const jarvisRecognition = new SpeechRecognition();
+    jarvisRecognition.continuous = false;
+    jarvisRecognition.interimResults = false;
+
+    jarvisTrigger.addEventListener('click', () => {
+        const currentLang = document.documentElement.getAttribute('data-lang') || 'pt';
+        jarvisRecognition.lang = currentLang === 'en' ? 'en-US' : (currentLang === 'es' ? 'es-ES' : 'pt-BR');
+        
+        try {
+            jarvisRecognition.start();
+            jarvisTrigger.classList.add('listening');
+            
+            // Explicitly enable reading for Jarvis session
+            isReading = true;
+            const btnTTS = document.getElementById('voice-tts');
+            if (btnTTS) btnTTS.classList.add('active');
+
+            const msg = currentLang === 'en' ? "Yes, Bruno. I am listening." : (currentLang === 'es' ? "Si, Bruno. Te escucho." : "Sim, Bruno. Estou ouvindo.");
+            speakText(msg);
+
+        } catch(e) { console.log("Recognition already started"); }
+    });
+
+    jarvisRecognition.onresult = (event) => {
+        const cmd = event.results[0][0].transcript.toLowerCase();
+        const currentLang = document.documentElement.getAttribute('data-lang') || 'pt';
+        
+        if (cmd.includes('projeto') || cmd.includes('portfolio') || cmd.includes('trabalho')) {
+            document.getElementById('projetos')?.scrollIntoView({ behavior: 'smooth' });
+            speakText(currentLang === 'en' ? "Opening projects gallery." : "Abrindo galeria de projetos.");
+        } else if (cmd.includes('contato') || cmd.includes('falar') || cmd.includes('email')) {
+            document.getElementById('contato')?.scrollIntoView({ behavior: 'smooth' });
+            speakText(currentLang === 'en' ? "Directing to contact section." : "Direcionando para a seção de contato.");
+        } else if (cmd.includes('sobre') || cmd.includes('quem') || cmd.includes('bruno')) {
+            document.getElementById('sobre')?.scrollIntoView({ behavior: 'smooth' });
+            speakText(currentLang === 'en' ? "Showing your professional summary." : "Exibindo seu resumo profissional.");
+        } else if (cmd.includes('currículo') || cmd.includes('cv') || cmd.includes('download')) {
+            window.open('files/Bruno Fernandes - Currículo.pdf', '_blank');
+            speakText(currentLang === 'en' ? "Opening your resume." : "Abrindo seu currículo para visualização.");
+        } else if (cmd.includes('tema') || cmd.includes('escuro') || cmd.includes('claro') || cmd.includes('luz')) {
+            const themeBtn = document.querySelector('.theme-toggle');
+            if (themeBtn) themeBtn.click();
+            speakText(currentLang === 'en' ? "Switching visual theme." : "Alterando o tema visual.");
+        } else {
+            speakText(currentLang === 'en' ? "Sorry, I didn't get that." : "Desculpe, não entendi o comando.");
+        }
+    };
+
+    jarvisRecognition.onend = () => {
+        jarvisTrigger.classList.remove('listening');
+    };
+    
+    jarvisRecognition.onerror = () => {
+        jarvisTrigger.classList.remove('listening');
+    };
+}
+
 
 
