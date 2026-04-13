@@ -2323,3 +2323,89 @@ html, body {
     background: white;
     box-shadow: 0 30px 60px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.05);
 }
+
+/* --- Jarvis Voice Assistant Floating Button --- */
+.jarvis-btn {
+    position: fixed;
+    bottom: 30px;
+    left: 30px; /* Changed to left to avoid clash with Back to Top */
+    width: 50px;
+    height: 50px;
+    background: var(--accent-primary);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    cursor: pointer;
+    z-index: 1000;
+    transition: var(--transition-smooth);
+    box-shadow: 0 8px 25px rgba(176, 141, 87, 0.3);
+}
+
+.jarvis-btn i {
+    font-size: 1.2rem;
+    position: relative;
+    z-index: 10;
+}
+
+.jarvis-btn:hover {
+    transform: scale(1.1) translateY(-5px);
+    box-shadow: 0 12px 30px rgba(176, 141, 87, 0.5);
+}
+
+.jarvis-ring {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 2px solid var(--accent-primary);
+    opacity: 0;
+    pointer-events: none;
+}
+
+.jarvis-btn.listening .jarvis-ring {
+    animation: jarvis-pulse 2s infinite;
+    opacity: 1;
+}
+
+.jarvis-label {
+    position: absolute;
+    left: 60px;
+    background: var(--accent-primary);
+    color: white;
+    padding: 6px 15px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    opacity: 0;
+    transform: translateX(-10px);
+    transition: var(--transition-smooth);
+    white-space: nowrap;
+    pointer-events: none;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.jarvis-btn:hover .jarvis-label {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+@keyframes jarvis-pulse {
+    0% { transform: scale(1); opacity: 0.8; }
+    100% { transform: scale(2.2); opacity: 0; }
+}
+
+@media (max-width: 768px) {
+    .jarvis-btn { 
+        bottom: 20px;
+        left: 20px;
+        width: 45px;
+        height: 45px;
+    }
+    .jarvis-label { display: none; }
+}
+
+[data-theme="light"] .jarvis-btn {
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
