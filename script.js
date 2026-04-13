@@ -1423,34 +1423,77 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- Premium Contact Form Handling ---
+    // --- Premium Contact Form Handling (Web3Forms Integration) ---
     const contactForm = document.getElementById('premium-contact-form');
     if (contactForm) {
-        contactForm.addEventListener('submit', (e) => {
+        contactForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             const btn = contactForm.querySelector('button');
             const originalHTML = btn.innerHTML;
+            const originalBackground = btn.style.background;
             
+            // UI State: Loading
             btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
             btn.disabled = true;
 
-            setTimeout(() => {
-                btn.innerHTML = '<i class="fas fa-check"></i> Enviado com Sucesso!';
-                btn.style.background = '#22c55e';
-                
-                // Show bot message about contact
-                setTimeout(() => {
-                    if (!aiWindow.classList.contains('active')) aiToggle.click();
-                    processAI("contato");
-                }, 1000);
+            const formData = new FormData(contactForm);
+            const object = Object.fromEntries(formData);
+            const json = JSON.stringify(object);
 
+            try {
+                const response = await fetch('https://api.web3forms.com/submit', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: json
+                });
+
+                const result = await response.json();
+
+                if (response.status === 200) {
+                    // Success State
+                    btn.innerHTML = '<i class="fas fa-check"></i> Enviado com Sucesso!';
+                    btn.style.background = '#22c55e';
+                    
+                    // Show bot message about contact (optional delay for better flow)
+                    setTimeout(() => {
+                        if (!aiWindow.classList.contains('active')) aiToggle.click();
+                        processAI("contato");
+                    }, 1000);
+
+                    // Reset form after a few seconds
+                    setTimeout(() => {
+                        btn.innerHTML = originalHTML;
+                        btn.style.background = originalBackground;
+                        btn.disabled = false;
+                        contactForm.reset();
+                    }, 4000);
+                } else {
+                    // API Error State
+                    console.log(result);
+                    btn.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Erro ao enviar';
+                    btn.style.background = '#ef4444';
+                    
+                    setTimeout(() => {
+                        btn.innerHTML = originalHTML;
+                        btn.style.background = originalBackground;
+                        btn.disabled = false;
+                    }, 4000);
+                }
+            } catch (error) {
+                // Network Error State
+                console.log(error);
+                btn.innerHTML = '<i class="fas fa-wifi-slash"></i> Erro de Conexão';
+                btn.style.background = '#ef4444';
+                
                 setTimeout(() => {
                     btn.innerHTML = originalHTML;
-                    btn.style.background = '';
+                    btn.style.background = originalBackground;
                     btn.disabled = false;
-                    contactForm.reset();
                 }, 4000);
-            }, 1500);
+            }
         });
     }
 });
