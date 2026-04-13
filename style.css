@@ -255,8 +255,8 @@ h4 {
 .hero-main-container {
     display: flex;
     align-items: center;
-    gap: 40px;
-    max-width: 1000px;
+    gap: 30px;
+    max-width: 1100px;
     animation: fadeIn 1.5s ease-out;
 }
 
@@ -328,8 +328,10 @@ h4 {
 
 .hero-separator {
     width: 2px;
+    min-width: 2px;
     height: 100px;
     background: rgba(255, 255, 255, 0.3);
+    flex-shrink: 0;
 }
 
 .hero-contacts {
@@ -344,7 +346,7 @@ h4 {
     align-items: center;
     gap: 12px;
     color: var(--hero-text);
-    font-size: 1rem;
+    font-size: 0.9rem;
     text-decoration: none;
     transition: var(--transition-smooth), var(--transition-theme);
 }
@@ -435,7 +437,7 @@ h4 {
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     transition: var(--transition-smooth);
-    cursor: pointer;
+    cursor: none !important;
 }
 
 .cv-button:hover {
@@ -460,7 +462,7 @@ h4 {
     display: flex;
     align-items: center;
     justify-content: center;
-    cursor: pointer;
+    cursor: none !important;
     color: var(--text-primary);
     font-size: 0.95rem;
     transition: var(--transition-smooth);
@@ -499,7 +501,7 @@ html:not([data-theme="light"]) .theme-toggle-btn .fa-moon {
     font-weight: 700;
     padding: 4px 8px;
     border-radius: 50px;
-    cursor: pointer;
+    cursor: none !important;
     transition: var(--transition-smooth);
 }
 
@@ -777,7 +779,7 @@ section {
     display: inline-block;
     transition: var(--transition-smooth);
     border: none;
-    cursor: pointer;
+    cursor: none !important;
 }
 
 .btn-primary:hover {
@@ -1089,7 +1091,7 @@ strong {
     display: flex;
     align-items: center;
     justify-content: center;
-    cursor: pointer;
+    cursor: none !important;
     z-index: 1000;
     opacity: 0;
     visibility: hidden;
@@ -1171,7 +1173,7 @@ strong {
     color: var(--text-secondary);
     padding: 8px 20px;
     border-radius: 50px;
-    cursor: pointer;
+    cursor: none !important;
     font-size: 0.85rem;
     font-weight: 500;
     transition: var(--transition-smooth);
@@ -1267,7 +1269,7 @@ strong {
 
 /* Academic Cards Interactive Styling */
 #formacao .academic-card {
-    cursor: pointer !important;
+    cursor: none !important;
     position: relative !important;
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
     user-select: none;
@@ -1352,7 +1354,7 @@ strong {
     color: var(--text-secondary);
     font-size: 2.5rem;
     font-weight: 300;
-    cursor: pointer;
+    cursor: none !important;
     z-index: 10001;
     transition: var(--transition-smooth);
     line-height: 1;
@@ -1430,7 +1432,7 @@ strong {
     border-radius: 50px;
     font-size: 0.8rem;
     font-weight: 600;
-    cursor: pointer;
+    cursor: none !important;
     transition: var(--transition-smooth);
     border: 1px solid transparent;
 }
@@ -1532,7 +1534,7 @@ strong {
     justify-content: center;
     font-size: 1.2rem;
     color: white;
-    cursor: pointer;
+    cursor: none !important;
     transition: all 0.3s;
     z-index: 3100;
     backdrop-filter: blur(5px);
@@ -1660,7 +1662,7 @@ html, body {
         border-radius: 50%;
         position: fixed;
         pointer-events: none;
-        z-index: 10000;
+        z-index: 999999;
         transform: translate(-50%, -50%);
         box-shadow: 0 0 15px var(--accent-primary);
         transition: width 0.35s cubic-bezier(0.23, 1, 0.32, 1), 
@@ -1870,7 +1872,7 @@ html, body {
     display: flex;
     align-items: center;
     justify-content: center;
-    cursor: pointer;
+    cursor: none !important;
     box-shadow: 0 10px 30px -5px rgba(176, 141, 87, 0.4);
     color: white;
     font-size: 1.2rem;
@@ -1953,7 +1955,7 @@ html, body {
     border: none;
     color: var(--text-secondary);
     font-size: 1.5rem;
-    cursor: pointer;
+    cursor: none !important;
 }
 
 .ai-chat-messages {
@@ -2024,7 +2026,7 @@ html, body {
     border-radius: 8px;
     width: 35px;
     height: 35px;
-    cursor: pointer;
+    cursor: none !important;
     transition: var(--transition-smooth);
 }
 
@@ -2049,7 +2051,7 @@ html, body {
     border-radius: 20px;
     font-size: 0.7rem;
     font-weight: 500;
-    cursor: pointer;
+    cursor: none !important;
     transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     white-space: nowrap;
 }
@@ -2271,7 +2273,7 @@ html, body {
     padding: 4px 10px;
     border-radius: 4px;
     color: var(--text-secondary);
-    cursor: pointer;
+    cursor: none !important;
     transition: all 0.2s;
 }
 
@@ -2293,7 +2295,7 @@ html, body {
     background: transparent;
     border: none;
     color: var(--text-secondary);
-    cursor: pointer;
+    cursor: none !important;
     transition: var(--transition-smooth);
     display: flex;
     align-items: center;
@@ -2337,7 +2339,7 @@ html, body {
     justify-content: center;
     align-items: center;
     color: white;
-    cursor: pointer;
+    cursor: none !important;
     z-index: 1000;
     transition: var(--transition-smooth);
     box-shadow: 0 8px 25px rgba(176, 141, 87, 0.3);
