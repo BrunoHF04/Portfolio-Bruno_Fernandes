@@ -1834,14 +1834,10 @@ if (jarvisTrigger && ('webkitSpeechRecognition' in window || 'SpeechRecognition'
     };
 
     function onPlayerReady(event) {
-        console.log("YouTube Player Loaded Successfully - Background Warmup (Muted)");
+        console.log("YouTube Player Loaded Successfully - Overlay Standing By");
         
         // Final sanity checks
-        ytPlayer.mute(); 
         ytPlayer.setVolume(100);
-        
-        // Start playing muted to bypass autoplay policy
-        ytPlayer.playVideo();
         
         // Achievement Registration
         achievements['music-play'] = { name: 'Melomaníaco Ghibli', icon: 'fa-music', earned: false };
@@ -1853,7 +1849,12 @@ if (jarvisTrigger && ('webkitSpeechRecognition' in window || 'SpeechRecognition'
     function onPlayerStateChange(event) {
         console.log("Player State Changed:", event.data);
         if (event.data === YT.PlayerState.PLAYING) {
-            console.log("Music Playing -> Syncing UI");
+            console.log("Music Playing -> Syncing UI & Releasing Sound");
+            
+            // Safety: Ensure sound is on when playing starts natively via overlay
+            ytPlayer.unMute();
+            ytPlayer.setVolume(100);
+
             musicCard.classList.add('playing');
             showAchievement('music-play');
             startTimer();
