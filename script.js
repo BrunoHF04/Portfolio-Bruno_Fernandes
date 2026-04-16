@@ -1834,7 +1834,9 @@ if (jarvisTrigger && ('webkitSpeechRecognition' in window || 'SpeechRecognition'
                 'disablekb': 1,
                 'fs': 0,
                 'modestbranding': 1,
-                'rel': 0
+                'rel': 0,
+                'enablejsapi': 1,
+                'origin': window.location.origin
             },
             events: {
                 'onReady': onPlayerReady,
