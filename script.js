@@ -1897,35 +1897,11 @@ if (jarvisTrigger && ('webkitSpeechRecognition' in window || 'SpeechRecognition'
         return `${minutes}:${seconds.toString().padStart(2, '0')}`;
     }
 
-    let isFirstPlay = true;
+    // Click synchronization is now handled natively by the transparent 
+    // YouTube overlay (z-index: 50) and our onPlayerStateChange listener.
+    // This bypasses browser media restrictions by recording the user gesture 
+    // directly inside the YouTube iframe context.
 
-    if (musicCard) {
-        musicCard.addEventListener('click', () => {
-            console.log("Music Card Clicked - Action: Play/Pause/Unmute Toggle");
-            if (!ytPlayer || typeof ytPlayer.getPlayerState !== 'function') {
-                console.error("YouTube Player not yet fully initialized");
-                return;
-            }
-
-            const state = ytPlayer.getPlayerState();
-            
-            if (state === YT.PlayerState.PLAYING && !ytPlayer.isMuted()) {
-                ytPlayer.pauseVideo();
-            } else {
-                // Wake up / Unmute
-                ytPlayer.unMute();
-                ytPlayer.setVolume(100);
-                
-                if (isFirstPlay) {
-                    ytPlayer.seekTo(0);
-                    isFirstPlay = false;
-                    console.log("Unmuted and Restarted for First Play");
-                }
-                
-                ytPlayer.playVideo();
-            }
-        });
-    }
 
     }
 });
