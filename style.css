@@ -2468,48 +2468,71 @@ html, body {
     background: #1DB954;
     border-radius: 2px;
     animation: spotify-bars 1.2s ease-in-out infinite;
+    animation-play-state: paused; /* Standby by default */
 }
 
-.spotify-bars .bar:nth-child(2) { animation-delay: 0.2s; height: 60%; }
-.spotify-bars .bar:nth-child(3) { animation-delay: 0.4s; height: 80%; }
-.spotify-bars .bar:nth-child(4) { animation-delay: 0.1s; height: 70%; }
-
-@keyframes spotify-bars {
-    0%, 100% { height: 10px; }
-    50% { height: 30px; }
+.spotify-card.playing .spotify-bars .bar {
+    animation-play-state: running;
 }
 
-@keyframes spotify-rotate {
+.spotify-card {
+    cursor: none !important;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+}
+
+.spotify-card::after {
+    content: '\f04b'; /* Play icon */
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.8);
+    background: var(--accent-primary);
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: all 0.3s ease;
+    z-index: 10;
+    pointer-events: none;
+    box-shadow: 0 0 20px rgba(176, 141, 87, 0.5);
+}
+
+.spotify-card:hover::after {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.spotify-card.playing::after {
+    content: '\f04c'; /* Pause icon */
+    background: #1DB954;
+}
+
+.spotify-card.playing {
+    border-color: #1DB954 !important;
+    box-shadow: 0 0 30px rgba(29, 185, 84, 0.2);
+}
+
+.spotify-card.playing .spotify-icon {
+}
+
+.music-player-card.playing .music-icon {
+    animation: music-rotate 4s linear infinite;
+}
+
+@keyframes music-rotate {
     from { transform: rotate(0deg); }
     to { transform: rotate(360deg); }
 }
 
-.spotify-info {
-    display: flex;
-    flex-direction: column;
-}
-
-.track-name {
-    font-size: 1rem;
-    font-weight: 700;
-    color: var(--text-primary);
-}
-
-.artist-name {
-    font-size: 0.8rem;
-    color: var(--text-secondary);
-}
-
-.spotify-footer {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.spotify-status {
-    font-size: 0.7rem;
-    font-weight: 600;
-    color: #1DB954;
+.music-player-card.playing {
+    box-shadow: 0 0 30px rgba(176, 141, 87, 0.2);
 }
 
 /* --- Achievement System (Item 5) --- */

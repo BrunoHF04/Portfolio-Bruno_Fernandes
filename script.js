@@ -120,9 +120,8 @@ const translations = {
         "ai-placeholder": "Pergunte algo...",
         "ai-welcome": "Olá! Sou o assistente do Bruno. Como posso te ajudar hoje?",
         "live-activity": "Atividade Real",
-        "spotify-title": "Ouvindo Agora",
-        "spotify-artist": "Bruno's Playlist",
-        "spotify-status": "No Fluxo..."
+        "music-title": "Trilha Sonora",
+        "music-status": "No Fluxo..."
     },
     en: {
         "nav-sobre": "About",
@@ -244,10 +243,9 @@ const translations = {
         "proj5-modal-solution": "Integration of Arduino hardware with flow sensors and a web interface for remote real-time monitoring of consumption.",
         "ai-placeholder": "Ask something...",
         "ai-welcome": "Hello! I am Bruno's assistant. How can I help you today?",
-        "live-activity": "Real Activity",
-        "spotify-title": "Now Playing",
-        "spotify-artist": "Bruno's Playlist",
-        "spotify-status": "In the Flow..."
+        "live-activity": "Real-time Activity",
+        "music-title": "Personal Soundtrack",
+        "music-status": "In Focus..."
     },
     es: {
         "nav-sobre": "Sobre",
@@ -1641,7 +1639,7 @@ const voiceStatus = document.getElementById('voice-status');
 let isReading = false;
 
 // Speech Recognition (STT)
-if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+if (btnSTT && ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window)) {
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
     const recognition = new SpeechRecognition();
     recognition.lang = document.documentElement.getAttribute('data-lang') === 'en' ? 'en-US' : 'pt-BR';
@@ -1657,27 +1655,29 @@ if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
             
             recognition.start();
             btnSTT.classList.add('active');
-            voiceStatus.innerText = currentLang === 'en' ? "Listening..." : (currentLang === 'es' ? "Escuchando..." : "Ouvindo...");
+            if (voiceStatus) voiceStatus.innerText = currentLang === 'en' ? "Listening..." : (currentLang === 'es' ? "Escuchando..." : "Ouvindo...");
         }
     });
 
     recognition.onresult = (event) => {
         const result = event.results[0][0].transcript;
-        aiInput.value = result;
-        addMessage(result, true);
-        processAI(result);
+        if (typeof aiInput !== 'undefined') {
+            aiInput.value = result;
+            addMessage(result, true);
+            processAI(result);
+        }
     };
 
     recognition.onend = () => {
         btnSTT.classList.remove('active');
-        voiceStatus.innerText = "";
+        if (voiceStatus) voiceStatus.innerText = "";
     };
 
     recognition.onerror = () => {
         btnSTT.classList.remove('active');
-        voiceStatus.innerText = "Erro de voz";
+        if (voiceStatus) voiceStatus.innerText = "Erro de voz";
     };
-} else {
+} else if (btnSTT) {
     btnSTT.style.display = 'none';
 }
 
@@ -1811,6 +1811,96 @@ if (jarvisTrigger && ('webkitSpeechRecognition' in window || 'SpeechRecognition'
 
     const terminalBtn = document.getElementById('terminal-input');
     if (terminalBtn) terminalBtn.addEventListener('focus', () => showAchievement('terminal-open'));
+
+    // --- Personalized Ghibli Music Player (YouTube API) ---
+    const musicCard = document.getElementById('music-card');
+    const progressBar = document.getElementById('music-progress');
+    const currentTimeEl = document.getElementById('music-current');
+    const durationTimeEl = document.getElementById('music-duration');
+    let ytPlayer;
+    let timerInterval;
+
+    // YT API Callback must be global
+    window.onYouTubeIframeAPIReady = function() {
+        ytPlayer = new YT.Player('yt-player-container', {
+            height: '0',
+            width: '0',
+            videoId: '12N_eG6_u4I',
+            playerVars: {
+                'playsinline': 1,
+                'controls': 0,
+                'disablekb': 1,
+                'fs': 0,
+                'modestbranding': 1,
+                'rel': 0
+            },
+            events: {
+                'onReady': onPlayerReady,
+                'onStateChange': onPlayerStateChange
+            }
+        });
+    };
+
+    function onPlayerReady(event) {
+        // Achievement Registration
+        achievements['music-play'] = { name: 'Melomaníaco Ghibli', icon: 'fa-music', earned: false };
+        
+        // Duration update
+        updateDuration();
+    }
+
+    function onPlayerStateChange(event) {
+        if (event.data === YT.PlayerState.PLAYING) {
+            musicCard.classList.add('playing');
+            showAchievement('music-play');
+            startTimer();
+        } else {
+            musicCard.classList.remove('playing');
+            stopTimer();
+        }
+    }
+
+    function startTimer() {
+        timerInterval = setInterval(() => {
+            const currentTime = ytPlayer.getCurrentTime();
+            const duration = ytPlayer.getDuration();
+            
+            // Update Progress Bar
+            const progressPercent = (currentTime / duration) * 100;
+            if (progressBar) progressBar.style.width = `${progressPercent}%`;
+            
+            // Update Timestamps
+            if (currentTimeEl) currentTimeEl.textContent = formatTime(currentTime);
+            if (durationTimeEl) durationTimeEl.textContent = formatTime(duration);
+        }, 500);
+    }
+
+    function stopTimer() {
+        clearInterval(timerInterval);
+    }
+
+    function updateDuration() {
+        const duration = ytPlayer.getDuration();
+        if (durationTimeEl) durationTimeEl.textContent = formatTime(duration);
+    }
+
+    function formatTime(time) {
+        const minutes = Math.floor(time / 60);
+        const seconds = Math.floor(time % 60);
+        return `${minutes}:${seconds.toString().padStart(2, '0')}`;
+    }
+
+    if (musicCard) {
+        musicCard.addEventListener('click', () => {
+            if (!ytPlayer) return;
+            const state = ytPlayer.getPlayerState();
+            if (state === YT.PlayerState.PLAYING) {
+                ytPlayer.pauseVideo();
+            } else {
+                ytPlayer.playVideo();
+            }
+        });
+    }
 
 }
 
