@@ -1834,12 +1834,17 @@ if (jarvisTrigger && ('webkitSpeechRecognition' in window || 'SpeechRecognition'
     };
 
     function onPlayerReady(event) {
-        console.log("YouTube Player Loaded Successfully");
+        console.log("YouTube Player Loaded Successfully - Background Warmup (Muted)");
+        
+        // Final sanity checks
+        ytPlayer.mute(); 
+        ytPlayer.setVolume(100);
+        
+        // Start playing muted to bypass autoplay policy
+        ytPlayer.playVideo();
+        
         // Achievement Registration
         achievements['music-play'] = { name: 'Melomaníaco Ghibli', icon: 'fa-music', earned: false };
-        
-        // Final sanity volume check
-        ytPlayer.setVolume(100);
         
         // Duration update
         updateDuration();
@@ -1896,7 +1901,7 @@ if (jarvisTrigger && ('webkitSpeechRecognition' in window || 'SpeechRecognition'
 
     if (musicCard) {
         musicCard.addEventListener('click', () => {
-            console.log("Music Card Clicked - Action: Play/Pause Toggle");
+            console.log("Music Card Clicked - Action: Play/Pause/Unmute Toggle");
             if (!ytPlayer || typeof ytPlayer.getPlayerState !== 'function') {
                 console.error("YouTube Player not yet fully initialized");
                 return;
@@ -1904,16 +1909,17 @@ if (jarvisTrigger && ('webkitSpeechRecognition' in window || 'SpeechRecognition'
 
             const state = ytPlayer.getPlayerState();
             
-            if (state === YT.PlayerState.PLAYING) {
+            if (state === YT.PlayerState.PLAYING && !ytPlayer.isMuted()) {
                 ytPlayer.pauseVideo();
             } else {
-                // Wake up from warmup mode
+                // Wake up / Unmute
                 ytPlayer.unMute();
                 ytPlayer.setVolume(100);
                 
                 if (isFirstPlay) {
                     ytPlayer.seekTo(0);
                     isFirstPlay = false;
+                    console.log("Unmuted and Restarted for First Play");
                 }
                 
                 ytPlayer.playVideo();
