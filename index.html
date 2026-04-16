@@ -440,11 +440,8 @@
                         <span id="music-duration">0:00</span>
                     </div>
                 </div>
-                <div class="music-card-footer">
-                    <span class="music-status" data-i18n="music-status">No Fluxo...</span>
-                </div>
-                <!-- Hidden YouTube Player Container -->
-                <div id="yt-player-container" style="position: absolute; width: 0; height: 0; opacity: 0; pointer-events: none;"></div>
+                <!-- Hidden YouTube Player Container (1px size for browser compatibility) -->
+                <div id="yt-player-container" style="position: absolute; width: 1px; height: 1px; opacity: 0.01; pointer-events: none; left: -1000px;"></div>
             </div>
 
             <!-- Bento Card: Solicitações (Normal) -->

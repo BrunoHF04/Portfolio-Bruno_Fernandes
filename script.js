@@ -1824,10 +1824,12 @@ if (jarvisTrigger && ('webkitSpeechRecognition' in window || 'SpeechRecognition'
 
     // YT API Callback must be global
     window.onYouTubeIframeAPIReady = function() {
+        console.log("YouTube API Ready - Initializing Player...");
         ytPlayer = new YT.Player('yt-player-container', {
-            height: '0',
-            width: '0',
+            height: '1',
+            width: '1',
             videoId: '12N_eG6_u4I',
+            host: 'https://www.youtube-nocookie.com',
             playerVars: {
                 'playsinline': 1,
                 'controls': 0,
@@ -1836,7 +1838,7 @@ if (jarvisTrigger && ('webkitSpeechRecognition' in window || 'SpeechRecognition'
                 'modestbranding': 1,
                 'rel': 0,
                 'enablejsapi': 1,
-                'origin': window.location.origin
+                'origin': 'https://bruno-fernandes.online'
             },
             events: {
                 'onReady': onPlayerReady,
@@ -1846,6 +1848,7 @@ if (jarvisTrigger && ('webkitSpeechRecognition' in window || 'SpeechRecognition'
     };
 
     function onPlayerReady(event) {
+        console.log("YouTube Player Loaded Successfully");
         // Achievement Registration
         achievements['music-play'] = { name: 'Melomaníaco Ghibli', icon: 'fa-music', earned: false };
         
@@ -1855,17 +1858,21 @@ if (jarvisTrigger && ('webkitSpeechRecognition' in window || 'SpeechRecognition'
 
     function onPlayerStateChange(event) {
         if (event.data === YT.PlayerState.PLAYING) {
+            console.log("Music Playing -> Syncing UI");
             musicCard.classList.add('playing');
             showAchievement('music-play');
             startTimer();
         } else {
+            console.log("Music Paused/Static -> Stopping Timer");
             musicCard.classList.remove('playing');
             stopTimer();
         }
     }
 
     function startTimer() {
+        if (timerInterval) clearInterval(timerInterval);
         timerInterval = setInterval(() => {
+            if (!ytPlayer || typeof ytPlayer.getCurrentTime !== 'function') return;
             const currentTime = ytPlayer.getCurrentTime();
             const duration = ytPlayer.getDuration();
             
@@ -1884,6 +1891,7 @@ if (jarvisTrigger && ('webkitSpeechRecognition' in window || 'SpeechRecognition'
     }
 
     function updateDuration() {
+        if (!ytPlayer || typeof ytPlayer.getDuration !== 'function') return;
         const duration = ytPlayer.getDuration();
         if (durationTimeEl) durationTimeEl.textContent = formatTime(duration);
     }
@@ -1896,7 +1904,11 @@ if (jarvisTrigger && ('webkitSpeechRecognition' in window || 'SpeechRecognition'
 
     if (musicCard) {
         musicCard.addEventListener('click', () => {
-            if (!ytPlayer) return;
+            console.log("Music Card Clicked - Action: Play/Pause Toggle");
+            if (!ytPlayer || typeof ytPlayer.getPlayerState !== 'function') {
+                console.error("YouTube Player not yet fully initialized");
+                return;
+            }
             const state = ytPlayer.getPlayerState();
             if (state === YT.PlayerState.PLAYING) {
                 ytPlayer.pauseVideo();
