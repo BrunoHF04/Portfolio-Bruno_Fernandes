@@ -1838,11 +1838,15 @@ if (jarvisTrigger && ('webkitSpeechRecognition' in window || 'SpeechRecognition'
         // Achievement Registration
         achievements['music-play'] = { name: 'Melomaníaco Ghibli', icon: 'fa-music', earned: false };
         
+        // Final sanity volume check
+        ytPlayer.setVolume(100);
+        
         // Duration update
         updateDuration();
     }
 
     function onPlayerStateChange(event) {
+        console.log("Player State Changed:", event.data);
         if (event.data === YT.PlayerState.PLAYING) {
             console.log("Music Playing -> Syncing UI");
             musicCard.classList.add('playing');
