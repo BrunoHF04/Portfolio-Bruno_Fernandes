@@ -1824,22 +1824,8 @@ if (jarvisTrigger && ('webkitSpeechRecognition' in window || 'SpeechRecognition'
 
     // YT API Callback must be global
     window.onYouTubeIframeAPIReady = function() {
-        console.log("YouTube API Ready - Initializing Player...");
+        console.log("YouTube API Ready - Binding to Static Iframe...");
         ytPlayer = new YT.Player('yt-player-container', {
-            height: '1',
-            width: '1',
-            videoId: '12N_eG6_u4I',
-            host: 'https://www.youtube-nocookie.com',
-            playerVars: {
-                'playsinline': 1,
-                'controls': 0,
-                'disablekb': 1,
-                'fs': 0,
-                'modestbranding': 1,
-                'rel': 0,
-                'enablejsapi': 1,
-                'origin': 'https://bruno-fernandes.online'
-            },
             events: {
                 'onReady': onPlayerReady,
                 'onStateChange': onPlayerStateChange
