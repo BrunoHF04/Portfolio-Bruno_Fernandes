@@ -1536,9 +1536,8 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
-});
 
-// --- Terminal / Command Palette Logic ---
+    // --- Terminal / Command Palette Logic ---
 const commandPalette = document.getElementById('command-palette');
 const terminalInput = document.getElementById('terminal-input');
 const hintTags = document.querySelectorAll('.hint-tag');
@@ -1802,6 +1801,9 @@ if (jarvisTrigger && ('webkitSpeechRecognition' in window || 'SpeechRecognition'
         if (scrolled > 50) showAchievement('scroll-50');
         if (scrolled > 90) showAchievement('scroll-90');
     });
+
+    const langBtns = document.querySelectorAll('.lang-btn');
+    const detailBtns = document.querySelectorAll('.btn-details');
 
     if (themeToggle) themeToggle.addEventListener('click', () => showAchievement('theme-switch'));
     
