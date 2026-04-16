@@ -413,27 +413,38 @@
                 <div id="github-heatmap" style="margin-top: 15px; width: 100%; height: 60px; opacity: 0.7;"></div>
             </div>
 
-            <!-- Bento Card: Spotify Pulse (Item 6) -->
-            <div class="glass-card spotify-card bento-small">
-                <div class="spotify-header">
-                    <i class="fab fa-spotify spotify-icon"></i>
-                    <span class="spotify-label" data-i18n="spotify-title">Ouvindo Agora</span>
+            <!-- Bento Card: Personalized Gold Music Player (Item 6 - Ghibli Mode) -->
+            <div class="glass-card music-player-card bento-small" id="music-card">
+                <div class="music-card-header">
+                    <i class="fas fa-vinyl-record music-icon"></i>
+                    <span class="music-label" data-i18n="music-title">Trilha Sonora</span>
                 </div>
-                <div class="spotify-content">
-                    <div class="spotify-bars">
-                        <div class="bar"></div>
-                        <div class="bar"></div>
-                        <div class="bar"></div>
-                        <div class="bar"></div>
+                <div class="music-card-content">
+                    <div class="music-bars">
+                        <div class="m-bar"></div>
+                        <div class="m-bar"></div>
+                        <div class="m-bar"></div>
+                        <div class="m-bar"></div>
                     </div>
-                    <div class="spotify-info">
-                        <span class="track-name">Lofi Hip Hop / Focus</span>
-                        <span class="artist-name" data-i18n="spotify-artist">Bruno's Playlist</span>
+                    <div class="music-info">
+                        <span class="music-track">Merry-go-round of Life</span>
+                        <span class="music-artist">Grissini Project</span>
                     </div>
                 </div>
-                <div class="spotify-footer">
-                    <span class="spotify-status" data-i18n="spotify-status">No Fluxo...</span>
+                <div class="music-card-progress">
+                    <div class="progress-bar-container">
+                        <div class="progress-bar-inner" id="music-progress"></div>
+                    </div>
+                    <div class="music-time-info">
+                        <span id="music-current">0:00</span>
+                        <span id="music-duration">0:00</span>
+                    </div>
                 </div>
+                <div class="music-card-footer">
+                    <span class="music-status" data-i18n="music-status">No Fluxo...</span>
+                </div>
+                <!-- Hidden YouTube Player Container -->
+                <div id="yt-player-container" style="position: absolute; width: 0; height: 0; opacity: 0; pointer-events: none;"></div>
             </div>
 
             <!-- Bento Card: Solicitações (Normal) -->
@@ -758,8 +769,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="three-scene.js"></script>
-    <script src="script.js"></script>
+    <script src="https://www.youtube.com/iframe_api"></script>
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
@@ -831,6 +841,8 @@
         </div>
     </div>
     <div class="custom-cursor"></div>
+    <script src="three-scene.js"></script>
+    <script src="script.js"></script>
 </body>
 
 </html>
