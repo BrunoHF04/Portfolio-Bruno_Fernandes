@@ -1888,6 +1888,8 @@ if (jarvisTrigger && ('webkitSpeechRecognition' in window || 'SpeechRecognition'
         return `${minutes}:${seconds.toString().padStart(2, '0')}`;
     }
 
+    let isFirstPlay = true;
+
     if (musicCard) {
         musicCard.addEventListener('click', () => {
             console.log("Music Card Clicked - Action: Play/Pause Toggle");
@@ -1895,10 +1897,21 @@ if (jarvisTrigger && ('webkitSpeechRecognition' in window || 'SpeechRecognition'
                 console.error("YouTube Player not yet fully initialized");
                 return;
             }
+
             const state = ytPlayer.getPlayerState();
+            
             if (state === YT.PlayerState.PLAYING) {
                 ytPlayer.pauseVideo();
             } else {
+                // Wake up from warmup mode
+                ytPlayer.unMute();
+                ytPlayer.setVolume(100);
+                
+                if (isFirstPlay) {
+                    ytPlayer.seekTo(0);
+                    isFirstPlay = false;
+                }
+                
                 ytPlayer.playVideo();
             }
         });
