@@ -177,8 +177,135 @@ const initNeuralFlow = () => {
     animate();
 };
 
+/**
+ * Skill Constellation - Item 3 Implementation
+ * Interactive 3D sphere of tech skills
+ */
+const initSkillConstellation = () => {
+    const container = document.getElementById('skill-constellation-container');
+    if (!container) return;
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(60, container.clientWidth / container.clientHeight, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+    
+    renderer.setSize(container.clientWidth, container.clientHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    container.appendChild(renderer.domElement);
+
+    const group = new THREE.Group();
+    scene.add(group);
+
+    const skills = [
+        { name: 'Python', color: '#3776AB' },
+        { name: 'SQL Server', color: '#CC2927' },
+        { name: 'Docker', color: '#2496ED' },
+        { name: 'Linux', color: '#FCC624' },
+        { name: 'Generative AI', color: '#FF4B4B' },
+        { name: 'Machine Learning', color: '#00A67E' },
+        { name: 'PowerShell', color: '#5391FE' },
+        { name: 'PostgreSQL', color: '#336791' },
+        { name: 'Business Intelligence', color: '#F2C811' },
+        { name: 'Cloud Computing', color: '#4285F4' }
+    ];
+
+    const createTextTexture = (text, color) => {
+        const canvas = document.createElement('canvas');
+        canvas.width = 256;
+        canvas.height = 256;
+        const ctx = canvas.getContext('2d');
+        
+        // Background Circle
+        ctx.beginPath();
+        ctx.arc(128, 128, 100, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.05)';
+        ctx.fill();
+        ctx.strokeStyle = color;
+        ctx.lineWidth = 8;
+        ctx.stroke();
+
+        // Text
+        ctx.fillStyle = 'white';
+        ctx.font = 'bold 32px Outfit';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(text, 128, 128);
+        
+        return new THREE.CanvasTexture(canvas);
+    };
+
+    const skillNodes = [];
+    skills.forEach((skill, i) => {
+        const phi = Math.acos(-1 + (2 * i) / skills.length);
+        const theta = Math.sqrt(skills.length * Math.PI) * phi;
+
+        const x = 1.2 * Math.cos(theta) * Math.sin(phi);
+        const y = 1.2 * Math.sin(theta) * Math.sin(phi);
+        const z = 1.2 * Math.cos(phi);
+
+        const material = new THREE.SpriteMaterial({ 
+            map: createTextTexture(skill.name, skill.color),
+            transparent: true,
+            opacity: 0.9
+        });
+        const sprite = new THREE.Sprite(material);
+        sprite.position.set(x, y, z);
+        sprite.scale.set(0.6, 0.6, 0.6);
+        
+        group.add(sprite);
+        skillNodes.push(sprite);
+    });
+
+    // Central Core
+    const coreGeometry = new THREE.IcosahedronGeometry(0.3, 2);
+    const coreMaterial = new THREE.MeshBasicMaterial({ 
+        color: '#b08d57', 
+        wireframe: true, 
+        transparent: true, 
+        opacity: 0.3 
+    });
+    const core = new THREE.Mesh(coreGeometry, coreMaterial);
+    scene.add(core);
+
+    camera.position.z = 3;
+
+    let mouseX = 0, mouseY = 0;
+    container.addEventListener('mousemove', (e) => {
+        const rect = container.getBoundingClientRect();
+        mouseX = ((e.clientX - rect.left) / container.clientWidth) - 0.5;
+        mouseY = ((e.clientY - rect.top) / container.clientHeight) - 0.5;
+    });
+
+    const animate = () => {
+        requestAnimationFrame(animate);
+        
+        group.rotation.y += 0.003;
+        group.rotation.x += 0.001;
+
+        // Interactive rotation
+        group.rotation.y += mouseX * 0.05;
+        group.rotation.x += mouseY * 0.05;
+
+        core.rotation.y -= 0.01;
+
+        renderer.render(scene, camera);
+    };
+
+    window.addEventListener('resize', () => {
+        camera.aspect = container.clientWidth / container.clientHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(container.clientWidth, container.clientHeight);
+    });
+
+    animate();
+};
+
 if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initNeuralFlow);
+    document.addEventListener('DOMContentLoaded', () => {
+        initNeuralFlow();
+        initSkillConstellation();
+    });
 } else {
     initNeuralFlow();
+    initSkillConstellation();
 }

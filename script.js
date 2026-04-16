@@ -119,7 +119,10 @@ const translations = {
         "proj5-modal-solution": "Integração de hardware Arduino com sensores de vazão e uma interface web para monitoramento remoto do consumo em tempo real.",
         "ai-placeholder": "Pergunte algo...",
         "ai-welcome": "Olá! Sou o assistente do Bruno. Como posso te ajudar hoje?",
-        "live-activity": "Atividade Real"
+        "live-activity": "Atividade Real",
+        "spotify-title": "Ouvindo Agora",
+        "spotify-artist": "Bruno's Playlist",
+        "spotify-status": "No Fluxo..."
     },
     en: {
         "nav-sobre": "About",
@@ -241,7 +244,10 @@ const translations = {
         "proj5-modal-solution": "Integration of Arduino hardware with flow sensors and a web interface for remote real-time monitoring of consumption.",
         "ai-placeholder": "Ask something...",
         "ai-welcome": "Hello! I am Bruno's assistant. How can I help you today?",
-        "live-activity": "Real Activity"
+        "live-activity": "Real Activity",
+        "spotify-title": "Now Playing",
+        "spotify-artist": "Bruno's Playlist",
+        "spotify-status": "In the Flow..."
     },
     es: {
         "nav-sobre": "Sobre",
@@ -359,11 +365,19 @@ const translations = {
         "proj5-modal-title": "Monitoreo de Racionamiento Inteligente",
         "proj5-modal-context": "Proyecto centrado en la sostenibilidad hídrica premiado en el 17º CONIC-SEMESP.",
         "proj5-modal-challenge": "Crear un sistema de bajo costo capaz de monitorear y racionar el consumo de agua de forma autónoma.",
-        "proj5-modal-solution": "Integración de hardware Arduino con sensores de flujo y una interfaz web para el monitoreo remoto del consumo en tiempo real."
+        "proj5-modal-solution": "Integración de hardware Arduino con sensores de flujo y una interfaz web para el monitoreo remoto del consumo en tiempo real.",
+        "spotify-title": "Escuchando Ahora",
+        "spotify-artist": "Bruno's Playlist",
+        "spotify-status": "En el Flujo..."
     }
 };
 
 document.addEventListener('DOMContentLoaded', () => {
+    // --- GSAP Plugins ---
+    if (typeof gsap !== 'undefined') {
+        gsap.registerPlugin(Flip, ScrollTrigger);
+    }
+
     // --- Loader Logic ---
     const loader = document.getElementById('loader');
     const loaderBar = document.getElementById('loader-bar');
@@ -673,28 +687,56 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('scroll', updateScrollFeatures);
     updateScrollFeatures(); // Run once on load
 
-    // --- Project Filtering Logic ---
+    // --- Project Filtering Logic (Advanced GSAP Flip) ---
+    // --- Project Filtering Logic (Advanced GSAP Flip) ---
     const filterBtns = document.querySelectorAll('.filter-btn');
-    const projectCards = document.querySelectorAll('.project-card');
+    const projectsGrid = document.querySelector('.projects-grid');
+    const allItems = projectsGrid ? Array.from(projectsGrid.children) : [];
 
-    filterBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            const filter = btn.getAttribute('data-filter');
+    if (filterBtns.length > 0 && allItems.length > 0) {
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const filter = btn.getAttribute('data-filter');
 
-            // Update active button
-            filterBtns.forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
+                // 1. Capture current height to prevent jumping
+                const currentHeight = projectsGrid.offsetHeight;
+                projectsGrid.style.minHeight = `${currentHeight}px`;
 
-            // Filter cards
-            projectCards.forEach(card => {
-                if (filter === 'all' || card.getAttribute('data-category') === filter) {
-                    card.classList.remove('hidden');
-                } else {
-                    card.classList.add('hidden');
-                }
+                // 2. Get the current state
+                const state = Flip.getState(allItems);
+
+                // 3. Adjust active button
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                // 4. Toggle visibility
+                allItems.forEach(item => {
+                    const category = item.getAttribute('data-category');
+                    if (category) {
+                        if (filter === 'all' || category === filter) {
+                            item.classList.remove('is-hidden');
+                        } else {
+                            item.classList.add('is-hidden');
+                        }
+                    }
+                });
+
+                // 5. Animate!
+                Flip.from(state, {
+                    duration: 0.8,
+                    ease: "power2.inOut",
+                    absolute: true, // Now stable with min-height
+                    stagger: 0.05,
+                    onEnter: elements => gsap.fromTo(elements, { opacity: 0, scale: 0.5 }, { opacity: 1, scale: 1, duration: 0.6 }),
+                    onLeave: elements => gsap.to(elements, { opacity: 0, scale: 0.5, duration: 0.6 }),
+                    onComplete: () => {
+                        // Cleanup
+                        projectsGrid.style.minHeight = "";
+                    }
+                });
             });
         });
-    });
+    }
 
     // --- 3D Tilt Effect Logic ---
     const tiltCards = document.querySelectorAll('.glass-card:not(.no-tilt)');
@@ -1715,6 +1757,61 @@ if (jarvisTrigger && ('webkitSpeechRecognition' in window || 'SpeechRecognition'
     jarvisRecognition.onerror = () => {
         jarvisTrigger.classList.remove('listening');
     };
+    // --- Achievement System (Item 5) ---
+    const achievements = {
+        'scroll-50': { name: 'Explorador Intermediário', icon: 'fa-shoe-prints', earned: false },
+        'scroll-90': { name: 'Mestre da Jornada', icon: 'fa-mountain', earned: false },
+        'theme-switch': { name: 'Dualidade Visual', icon: 'fa-adjust', earned: false },
+        'lang-switch': { name: 'Poliglota Tech', icon: 'fa-language', earned: false },
+        'project-click': { name: 'Curioso de Soluções', icon: 'fa-lightbulb', earned: false },
+        'terminal-open': { name: 'Hackerman', icon: 'fa-terminal', earned: false }
+    };
+
+    function showAchievement(id) {
+        if (achievements[id].earned) return;
+        achievements[id].earned = true;
+
+        const toast = document.createElement('div');
+        toast.className = 'achievement-toast';
+        toast.innerHTML = `
+            <div class="achievement-icon"><i class="fas ${achievements[id].icon}"></i></div>
+            <div class="achievement-text">
+                <span class="achievement-title">Conquista Desbloqueada</span>
+                <span class="achievement-name">${achievements[id].name}</span>
+            </div>
+        `;
+        document.body.appendChild(toast);
+
+        setTimeout(() => toast.classList.add('show'), 100);
+
+        // Sound effect (optional, very subtle)
+        // new Audio('assets/achievement.mp3').play();
+
+        setTimeout(() => {
+            toast.classList.remove('show');
+            setTimeout(() => toast.remove(), 600);
+        }, 5000);
+    }
+
+    // Triggers
+    window.addEventListener('scroll', () => {
+        const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const scrolled = (winScroll / height) * 100;
+        
+        if (scrolled > 50) showAchievement('scroll-50');
+        if (scrolled > 90) showAchievement('scroll-90');
+    });
+
+    if (themeToggle) themeToggle.addEventListener('click', () => showAchievement('theme-switch'));
+    
+    langBtns.forEach(btn => btn.addEventListener('click', () => showAchievement('lang-switch')));
+    
+    detailBtns.forEach(btn => btn.addEventListener('click', () => showAchievement('project-click')));
+
+    const terminalBtn = document.getElementById('terminal-input');
+    if (terminalBtn) terminalBtn.addEventListener('focus', () => showAchievement('terminal-open'));
+
 }
 
 
