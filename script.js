@@ -1904,7 +1904,8 @@ if (jarvisTrigger && ('webkitSpeechRecognition' in window || 'SpeechRecognition'
         });
     }
 
-}
+    }
+});
 
 
 
