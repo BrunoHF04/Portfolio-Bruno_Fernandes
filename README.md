@@ -1,4 +1,4 @@
-# 🚀 Portfólio de Bruno Fernandes - Edição Premium
+# Portfólio de Bruno Fernandes
 
 Este portfólio é um ecossistema digital de alta performance, projetado para demonstrar **autoridade técnica em Gestão de Projetos de TI e IA Generativa**. O projeto foca na aplicação estratégica de tecnologias modernas para criar experiências imersivas, estáveis e globais.
 
