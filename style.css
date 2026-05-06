@@ -1404,6 +1404,12 @@ strong {
     filter: drop-shadow(0 0 8px var(--accent-primary));
 }
 
+/* Aspas nos depoimentos: o scale global estourava o canto do card */
+.glass-card.testimonial-card:hover i.fa-quote-left {
+    transform: scale(1.08);
+    transform-origin: top left;
+}
+
 /* Copy Email Feedback */
 .copy-feedback {
     position: fixed;
