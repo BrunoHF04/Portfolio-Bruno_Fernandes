@@ -117,6 +117,26 @@ const translations = {
         "proj5-modal-context": "Projeto focado em sustentabilidade hídrica premiado no 17º CONIC-SEMESP.",
         "proj5-modal-challenge": "Criar um sistema de baixo custo capaz de monitorar e racionar o consumo de água de forma autônoma.",
         "proj5-modal-solution": "Integração de hardware Arduino com sensores de vazão e uma interface web para monitoramento remoto do consumo em tempo real.",
+        "proj6-desc": "Gestor de arquivos em painel duplo com SSH/SFTP e Docker remoto via socket sobre SSH, automações, terminal integrado e interface em Go (Fyne).",
+        "proj7-desc": "Scanner de memória para Nintendo Switch: overlay Tesla + sysmodule Atmosphere com IPC, buscas numéricas e escrita (poke) em tempo real (C++20).",
+        "proj8-desc": "Higienização de RTF/TXT com metadados DDE/OLE e suporte a lote no PostgreSQL, com GUI em Python, auditoria por batch e rollback.",
+        "proj6-modal-title": "ContainerWay",
+        "proj6-modal-context": "Aplicação desktop open source para gestão de ficheiros em dois painéis, com foco em operação quotidiana em Windows e empacotamento opcional para Linux (.deb / Flatpak).",
+        "proj6-modal-challenge": "Administrar hosts Linux remotos, transferências pesadas e contentores sem expor a API Docker em TCP, mantendo um fluxo coerente de permissões sudo e credenciais.",
+        "proj6-modal-solution": "Cliente em Go com UI Fyne, sessão SSH reutilizada para SFTP, acesso ao Docker por socket Unix montado sobre SSH, fila de transferências paralela e motor de automações com histórico.",
+        "proj7-modal-title": "Switch Engine",
+        "proj7-modal-context": "Ferramenta de varredura de memória para consola Nintendo Switch sob Atmosphere CFW, composta por overlay Tesla (`switch-engine.ovl`) e sysmodule com serviço IPC `seng`.",
+        "proj7-modal-challenge": "Os overlays Tesla não dispõem de permissões para invocar diretamente as SVCs de debug no processo alvo.",
+        "proj7-modal-solution": "Arquitetura em duas camadas: interface libtesla no overlay e backend privilegiado no sysmodule, comunicando pedidos CMIF/HIPC para anexar o processo, ler memória R/W e aplicar primeiro scan / próximo scan / poke.",
+        "proj8-modal-title": "Sanitizador RTF",
+        "proj8-modal-context": "Projeto MIT em Python para limpar RTF/TXT corrompidos por bookmarks DDE e blocos volumosos (`shppict`, OLE hex), típicos em exportações que incham registos na base.",
+        "proj8-modal-challenge": "Evitar falhas de memória em editores e timeouts no PostgreSQL quando colunas ultrapassam dezenas ou centenas de MB sem ganho proporcional em texto útil.",
+        "proj8-modal-solution": "Núcleo com níveis seguro/intermediário/agressivo, deteção de massas hexadecimais, GUI Tkinter tema escuro, higienização em pasta e atualização por lotes com tabela `rtf_sanitize_audit`, relatório CSV e rollback por `batch_id`.",
+        "modal-github-cta": "Ver repositório no GitHub",
+        "tag-go": "Go",
+        "tag-docker": "Docker",
+        "tag-cpp": "C++",
+        "tag-postgres": "PostgreSQL",
         "ai-placeholder": "Pergunte algo...",
         "ai-welcome": "Olá! Sou o assistente do Bruno. Como posso te ajudar hoje?",
         "live-activity": "Atividade Real",
@@ -241,6 +261,26 @@ const translations = {
         "proj5-modal-context": "Project focused on water sustainability awarded at the 17th CONIC-SEMESP.",
         "proj5-modal-challenge": "Create a low-cost system capable of autonomously monitoring and rationing water consumption.",
         "proj5-modal-solution": "Integration of Arduino hardware with flow sensors and a web interface for remote real-time monitoring of consumption.",
+        "proj6-desc": "Dual-pane file manager with SSH/SFTP and remote Docker via socket over SSH, automations, integrated terminal — Go (Fyne).",
+        "proj7-desc": "Nintendo Switch memory scanner: Tesla overlay + Atmosphere sysmodule over IPC — numeric scans and live poke (C++20).",
+        "proj8-desc": "Python tool to sanitize RTF/TXT with DDE/OLE artifacts and batch PostgreSQL cleanup with auditing and rollback.",
+        "proj6-modal-title": "ContainerWay",
+        "proj6-modal-context": "Open-source desktop application for dual-panel file management focused on everyday Windows workflows, with optional Linux packaging (.deb / Flatpak).",
+        "proj6-modal-challenge": "Operate remote Linux hosts, heavy transfers, and containers without exposing the Docker API on TCP while keeping coherent sudo elevation and credential handling.",
+        "proj6-modal-solution": "Go client with a Fyne UI, SSH session reused for SFTP, Docker through a Unix socket tunneled over SSH, parallel transfer queue, and an automation engine with operational history.",
+        "proj7-modal-title": "Switch Engine",
+        "proj7-modal-context": "Memory scanning tool for the Nintendo Switch on Atmosphere CFW, split into a Tesla overlay (`switch-engine.ovl`) and a sysmodule exposing the IPC service `seng`.",
+        "proj7-modal-challenge": "Tesla overlays are not permitted to invoke debug supervisor calls directly on the target game process.",
+        "proj7-modal-solution": "Two-layer architecture: libtesla UI in the overlay and a privileged backend in the sysmodule, exchanging CMIF/HIPC commands to attach, scan read/write regions, and run first/next scan plus memory poke.",
+        "proj8-modal-title": "Sanitizador RTF",
+        "proj8-modal-context": "MIT-licensed Python project to clean RTF/TXT corrupted by DDE bookmarks and large embedded blocks (`shppict`, OLE hex) that bloat database rows.",
+        "proj8-modal-challenge": "Prevent editor freezes and PostgreSQL timeouts when columns reach tens or hundreds of MB without proportional readable text gains.",
+        "proj8-modal-solution": "Core with safe/intermediate/aggressive levels, hexadecimal blob detection, dark-themed Tkinter GUI, folder batch mode, PostgreSQL updates with `rtf_sanitize_audit`, CSV reports, and rollback by `batch_id`.",
+        "modal-github-cta": "View repository on GitHub",
+        "tag-go": "Go",
+        "tag-docker": "Docker",
+        "tag-cpp": "C++",
+        "tag-postgres": "PostgreSQL",
         "ai-placeholder": "Ask something...",
         "ai-welcome": "Hello! I am Bruno's assistant. How can I help you today?",
         "live-activity": "Real-time Activity",
@@ -364,6 +404,26 @@ const translations = {
         "proj5-modal-context": "Proyecto centrado en la sostenibilidad hídrica premiado en el 17º CONIC-SEMESP.",
         "proj5-modal-challenge": "Crear un sistema de bajo costo capaz de monitorear y racionar el consumo de agua de forma autónoma.",
         "proj5-modal-solution": "Integración de hardware Arduino con sensores de flujo y una interfaz web para el monitoreo remoto del consumo en tiempo real.",
+        "proj6-desc": "Gestor de archivos en doble panel con SSH/SFTP y Docker remoto vía socket sobre SSH, automatizaciones y terminal integrado — Go (Fyne).",
+        "proj7-desc": "Escáner de memoria para Nintendo Switch: overlay Tesla + sysmodule Atmosphere por IPC — escaneos numéricos y poke en tiempo real (C++20).",
+        "proj8-desc": "Herramienta Python para sanitizar RTF/TXT con artefactos DDE/OLE y limpieza por lotes en PostgreSQL con auditoría y rollback.",
+        "proj6-modal-title": "ContainerWay",
+        "proj6-modal-context": "Aplicación de escritorio de código abierto para gestión de archivos en dos paneles centrada en el uso diario en Windows, con empaquetado opcional para Linux (.deb / Flatpak).",
+        "proj6-modal-challenge": "Operar hosts Linux remotos, transferencias grandes y contenedores sin exponer la API Docker en TCP, manteniendo elevación sudo y credenciales de forma consistente.",
+        "proj6-modal-solution": "Cliente en Go con UI Fyne, sesión SSH reutilizada para SFTP, Docker vía socket Unix sobre SSH, cola de transferencias paralela y motor de automatizaciones con historial.",
+        "proj7-modal-title": "Switch Engine",
+        "proj7-modal-context": "Herramienta de barrido de memoria para Nintendo Switch en Atmosphere CFW, dividida en overlay Tesla (`switch-engine.ovl`) y sysmodule con servicio IPC `seng`.",
+        "proj7-modal-challenge": "Los overlays Tesla no tienen permisos para invocar directamente las SVC de depuración en el proceso objetivo.",
+        "proj7-modal-solution": "Arquitectura en dos capas: interfaz libtesla en el overlay y backend privilegiado en el sysmodule, intercambiando comandos CMIF/HIPC para adjuntar el proceso, leer regiones R/W y ejecutar primer/siguiente escaneo y poke.",
+        "proj8-modal-title": "Sanitizador RTF",
+        "proj8-modal-context": "Proyecto MIT en Python para limpiar RTF/TXT dañados por marcadores DDE y bloques enormes (`shppict`, hex OLE) que inflan filas en la base de datos.",
+        "proj8-modal-challenge": "Evitar bloqueos en editores y timeouts en PostgreSQL cuando las columnas alcanzan decenas o cientos de MB sin ganancia proporcional en texto útil.",
+        "proj8-modal-solution": "Núcleo con niveles seguro/intermedio/agresivo, detección de masas hexadecimales, GUI Tkinter en tema oscuro, higienización por carpetas y actualizaciones por lotes con tabla `rtf_sanitize_audit`, informe CSV y rollback por `batch_id`.",
+        "modal-github-cta": "Ver repositorio en GitHub",
+        "tag-go": "Go",
+        "tag-docker": "Docker",
+        "tag-cpp": "C++",
+        "tag-postgres": "PostgreSQL",
         "spotify-title": "Escuchando Ahora",
         "spotify-artist": "Bruno's Playlist",
         "spotify-status": "En el Flujo..."
@@ -524,7 +584,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Modal Logic ---
     const modal = document.getElementById('project-modal');
     const modalBody = document.getElementById('modal-body');
-    const closeModal = document.querySelector('.close-modal');
+    const closeModal = document.querySelector('#project-modal .close-modal');
     const detailBtns = document.querySelectorAll('.btn-detail');
 
     function fillModalContent(projectId, lang) {
@@ -535,8 +595,22 @@ document.addEventListener('DOMContentLoaded', () => {
             "2": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=600&auto=format&fit=crop",
             "3": "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?q=80&w=600&auto=format&fit=crop",
             "4": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=600&auto=format&fit=crop",
-            "5": "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=600&auto=format&fit=crop"
+            "5": "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=600&auto=format&fit=crop",
+            "6": "https://images.unsplash.com/photo-1633356122544-f134324a6cee?q=80&w=600&auto=format&fit=crop",
+            "7": "https://images.unsplash.com/photo-1612287230202-1ff1d85d1bdf?q=80&w=600&auto=format&fit=crop",
+            "8": "https://images.unsplash.com/photo-1542831371-29b0f74f9713?q=80&w=600&auto=format&fit=crop"
         };
+
+        const projectGithubUrls = {
+            "6": "https://github.com/BrunoHF04/ContainerWay",
+            "7": "https://github.com/BrunoHF04/switch-engine",
+            "8": "https://github.com/BrunoHF04/SanitizadorRTF"
+        };
+
+        const repoUrl = projectGithubUrls[projectId];
+        const repoBlock = repoUrl
+            ? `<p style="margin-top: 1.25rem;"><a href="${repoUrl}" target="_blank" rel="noopener noreferrer" class="btn-primary" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 10px 20px; text-decoration: none;"><i class="fab fa-github"></i> ${t['modal-github-cta']}</a></p>`
+            : '';
 
         const content = `
             <div class="modal-header-img">
@@ -550,6 +624,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <p>${t[`proj${projectId}-modal-challenge`]}</p>
                 <h4>${t['modal-solution']}</h4>
                 <p>${t[`proj${projectId}-modal-solution`]}</p>
+                ${repoBlock}
             </div>
         `;
         modalBody.innerHTML = content;
@@ -580,7 +655,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     window.addEventListener('click', (e) => {
         if (e.target === modal) {
-            closeModal.click();
+            closeModal?.click();
         }
     });
 
