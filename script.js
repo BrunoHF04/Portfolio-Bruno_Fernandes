@@ -811,10 +811,12 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- 3D Tilt Effect Logic ---
+    // --- 3D Tilt Effect Logic (exclui secção Projetos & Realizações) ---
     const tiltCards = document.querySelectorAll('.glass-card:not(.no-tilt)');
 
     tiltCards.forEach(card => {
+        if (card.closest('#projetos')) return;
+
         card.addEventListener('mousemove', (e) => {
             const rect = card.getBoundingClientRect();
             const x = e.clientX - rect.left;
@@ -1479,9 +1481,11 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // --- 3D Tilt Effect (Custom Smooth GSAP) ---
+    // --- 3D Tilt Effect (Custom Smooth GSAP; exclui secção Projetos) ---
     const cards = document.querySelectorAll('.glass-card');
     cards.forEach(card => {
+        if (card.closest('#projetos')) return;
+
         card.addEventListener('mousemove', (e) => {
             const rect = card.getBoundingClientRect();
             const x = e.clientX - rect.left;
