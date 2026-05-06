@@ -1924,6 +1924,19 @@ if (jarvisTrigger && ('webkitSpeechRecognition' in window || 'SpeechRecognition'
         
         // Duration update
         updateDuration();
+
+        // Clique no card (iframe não recebe eventos) mantém o cursor customizado e gesto de utilizador no documento
+        if (musicCard) {
+            musicCard.addEventListener('click', () => {
+                if (!ytPlayer || typeof ytPlayer.getPlayerState !== 'function') return;
+                const st = ytPlayer.getPlayerState();
+                if (st === YT.PlayerState.PLAYING) {
+                    ytPlayer.pauseVideo();
+                } else {
+                    ytPlayer.playVideo();
+                }
+            });
+        }
     }
 
     function onPlayerStateChange(event) {
@@ -1977,12 +1990,6 @@ if (jarvisTrigger && ('webkitSpeechRecognition' in window || 'SpeechRecognition'
         const seconds = Math.floor(time % 60);
         return `${minutes}:${seconds.toString().padStart(2, '0')}`;
     }
-
-    // Click synchronization is now handled natively by the transparent 
-    // YouTube overlay (z-index: 50) and our onPlayerStateChange listener.
-    // This bypasses browser media restrictions by recording the user gesture 
-    // directly inside the YouTube iframe context.
-
 
     }
 });

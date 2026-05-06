@@ -2469,6 +2469,11 @@ html, body {
     overflow: hidden;
 }
 
+/* O iframe do YouTube roubava o alvo do ponteiro: mouseleave no card, cursor do sistema e hover do cursor customizado quebrados */
+.music-player-card #yt-player-container {
+    pointer-events: none;
+}
+
 .music-card-header {
     display: flex;
     align-items: center;
