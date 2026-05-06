@@ -1485,6 +1485,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const cards = document.querySelectorAll('.glass-card');
     cards.forEach(card => {
         if (card.closest('#projetos')) return;
+        if (card.classList.contains('no-tilt')) return;
 
         card.addEventListener('mousemove', (e) => {
             const rect = card.getBoundingClientRect();
