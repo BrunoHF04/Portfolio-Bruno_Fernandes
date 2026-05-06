@@ -1505,6 +1505,25 @@ strong {
     min-height: 0;
     scrollbar-width: thin;
     scrollbar-color: var(--border-card) transparent;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Modal de projetos: o JS injeta header + .modal-body-content dentro de #modal-body.
+   Sem este encadeamento flex, o texto crescia além do max-height e era cortado sem scroll. */
+#project-modal .modal-content {
+    min-height: 0;
+}
+
+#project-modal #modal-body {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow: hidden;
+}
+
+#project-modal .modal-header-img {
+    flex-shrink: 0;
 }
 
 /* Custom Scrollbar */
